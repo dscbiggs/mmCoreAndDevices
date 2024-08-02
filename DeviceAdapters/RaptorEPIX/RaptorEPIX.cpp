@@ -44,7 +44,7 @@
 #ifdef PLEORA
 	const char* g_strVersion = "v1.0.3, 10/21/2019";
 #else
-	const char* g_strVersion = "v1.16.3, 5/11/2022";
+	const char* g_strVersion = "v1.19.1, 10/27/2023";
 #endif
 
 
@@ -58,7 +58,15 @@
 #define _RAPTOR_CAMERA_OWL_320  (_RAPTOR_CAMERA_OWL + 1024)
 #define _RAPTOR_CAMERA_OWL_640  (_RAPTOR_CAMERA_OWL + 2048)
 #define _RAPTOR_CAMERA_OWL_NINOX_640  (_RAPTOR_CAMERA_OWL + 4096)
+#define _RAPTOR_CAMERA_OWL_NINOX_1280 (_RAPTOR_CAMERA_OWL + 32768)
 
+#define _RAPTOR_VARIANT_OWL_640_M  1
+#define _RAPTOR_VARIANT_OWL_640_T  2
+#define _RAPTOR_VARIANT_NINOX_640_SU  3
+#define _RAPTOR_VARIANT_OWL_1280  4
+#define _RAPTOR_VARIANT_EAGLE_V_4210  5
+#define _RAPTOR_VARIANT_EAGLE_V_4240  6
+#define _RAPTOR_VARIANT_EAGLE_V_4710  7
 
 #define _RAPTOR_CAMERA_OSPREY				( 32 + _RAPTOR_CAMERA_COMMONCMDS1)
 #define _RAPTOR_CAMERA_KINGFISHER_674		( 64 + _RAPTOR_CAMERA_COMMONCMDS1)
@@ -129,12 +137,18 @@ bool bEagle4210 = false;
 const char* g_RaptorCameraKITEDeviceName			= RAPTOR SPC KITE SPC CAM;
 const char* g_RaptorCameraOwl320DeviceName			= RAPTOR SPC OWL SPC CAM " 320";
 const char* g_RaptorCameraOwl640DeviceName			= RAPTOR SPC OWL SPC CAM " 640";
-const char* g_RaptorCameraOwlNinox640DeviceName		= RAPTOR SPC NINOX SPC CAM " 640";
+const char* g_RaptorCameraOwl640MDeviceName			= RAPTOR SPC OWL SPC CAM " 640 M";
+const char* g_RaptorCameraOwl640TDeviceName			= RAPTOR SPC OWL SPC CAM " 640 T"; 
+const char* g_RaptorCameraOwl1280DeviceName			= RAPTOR SPC OWL SPC CAM " 1280"; 
+const char* g_RaptorCameraOwlNinox640SUDeviceName	= RAPTOR SPC NINOX SPC CAM " 640 SU";
+const char* g_RaptorCameraOwlNinox640DeviceName     = RAPTOR SPC NINOX SPC CAM " 640";
+const char* g_RaptorCameraNinox1280DeviceName		= RAPTOR SPC NINOX SPC CAM " 1280";
 const char* g_RaptorCameraFalconDeviceName			= RAPTOR SPC FALCON SPC CAM;
 const char* g_RaptorCameraFalconIIIDeviceName		= RAPTOR SPC FALCON " III" SPC CAM;
 const char* g_RaptorCameraEagleDeviceName			= RAPTOR SPC EAGLE SPC CAM;
 const char* g_RaptorCameraEagleV4240DeviceName		= RAPTOR SPC EAGLE SPC "V 4240" SPC CAM;
-const char* g_RaptorCameraEagleV4210DeviceName		= RAPTOR SPC EAGLE SPC "V 4210" SPC CAM;
+const char* g_RaptorCameraEagleV4210DeviceName = RAPTOR SPC EAGLE SPC "V 4210" SPC CAM;
+const char* g_RaptorCameraEagleV4710DeviceName = RAPTOR SPC EAGLE SPC "V 4710" SPC CAM;
 const char* g_RaptorCameraOspreyDeviceName			= RAPTOR SPC OSPREY SPC CAM;
 const char* g_RaptorCameraOspreyRGBDeviceName		= RAPTOR SPC OSPREY " RGB " CAM;
 const char* g_RaptorCameraKingfisher674DeviceName	= RAPTOR SPC KINGFISHER " 674";
@@ -149,10 +163,16 @@ const char* g_RaptorCameraUnknown1RGBDeviceName		= RAPTOR SPC "XCAP RGB Export";
 const char* g_RaptorKITE = KITE;
 const char* g_RaptorOwl320 = OWL " 320";
 const char* g_RaptorOwl640 = OWL " 640";
+const char* g_RaptorOwl640M = OWL " 640 M";
+const char* g_RaptorOwl640T = OWL " 640 T";
+const char* g_RaptorOwl1280 = OWL " 1280";
+const char* g_RaptorNinox640SU = NINOX " 640 SU";
 const char* g_RaptorNinox640 = NINOX " 640";
+const char* g_RaptorNinox1280 = NINOX " 1280";
 const char* g_RaptorEagle = EAGLE;
 const char* g_RaptorEagleV4240 = EAGLE " V 4240";
 const char* g_RaptorEagleV4210 = EAGLE " V 4210";
+const char* g_RaptorEagleV4710 = EAGLE " V 4710";
 const char* g_RaptorFalcon = FALCON;
 const char* g_RaptorFalconIII = FALCON " III";
 const char* g_RaptorOsprey = OSPREY;
@@ -241,12 +261,14 @@ const char* g_Keyword_PeakAvgLevel = "Xpert: AE Peak/Avg Level";
 const char* g_Keyword_AGCSpeed     = "Xpert: AE Gain Speed";
 const char* g_Keyword_ExpSpeed     = "Xpert: AE Exp Speed";
 const char* g_Keyword_AutoExpLevel = "Xpert: AE Set Level";
+const char* g_Keyword_AutoGain = "Xpert: Auto Gain Mode";
 const char* g_Keyword_UseSerialLog = "Xpert: Use Serial Log";
 const char* g_Keyword_EPIXUnit     = "EPIX_Unit";
 const char* g_Keyword_EPIXUnit2    = "EPIX Unit";
 const char* g_Keyword_EPIXMultiUnitMask    = "EPIX Units to Open";
 
-const char* g_Keyword_HighGain      = "High Gain";
+const char* g_Keyword_HighGain = "High Gain";
+const char* g_Keyword_LongExp = "Long Exposure";
 const char* g_Keyword_ROIAppearance = "ROI Appearance";
 const char* g_Keyword_AutoExposure = "Exposure: Auto";
 const char* g_Keyword_TrigDelay   = "Ext. Trig. Delay (ms)";
@@ -331,6 +353,7 @@ MMThreadLock g_serialLock_[64];
 FILE *fidSerial[64];
 long gUseSerialLog[64];
 double gClockZero[64];
+double gClockTx[64];
 double gClockCurrent[64];
 void mySleep(double nTime_ms);
 double myClock();
@@ -394,253 +417,266 @@ int serialWriteReadCmd(int unitopenmap, int unit, unsigned char* bufin, int insi
 	static	pxvbtime_t  lastcapttime[1] = {0};		// when was image last captured
 
 	#if defined(WIN64)
-		#define FORMATFILE_LOAD_KITE   "XCAP\xcapRaptorKITE64.fmt"  // loaded from file during execution
-		//#define FORMATFILE_LOAD_OWL    "XCAP\xcapRaptorOWL640x480_64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OWL_320    "XCAP\xcapRaptorOWL-CL-320_64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OWL_640    "XCAP\xcapRaptorOWL-CL-640_64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OWL_NINOX_640    "XCAP\xcapRaptorNinox-640_64C.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OWL_NINOX_640_BIN1    "XCAP\xcapRaptorNinox-640_64C_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KITE   "XCAP\\xcapRaptorKITE64.fmt"  // loaded from file during execution
+		//#define FORMATFILE_LOAD_OWL    "XCAP\\xcapRaptorOWL640x480_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OWL_320    "XCAP\\xcapRaptorOWL-CL-320_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OWL_640    "XCAP\\xcapRaptorOWL-CL-640_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OWL_640_M    "XCAP\\xcapRaptorOWL-CL-640-M_64.fmt"  // loaded from file during execution		
+		#define FORMATFILE_LOAD_OWL_640_T    "XCAP\\xcapRaptorOWL-CL-640-T_64.fmt"  // loaded from file during execution		
+		#define FORMATFILE_LOAD_OWL_1280    "XCAP\\xcapRaptorOWL-CL-1280_64.fmt"  // loaded from file during execution		
 
-		#define FORMATFILE_LOAD_EAGLE "XCAP\xcapRaptorEagle_64A.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_BIN1 "XCAP\xcapRaptorEagle_64A_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_BIN2 "XCAP\xcapRaptorEagle_64A_Bin2.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_BIN4 "XCAP\xcapRaptorEagle_64A_Bin4.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OWL_NINOX_640    "XCAP\\xcapRaptorNinox-640_64C.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OWL_NINOX_640_BIN1    "XCAP\\xcapRaptorNinox-640_64C_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OWL_NINOX_1280    "XCAP\\xcapRaptorNinox-1280_64v2.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OWL_NINOX_1280_BIN1    "XCAP\\xcapRaptorNinox-1280_64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OWL_NINOX_640_SU    "XCAP\\xcapRaptorNinox-640-SU_64.fmt"  // loaded from file during execution		
+		#define FORMATFILE_LOAD_OWL_NINOX_640_SU_BIN1    "XCAP\\xcapRaptorNinox-640-SU_64_Bin1.fmt"  // loaded from file during execution		
 
-		#define FORMATFILE_LOAD_EAGLE_V		 "XCAP\xcapRaptorEagleV_64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_V_BIN1 "XCAP\xcapRaptorEagleV_64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_V_BIN2 "XCAP\xcapRaptorEagleV_64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_V_BIN4 "XCAP\xcapRaptorEagleV_64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE "XCAP\\xcapRaptorEagle_64A.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_BIN1 "XCAP\\xcapRaptorEagle_64A_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_BIN2 "XCAP\\xcapRaptorEagle_64A_Bin2.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_BIN4 "XCAP\\xcapRaptorEagle_64A_Bin4.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_EAGLE_XO4240	  "XCAP\xcapRaptorEagleXO4240_64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_XO4240_BIN1 "XCAP\xcapRaptorEagleXO4240_64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_XO4240_BIN2 "XCAP\xcapRaptorEagleXO4240_64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_XO4240_BIN4 "XCAP\xcapRaptorEagleXO4240_64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_V		 "XCAP\\xcapRaptorEagleV_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_V_BIN1 "XCAP\\xcapRaptorEagleV_64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_V_BIN2 "XCAP\\xcapRaptorEagleV_64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_V_BIN4 "XCAP\\xcapRaptorEagleV_64_Bin1.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_EAGLE_XO4210	  "XCAP\xcapRaptorEagleXO4210_64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_XO4210_BIN1 "XCAP\xcapRaptorEagleXO4210_64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_XO4210_BIN2 "XCAP\xcapRaptorEagleXO4210_64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_XO4210_BIN4 "XCAP\xcapRaptorEagleXO4210_64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_XO4240	  "XCAP\\xcapRaptorEagleXO4240_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_XO4240_BIN1 "XCAP\\xcapRaptorEagleXO4240_64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_XO4240_BIN2 "XCAP\\xcapRaptorEagleXO4240_64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_XO4240_BIN4 "XCAP\\xcapRaptorEagleXO4240_64_Bin1.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_FALCON "XCAP\xcapRaptorFalcon64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_FALCON_III "XCAP\xcapRaptorFalconIII_64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_FALCON_III_BIN1 "XCAP\xcapRaptorFalconIII_64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_FALCON_III_BIN2 "XCAP\xcapRaptorFalconIII_64_Bin2.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_FALCON_III_BIN4 "XCAP\xcapRaptorFalconIII_64_Bin4.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_XO4210	  "XCAP\\xcapRaptorEagleXO4210_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_XO4210_BIN1 "XCAP\\xcapRaptorEagleXO4210_64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_XO4210_BIN2 "XCAP\\xcapRaptorEagleXO4210_64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_XO4210_BIN4 "XCAP\\xcapRaptorEagleXO4210_64_Bin1.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_KINGFISHER694	   "XCAP\xcapRaptorKingFisher694_64A.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_BIN1 "XCAP\xcapRaptorKingFisher694_64ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_BIN2 "XCAP\xcapRaptorKingFisher694_64ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_BIN4 "XCAP\xcapRaptorKingFisher694_64ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674	    "XCAP\xcapRaptorKingFisher674_64A.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_BIN1 "XCAP\xcapRaptorKingFisher674_64A_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_BIN2 "XCAP\xcapRaptorKingFisher674_64A_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_BIN4 "XCAP\xcapRaptorKingFisher674_64A_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_XO4710	  "XCAP\\xcapRaptorEagleV_4710_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_XO4710_BIN1 "XCAP\\xcapRaptorEagleV_4710_64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_XO4710_BIN2 "XCAP\\xcapRaptorEagleV_4710_64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_XO4710_BIN4 "XCAP\\xcapRaptorEagleV_4710_64_Bin1.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_KINGFISHER694_RGB	   "XCAP\xcapRaptorKingFisher694RGB_64A.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN1 "XCAP\xcapRaptorKingFisher694RGB_64ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN2 "XCAP\xcapRaptorKingFisher694RGB_64ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN4 "XCAP\xcapRaptorKingFisher694RGB_64ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_RGB	   "XCAP\xcapRaptorKingFisher674RGB_64A.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN1 "XCAP\xcapRaptorKingFisher674RGB_64ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN2 "XCAP\xcapRaptorKingFisher674RGB_64ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN4 "XCAP\xcapRaptorKingFisher674RGB_64ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_FALCON "XCAP\\xcapRaptorFalcon64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_FALCON_III "XCAP\\xcapRaptorFalconIII_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_FALCON_III_BIN1 "XCAP\\xcapRaptorFalconIII_64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_FALCON_III_BIN2 "XCAP\\xcapRaptorFalconIII_64_Bin2.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_FALCON_III_BIN4 "XCAP\\xcapRaptorFalconIII_64_Bin4.fmt"  // loaded from file during execution
+
+		#define FORMATFILE_LOAD_KINGFISHER694	   "XCAP\\xcapRaptorKingFisher694_64A.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_BIN1 "XCAP\\xcapRaptorKingFisher694_64ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_BIN2 "XCAP\\xcapRaptorKingFisher694_64ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_BIN4 "XCAP\\xcapRaptorKingFisher694_64ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674	    "XCAP\\xcapRaptorKingFisher674_64A.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_BIN1 "XCAP\\xcapRaptorKingFisher674_64A_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_BIN2 "XCAP\\xcapRaptorKingFisher674_64A_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_BIN4 "XCAP\\xcapRaptorKingFisher674_64A_Bin1.fmt"  // loaded from file during execution
+
+		#define FORMATFILE_LOAD_KINGFISHER694_RGB	   "XCAP\\xcapRaptorKingFisher694RGB_64A.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN1 "XCAP\\xcapRaptorKingFisher694RGB_64ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN2 "XCAP\\xcapRaptorKingFisher694RGB_64ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN4 "XCAP\\xcapRaptorKingFisher694RGB_64ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_RGB	   "XCAP\\xcapRaptorKingFisher674RGB_64A.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN1 "XCAP\\xcapRaptorKingFisher674RGB_64ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN2 "XCAP\\xcapRaptorKingFisher674RGB_64ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN4 "XCAP\\xcapRaptorKingFisher674RGB_64ABin1.fmt"  // loaded from file during execution
 
 
-		#define FORMATFILE_LOAD_CYGNET					"XCAP\xcapRaptorCygnet_64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_BIN1				"XCAP\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_BIN2				"XCAP\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_BIN4				"XCAP\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_RGB				"XCAP\xcapRaptorCygnetRGB_64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_RGB_BIN1			"XCAP\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_RGB_BIN2			"XCAP\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_RGB_BIN4			"XCAP\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET					"XCAP\\xcapRaptorCygnet_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_BIN1				"XCAP\\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_BIN2				"XCAP\\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_BIN4				"XCAP\\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_RGB				"XCAP\\xcapRaptorCygnetRGB_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_RGB_BIN1			"XCAP\\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_RGB_BIN2			"XCAP\\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_RGB_BIN4			"XCAP\\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_UNKNOWN1				"XCAP\xcapRaptorExport64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_BIN1			"XCAP\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_BIN2			"XCAP\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_BIN4			"XCAP\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_RGB			"XCAP\xcapRaptorExportRGB64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN1		"XCAP\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN2		"XCAP\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN4		"XCAP\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1				"XCAP\\xcapRaptorExport64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_BIN1			"XCAP\\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_BIN2			"XCAP\\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_BIN4			"XCAP\\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_RGB			"XCAP\\xcapRaptorExportRGB64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN1		"XCAP\\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN2		"XCAP\\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN4		"XCAP\\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_OSPREY "XCAP\xcapRaptorOsprey64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_BIN1 "XCAP\xcapRaptorOsprey64Bin1B.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_BIN2 "XCAP\xcapRaptorOsprey64Bin2B.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_BIN4 "XCAP\xcapRaptorOsprey64Bin4B.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY "XCAP\\xcapRaptorOsprey64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_BIN1 "XCAP\\xcapRaptorOsprey64Bin1B.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_BIN2 "XCAP\\xcapRaptorOsprey64Bin2B.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_BIN4 "XCAP\\xcapRaptorOsprey64Bin4B.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_OSPREY_RGB "XCAP\xcapRaptorOspreyRGB64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_RGB_BIN1 "XCAP\xcapRaptorOspreyRGB64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_RGB_BIN2 "XCAP\xcapRaptorOspreyRGB64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_RGB_BIN4 "XCAP\xcapRaptorOspreyRGB64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_RGB "XCAP\\xcapRaptorOspreyRGB64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_RGB_BIN1 "XCAP\\xcapRaptorOspreyRGB64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_RGB_BIN2 "XCAP\\xcapRaptorOspreyRGB64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_RGB_BIN4 "XCAP\\xcapRaptorOspreyRGB64Bin1.fmt"  // loaded from file during execution
 	
-		//#define FORMATFILE_LOAD_OSPREY_RGB "XCAP\xcapRaptorKingFisher694RGB64.fmt"  // loaded from file during execution
-		//#define FORMATFILE_LOAD_OSPREY_RGB_BIN1 "XCAP\xcapRaptorKingFisher694RGB64_Bin1.fmt"  // loaded from file during execution
-		//#define FORMATFILE_LOAD_OSPREY_RGB_BIN2 "XCAP\xcapRaptorKingFisher694RGB64_Bin1.fmt"  // loaded from file during execution
-		//#define FORMATFILE_LOAD_OSPREY_RGB_BIN4 "XCAP\xcapRaptorKingFisher694RGB64_Bin1.fmt"  // loaded from file during execution
+		//#define FORMATFILE_LOAD_OSPREY_RGB "XCAP\\xcapRaptorKingFisher694RGB64.fmt"  // loaded from file during execution
+		//#define FORMATFILE_LOAD_OSPREY_RGB_BIN1 "XCAP\\xcapRaptorKingFisher694RGB64_Bin1.fmt"  // loaded from file during execution
+		//#define FORMATFILE_LOAD_OSPREY_RGB_BIN2 "XCAP\\xcapRaptorKingFisher694RGB64_Bin1.fmt"  // loaded from file during execution
+		//#define FORMATFILE_LOAD_OSPREY_RGB_BIN4 "XCAP\\xcapRaptorKingFisher694RGB64_Bin1.fmt"  // loaded from file during execution
 
 	#elif defined(WIN32)
-		#define FORMATFILE_LOAD_KITE   "XCAP\xcapRaptorKITE.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OWL    "XCAP\xcapRaptorOWL-CL-320.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KITE   "XCAP\\xcapRaptorKITE.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OWL    "XCAP\\xcapRaptorOWL-CL-320.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_OWL_320    "XCAP\xcapRaptorOWL-CL-320_32.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OWL_640    "XCAP\xcapRaptorOWL-CL-640_32.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OWL_NINOX_640    "XCAP\xcapRaptorNinox-640_32.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OWL_NINOX_640_BIN1    "XCAP\xcapRaptorNinox-640_32_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OWL_320    "XCAP\\xcapRaptorOWL-CL-320_32.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OWL_640    "XCAP\\xcapRaptorOWL-CL-640_32.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OWL_NINOX_640    "XCAP\\xcapRaptorNinox-640_32.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OWL_NINOX_640_BIN1    "XCAP\\xcapRaptorNinox-640_32_Bin1.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_EAGLE "XCAP\xcapRaptorEagle_32.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_BIN1 "XCAP\xcapRaptorEagle_32_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_BIN2 "XCAP\xcapRaptorEagle_32_Bin2.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_BIN4 "XCAP\xcapRaptorEagle_32_Bin4.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE "XCAP\\xcapRaptorEagle_32.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_BIN1 "XCAP\\xcapRaptorEagle_32_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_BIN2 "XCAP\\xcapRaptorEagle_32_Bin2.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_BIN4 "XCAP\\xcapRaptorEagle_32_Bin4.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_EAGLE_V		 "XCAP\xcapRaptorEagleV_64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_V_BIN1 "XCAP\xcapRaptorEagleV_64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_V_BIN2 "XCAP\xcapRaptorEagleV_64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_EAGLE_V_BIN4 "XCAP\xcapRaptorEagleV_64_Bin1.fmt"  // loaded from file during execution
-
-
-		#define FORMATFILE_LOAD_FALCON "XCAP\xcapRaptorFalcon.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY "XCAP\xcapRaptorOsprey.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_BIN1 "XCAP\xcapRaptorOspreyBin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_BIN2 "XCAP\xcapRaptorOspreyBin2.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_BIN4 "XCAP\xcapRaptorOspreyBin4.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_RGB "XCAP\xcapRaptorOspreyRGB32.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_RGB_BIN1 "XCAP\xcapRaptorOspreyRGB32Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_RGB_BIN2 "XCAP\xcapRaptorOspreyRGB32Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_RGB_BIN4 "XCAP\xcapRaptorOspreyRGB32Bin1.fmt"  // loaded from file during execution
-
-		#define FORMATFILE_LOAD_KINGFISHER694	   "XCAP\xcapRaptorKingFisher694_32A.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_BIN1 "XCAP\xcapRaptorKingFisher694_32ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_BIN2 "XCAP\xcapRaptorKingFisher694_32ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_BIN4 "XCAP\xcapRaptorKingFisher694_32ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674	   "XCAP\xcapRaptorKingFisher674_32A.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_BIN1 "XCAP\xcapRaptorKingFisher674_32ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_BIN2 "XCAP\xcapRaptorKingFisher674_32ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_BIN4 "XCAP\xcapRaptorKingFisher674_32ABin1.fmt"  // loaded from file during execution
-
-		#define FORMATFILE_LOAD_KINGFISHER694_RGB	   "XCAP\xcapRaptorKingFisher694RGB_32A.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN1 "XCAP\xcapRaptorKingFisher694RGB_32ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN2 "XCAP\xcapRaptorKingFisher694RGB_32ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN4 "XCAP\xcapRaptorKingFisher694RGB_32ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_RGB	   "XCAP\xcapRaptorKingFisher674RGB_32A.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN1 "XCAP\xcapRaptorKingFisher674RGB_32ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN2 "XCAP\xcapRaptorKingFisher674RGB_32ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN4 "XCAP\xcapRaptorKingFisher674RGB_32ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_V		 "XCAP\\xcapRaptorEagleV_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_V_BIN1 "XCAP\\xcapRaptorEagleV_64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_V_BIN2 "XCAP\\xcapRaptorEagleV_64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_EAGLE_V_BIN4 "XCAP\\xcapRaptorEagleV_64_Bin1.fmt"  // loaded from file during execution
 
 
-		#define FORMATFILE_LOAD_CYGNET					"XCAP\xcapRaptorCygnet_64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_BIN1				"XCAP\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_BIN2				"XCAP\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_BIN4				"XCAP\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_RGB				"XCAP\xcapRaptorCygnetRGB_64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_RGB_BIN1			"XCAP\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_RGB_BIN2			"XCAP\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_RGB_BIN4			"XCAP\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_FALCON "XCAP\\xcapRaptorFalcon.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY "XCAP\\xcapRaptorOsprey.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_BIN1 "XCAP\\xcapRaptorOspreyBin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_BIN2 "XCAP\\xcapRaptorOspreyBin2.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_BIN4 "XCAP\\xcapRaptorOspreyBin4.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_RGB "XCAP\\xcapRaptorOspreyRGB32.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_RGB_BIN1 "XCAP\\xcapRaptorOspreyRGB32Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_RGB_BIN2 "XCAP\\xcapRaptorOspreyRGB32Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_RGB_BIN4 "XCAP\\xcapRaptorOspreyRGB32Bin1.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_UNKNOWN1				"XCAP\xcapRaptorExport64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_BIN1			"XCAP\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_BIN2			"XCAP\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_BIN4			"XCAP\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_RGB			"XCAP\xcapRaptorExportRGB64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN1		"XCAP\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN2		"XCAP\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN4		"XCAP\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694	   "XCAP\\xcapRaptorKingFisher694_32A.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_BIN1 "XCAP\\xcapRaptorKingFisher694_32ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_BIN2 "XCAP\\xcapRaptorKingFisher694_32ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_BIN4 "XCAP\\xcapRaptorKingFisher694_32ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674	   "XCAP\\xcapRaptorKingFisher674_32A.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_BIN1 "XCAP\\xcapRaptorKingFisher674_32ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_BIN2 "XCAP\\xcapRaptorKingFisher674_32ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_BIN4 "XCAP\\xcapRaptorKingFisher674_32ABin1.fmt"  // loaded from file during execution
+
+		#define FORMATFILE_LOAD_KINGFISHER694_RGB	   "XCAP\\xcapRaptorKingFisher694RGB_32A.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN1 "XCAP\\xcapRaptorKingFisher694RGB_32ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN2 "XCAP\\xcapRaptorKingFisher694RGB_32ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN4 "XCAP\\xcapRaptorKingFisher694RGB_32ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_RGB	   "XCAP\\xcapRaptorKingFisher674RGB_32A.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN1 "XCAP\\xcapRaptorKingFisher674RGB_32ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN2 "XCAP\\xcapRaptorKingFisher674RGB_32ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN4 "XCAP\\xcapRaptorKingFisher674RGB_32ABin1.fmt"  // loaded from file during execution
+
+
+		#define FORMATFILE_LOAD_CYGNET					"XCAP\\xcapRaptorCygnet_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_BIN1				"XCAP\\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_BIN2				"XCAP\\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_BIN4				"XCAP\\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_RGB				"XCAP\\xcapRaptorCygnetRGB_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_RGB_BIN1			"XCAP\\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_RGB_BIN2			"XCAP\\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_RGB_BIN4			"XCAP\\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
+
+		#define FORMATFILE_LOAD_UNKNOWN1				"XCAP\\xcapRaptorExport64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_BIN1			"XCAP\\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_BIN2			"XCAP\\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_BIN4			"XCAP\\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_RGB			"XCAP\\xcapRaptorExportRGB64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN1		"XCAP\\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN2		"XCAP\\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN4		"XCAP\\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
 
 
 	#elif defined(MMLINUX32)
-		#define FORMATFILE_LOAD_KITE   "XCAP\xcapRaptorKITE_Linux32.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OWL    "XCAP\xcapRaptorOWL-CL-320_Linux32.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_FALCON "XCAP\xcapRaptorFalcon_Linux32.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY "XCAP\xcapRaptorOsprey_Linux32.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_BIN1 "XCAP\xcapRaptorOsprey_Linux32_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_BIN2 "XCAP\xcapRaptorOsprey_Linux32_Bin2.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_BIN4 "XCAP\xcapRaptorOsprey_Linux32_Bin4.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KITE   "XCAP\\xcapRaptorKITE_Linux32.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OWL    "XCAP\\xcapRaptorOWL-CL-320_Linux32.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_FALCON "XCAP\\xcapRaptorFalcon_Linux32.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY "XCAP\\xcapRaptorOsprey_Linux32.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_BIN1 "XCAP\\xcapRaptorOsprey_Linux32_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_BIN2 "XCAP\\xcapRaptorOsprey_Linux32_Bin2.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_BIN4 "XCAP\\xcapRaptorOsprey_Linux32_Bin4.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_KINGFISHER694	   "XCAP\xcapRaptorKingFisher694_64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_BIN1 "XCAP\xcapRaptorKingFisher694_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_BIN2 "XCAP\xcapRaptorKingFisher694_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_BIN4 "XCAP\xcapRaptorKingFisher694_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674	    "XCAP\xcapRaptorKingFisher674_64A.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_BIN1 "XCAP\xcapRaptorKingFisher674_64A_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_BIN2 "XCAP\xcapRaptorKingFisher674_64A_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_BIN4 "XCAP\xcapRaptorKingFisher674_64A_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694	   "XCAP\\xcapRaptorKingFisher694_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_BIN1 "XCAP\\xcapRaptorKingFisher694_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_BIN2 "XCAP\\xcapRaptorKingFisher694_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_BIN4 "XCAP\\xcapRaptorKingFisher694_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674	    "XCAP\\xcapRaptorKingFisher674_64A.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_BIN1 "XCAP\\xcapRaptorKingFisher674_64A_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_BIN2 "XCAP\\xcapRaptorKingFisher674_64A_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_BIN4 "XCAP\\xcapRaptorKingFisher674_64A_Bin1.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_KINGFISHER694_RGB	   "XCAP\xcapRaptorKingFisher694RGB_64A.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN1 "XCAP\xcapRaptorKingFisher694RGB_64ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN2 "XCAP\xcapRaptorKingFisher694RGB_64ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN4 "XCAP\xcapRaptorKingFisher694RGB_64ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_RGB	   "XCAP\xcapRaptorKingFisher674RGB_64A.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN1 "XCAP\xcapRaptorKingFisher674RGB_64ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN2 "XCAP\xcapRaptorKingFisher674RGB_64ABin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN4 "XCAP\xcapRaptorKingFisher674RGB_64ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_RGB	   "XCAP\\xcapRaptorKingFisher694RGB_64A.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN1 "XCAP\\xcapRaptorKingFisher694RGB_64ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN2 "XCAP\\xcapRaptorKingFisher694RGB_64ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN4 "XCAP\\xcapRaptorKingFisher694RGB_64ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_RGB	   "XCAP\\xcapRaptorKingFisher674RGB_64A.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN1 "XCAP\\xcapRaptorKingFisher674RGB_64ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN2 "XCAP\\xcapRaptorKingFisher674RGB_64ABin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN4 "XCAP\\xcapRaptorKingFisher674RGB_64ABin1.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_CYGNET					"XCAP\xcapRaptorCygnet_64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_BIN1				"XCAP\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_BIN2				"XCAP\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_BIN4				"XCAP\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_RGB				"XCAP\xcapRaptorCygnetRGB_64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_RGB_BIN1			"XCAP\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_RGB_BIN2			"XCAP\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_RGB_BIN4			"XCAP\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET					"XCAP\\xcapRaptorCygnet_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_BIN1				"XCAP\\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_BIN2				"XCAP\\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_BIN4				"XCAP\\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_RGB				"XCAP\\xcapRaptorCygnetRGB_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_RGB_BIN1			"XCAP\\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_RGB_BIN2			"XCAP\\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_RGB_BIN4			"XCAP\\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_UNKNOWN1				"XCAP\xcapRaptorExport64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_BIN1			"XCAP\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_BIN2			"XCAP\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_BIN4			"XCAP\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_RGB			"XCAP\xcapRaptorExportRGB64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN1		"XCAP\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN2		"XCAP\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN4		"XCAP\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1				"XCAP\\xcapRaptorExport64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_BIN1			"XCAP\\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_BIN2			"XCAP\\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_BIN4			"XCAP\\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_RGB			"XCAP\\xcapRaptorExportRGB64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN1		"XCAP\\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN2		"XCAP\\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN4		"XCAP\\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
 
 	#elif defined(MMLINUX64)
-		#define FORMATFILE_LOAD_KITE   "XCAP\xcapRaptorKITE_Linux64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OWL    "XCAP\xcapRaptorOWL-CL-320_Linux64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_FALCON "XCAP\xcapRaptorFalcon_Linux64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY "XCAP\xcapRaptorOsprey_Linux64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_BIN1 "XCAP\xcapRaptorOsprey_Linux64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_BIN2 "XCAP\xcapRaptorOsprey_Linux64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_BIN4 "XCAP\xcapRaptorOsprey_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KITE   "XCAP\\xcapRaptorKITE_Linux64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OWL    "XCAP\\xcapRaptorOWL-CL-320_Linux64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_FALCON "XCAP\\xcapRaptorFalcon_Linux64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY "XCAP\\xcapRaptorOsprey_Linux64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_BIN1 "XCAP\\xcapRaptorOsprey_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_BIN2 "XCAP\\xcapRaptorOsprey_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_BIN4 "XCAP\\xcapRaptorOsprey_Linux64_Bin1.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_OSPREY_RGB "XCAP\xcapRaptorOspreyRGB_Linux64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_RGB_BIN1 "XCAP\xcapRaptorOspreyRGB_Linux64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_RGB_BIN2 "XCAP\xcapRaptorOspreyRGB_Linux64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_OSPREY_RGB_BIN4 "XCAP\xcapRaptorOspreyRGB_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_RGB "XCAP\\xcapRaptorOspreyRGB_Linux64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_RGB_BIN1 "XCAP\\xcapRaptorOspreyRGB_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_RGB_BIN2 "XCAP\\xcapRaptorOspreyRGB_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_OSPREY_RGB_BIN4 "XCAP\\xcapRaptorOspreyRGB_Linux64_Bin1.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_KINGFISHER694	   "XCAP\xcapRaptorKingFisher694_Linux64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_BIN1 "XCAP\xcapRaptorKingFisher694_Linux64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_BIN2 "XCAP\xcapRaptorKingFisher694_Linux64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_BIN4 "XCAP\xcapRaptorKingFisher694_Linux64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674	   "XCAP\xcapRaptorKingFisher674_Linux64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_BIN1 "XCAP\xcapRaptorKingFisher674_Linux64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_BIN2 "XCAP\xcapRaptorKingFisher674_Linux64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_BIN4 "XCAP\xcapRaptorKingFisher674_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694	   "XCAP\\xcapRaptorKingFisher694_Linux64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_BIN1 "XCAP\\xcapRaptorKingFisher694_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_BIN2 "XCAP\\xcapRaptorKingFisher694_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_BIN4 "XCAP\\xcapRaptorKingFisher694_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674	   "XCAP\\xcapRaptorKingFisher674_Linux64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_BIN1 "XCAP\\xcapRaptorKingFisher674_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_BIN2 "XCAP\\xcapRaptorKingFisher674_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_BIN4 "XCAP\\xcapRaptorKingFisher674_Linux64_Bin1.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_KINGFISHER694_RGB	"XCAP\xcapRaptorKingFisher694RGB_Linux64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN1  "XCAP\xcapRaptorKingFisher694RGB_Linux64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN2  "XCAP\xcapRaptorKingFisher694RGB_Linux64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN4  "XCAP\xcapRaptorKingFisher694RGB_Linux64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_RGB	"XCAP\xcapRaptorKingFisher674RGB_Linux64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN1  "XCAP\xcapRaptorKingFisher674RGB_Linux64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN2  "XCAP\xcapRaptorKingFisher674RGB_Linux64_Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN4  "XCAP\xcapRaptorKingFisher674RGB_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_RGB	"XCAP\\xcapRaptorKingFisher694RGB_Linux64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN1  "XCAP\\xcapRaptorKingFisher694RGB_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN2  "XCAP\\xcapRaptorKingFisher694RGB_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER694_RGB_BIN4  "XCAP\\xcapRaptorKingFisher694RGB_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_RGB	"XCAP\\xcapRaptorKingFisher674RGB_Linux64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN1  "XCAP\\xcapRaptorKingFisher674RGB_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN2  "XCAP\\xcapRaptorKingFisher674RGB_Linux64_Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_KINGFISHER674_RGB_BIN4  "XCAP\\xcapRaptorKingFisher674RGB_Linux64_Bin1.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_CYGNET					"XCAP\xcapRaptorCygnet_64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_BIN1				"XCAP\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_BIN2				"XCAP\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_BIN4				"XCAP\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_RGB				"XCAP\xcapRaptorCygnetRGB_64.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_RGB_BIN1			"XCAP\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_RGB_BIN2			"XCAP\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_CYGNET_RGB_BIN4			"XCAP\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET					"XCAP\\xcapRaptorCygnet_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_BIN1				"XCAP\\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_BIN2				"XCAP\\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_BIN4				"XCAP\\xcapRaptorCygnet_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_RGB				"XCAP\\xcapRaptorCygnetRGB_64.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_RGB_BIN1			"XCAP\\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_RGB_BIN2			"XCAP\\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_CYGNET_RGB_BIN4			"XCAP\\xcapRaptorCygnetRGB_64Bin1.fmt"  // loaded from file during execution
 
-		#define FORMATFILE_LOAD_UNKNOWN1				"XCAP\xcapRaptorExport64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_BIN1			"XCAP\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_BIN2			"XCAP\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_BIN4			"XCAP\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_RGB			"XCAP\xcapRaptorExportRGB64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN1		"XCAP\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN2		"XCAP\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
-		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN4		"XCAP\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1				"XCAP\\xcapRaptorExport64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_BIN1			"XCAP\\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_BIN2			"XCAP\\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_BIN4			"XCAP\\xcapRaptorExportNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_RGB			"XCAP\\xcapRaptorExportRGB64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN1		"XCAP\\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN2		"XCAP\\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
+		#define FORMATFILE_LOAD_UNKNOWN1_RGB_BIN4		"XCAP\\xcapRaptorExportRGBNoSerial64bit.fmt"  // loaded from file during execution
 	#endif
 	//#define FORMATFILE_COMP   "xcvidset.fmt"  // or compiled into this application
 
@@ -765,12 +801,18 @@ MODULE_API void InitializeModuleData()
 
 	#ifndef HORIBA_COMPILE
 	   RegisterDevice(g_RaptorCameraOwl320DeviceName,       MM::CameraDevice, g_RaptorCameraOwl320DeviceName);
-	   RegisterDevice(g_RaptorCameraOwl640DeviceName,       MM::CameraDevice, g_RaptorCameraOwl640DeviceName);
-	   RegisterDevice(g_RaptorCameraOwlNinox640DeviceName,  MM::CameraDevice, g_RaptorCameraOwlNinox640DeviceName);	
-	   
+	   RegisterDevice(g_RaptorCameraOwl640DeviceName, MM::CameraDevice, g_RaptorCameraOwl640DeviceName);
+	   RegisterDevice(g_RaptorCameraOwl640MDeviceName, MM::CameraDevice, g_RaptorCameraOwl640MDeviceName);
+	   RegisterDevice(g_RaptorCameraOwl640TDeviceName, MM::CameraDevice, g_RaptorCameraOwl640TDeviceName);
+	   RegisterDevice(g_RaptorCameraOwlNinox640SUDeviceName, MM::CameraDevice, g_RaptorCameraOwlNinox640SUDeviceName);
+	   RegisterDevice(g_RaptorCameraOwlNinox640DeviceName, MM::CameraDevice, g_RaptorCameraOwlNinox640DeviceName);
+	   RegisterDevice(g_RaptorCameraOwl1280DeviceName, MM::CameraDevice, g_RaptorCameraOwl1280DeviceName);
+	   RegisterDevice(g_RaptorCameraNinox1280DeviceName, MM::CameraDevice, g_RaptorCameraNinox1280DeviceName);
+
 	   RegisterDevice(g_RaptorCameraEagleDeviceName,        MM::CameraDevice, g_RaptorCameraEagleDeviceName);
 	   RegisterDevice(g_RaptorCameraEagleV4240DeviceName,   MM::CameraDevice, g_RaptorCameraEagleV4240DeviceName);
-	   RegisterDevice(g_RaptorCameraEagleV4210DeviceName,   MM::CameraDevice, g_RaptorCameraEagleV4210DeviceName);
+	   RegisterDevice(g_RaptorCameraEagleV4210DeviceName, MM::CameraDevice, g_RaptorCameraEagleV4210DeviceName);
+	   RegisterDevice(g_RaptorCameraEagleV4710DeviceName, MM::CameraDevice, g_RaptorCameraEagleV4710DeviceName);
 
 	   RegisterDevice(g_RaptorCameraKingfisher674DeviceName, MM::CameraDevice, g_RaptorCameraKingfisher674DeviceName);
 	   RegisterDevice(g_RaptorCameraKingfisher694DeviceName, MM::CameraDevice, g_RaptorCameraKingfisher694DeviceName);
@@ -803,13 +845,38 @@ MODULE_API MM::Device* CreateDevice(const char* deviceName)
    }
    else if (strcmp(deviceName, g_RaptorCameraOwl640DeviceName) == 0)
    {
-      // create camera
-      return new CRaptorEPIX(_RAPTOR_CAMERA_OWL_640);
+	   // create camera
+	   return new CRaptorEPIX(_RAPTOR_CAMERA_OWL_640);
+   }
+   else if (strcmp(deviceName, g_RaptorCameraOwl640MDeviceName) == 0)
+   {
+	   // create camera
+	   return new CRaptorEPIX(_RAPTOR_CAMERA_OWL_640, _RAPTOR_VARIANT_OWL_640_M);
    }
    else if (strcmp(deviceName, g_RaptorCameraOwlNinox640DeviceName) == 0)
    {
-      // create camera
-      return new CRaptorEPIX(_RAPTOR_CAMERA_OWL_NINOX_640);
+	   // create camera
+	   return new CRaptorEPIX(_RAPTOR_CAMERA_OWL_NINOX_640);
+   }
+   else if (strcmp(deviceName, g_RaptorCameraOwlNinox640SUDeviceName) == 0)
+   {
+	   // create camera
+	   return new CRaptorEPIX(_RAPTOR_CAMERA_OWL_NINOX_640, _RAPTOR_VARIANT_NINOX_640_SU);
+   }
+   else if (strcmp(deviceName, g_RaptorCameraOwl640TDeviceName) == 0)
+   {
+	   // create camera
+	   return new CRaptorEPIX(_RAPTOR_CAMERA_OWL_NINOX_1280, _RAPTOR_VARIANT_OWL_640_T);
+   }
+   else if (strcmp(deviceName, g_RaptorCameraOwl1280DeviceName) == 0)
+   {
+	   // create camera
+	   return new CRaptorEPIX(_RAPTOR_CAMERA_OWL_NINOX_1280, _RAPTOR_VARIANT_OWL_1280);
+   }
+   else if (strcmp(deviceName, g_RaptorCameraNinox1280DeviceName) == 0)
+   {
+	   // create camera
+	   return new CRaptorEPIX(_RAPTOR_CAMERA_OWL_NINOX_1280);
    }
    else if (strcmp(deviceName, g_RaptorCameraEagleDeviceName) == 0)
    {
@@ -820,13 +887,19 @@ MODULE_API MM::Device* CreateDevice(const char* deviceName)
    {
       // create camera
 	   bEagle4210 = false;
-      return new CRaptorEPIX(_RAPTOR_CAMERA_EAGLE_V_4240);
+      return new CRaptorEPIX(_RAPTOR_CAMERA_EAGLE_V_4240, _RAPTOR_VARIANT_EAGLE_V_4240);
    }
-  else if (strcmp(deviceName, g_RaptorCameraEagleV4210DeviceName) == 0)
+   else if (strcmp(deviceName, g_RaptorCameraEagleV4210DeviceName) == 0)
    {
-      // create camera
+	   // create camera
 	   bEagle4210 = true;
-      return new CRaptorEPIX(_RAPTOR_CAMERA_EAGLE_V_4210);
+	   return new CRaptorEPIX(_RAPTOR_CAMERA_EAGLE_V_4210, _RAPTOR_VARIANT_EAGLE_V_4210);
+   }
+   else if (strcmp(deviceName, g_RaptorCameraEagleV4710DeviceName) == 0)
+   {
+	   // create camera
+	   bEagle4210 = true;
+	   return new CRaptorEPIX(_RAPTOR_CAMERA_EAGLE_V_4210, _RAPTOR_VARIANT_EAGLE_V_4710);
    }
    else if (strcmp(deviceName, g_RaptorCameraFalconDeviceName) == 0)
    {
@@ -911,32 +984,33 @@ MODULE_API void DeleteDevice(MM::Device* pDevice)
 * the constructor. We should do as little as possible in the constructor and
 * perform most of the initialization in the Initialize() method.
 */
-CRaptorEPIX::CRaptorEPIX(int nCameraType) :
-   CCameraBase<CRaptorEPIX> (),
-   cameraType_(0),
-   dPhase_(0),
-   exposure_(0),
-   exposureMax_(1000),
-   initialized_(false),
-   serialOK_(false),
-   readoutUs_(0.0),
-   scanMode_(1),
-   bitDepth_(16),
-   roiX_(0),
-   roiY_(0),
-   roiSnapX_(0),
-   roiSnapY_(0),
-   snapWidth_(0),
-   snapHeight_(0),
-   snapBinX_(1),
-   snapBinY_(1),
-   sequenceStartTime_(0), 
+CRaptorEPIX::CRaptorEPIX(int nCameraType, int nCameraVar) :
+	CCameraBase<CRaptorEPIX>(),
+	cameraType_(0),
+	cameraVar_(0),
+	dPhase_(0),
+	exposure_(0),
+	exposureMax_(1000),
+	initialized_(false),
+	serialOK_(false),
+	readoutUs_(0.0),
+	scanMode_(1),
+	bitDepth_(16),
+	roiX_(0),
+	roiY_(0),
+	roiSnapX_(0),
+	roiSnapY_(0),
+	snapWidth_(0),
+	snapHeight_(0),
+	snapBinX_(1),
+	snapBinY_(1),
+	sequenceStartTime_(0),
 	binSize_(1),
 	cameraCCDXSize_(888),
 	cameraCCDYSize_(888),
-   nComponents_(1),
-   pDemoResourceLock_(0),
-   triggerDevice_(""),
+	nComponents_(1),
+	pDemoResourceLock_(0),
+	triggerDevice_(""),
 	dropPixels_(false),
 	saturatePixels_(false),
 	fractionOfPixelsToDropOrSaturate_(0.002),
@@ -944,14 +1018,14 @@ CRaptorEPIX::CRaptorEPIX(int nCameraType) :
 	Gain_(0),
 	useAOI_(false),
 	updatingAOI_(false),
-    AOILeft_(0),
-    AOITop_(0),
-    AOIWidth_(0),
-    AOIHeight_(0),
-    LastAOILeft_(0),
-    LastAOITop_(0),
-    LastAOIWidth_(0),
-    LastAOIHeight_(0),
+	AOILeft_(0),
+	AOITop_(0),
+	AOIWidth_(0),
+	AOIHeight_(0),
+	LastAOILeft_(0),
+	LastAOITop_(0),
+	LastAOIWidth_(0),
+	LastAOIHeight_(0),
 	triggerMode_(0),
 	captureMode_(0),
 	ForceUpdate_(true),
@@ -960,24 +1034,27 @@ CRaptorEPIX::CRaptorEPIX(int nCameraType) :
 	AntiBloom_(0),
 	FPGACtrl_(0),
 	PostCaptureROI_(false),
-    TECSetPoint_(15),
-    OWLNUCState_(0),
-    OWLPeakAvgLevel_(0),
-    OWLAGCSpeed_(0),
-    OWLROIAppearance_(0),
+	TECSetPoint_(15),
+	OWLNUCState_(0),
+	OWLPeakAvgLevel_(0),
+	OWLAGCSpeed_(0),
+	OWLROIAppearance_(0),
 	OWLAutoExp_(0),
 	OWLHighGain_(0),
+	OWLLongExp_(0),
 	OWLBlackOffset_(0),
 	OWLTrigDelay_(0.0),
 	OWLFrameRate_(0.0),
-    serialNum_(0),
-    buildDateDD_(0),
-    buildDateMM_(0),
-    buildDateYY_(0),
-    EPROM_ADC_Cal_0C_(0),
-    EPROM_ADC_Cal_40C_(0),
-    EPROM_DAC_Cal_0C_(0),
-    EPROM_DAC_Cal_40C_(0),
+	serialNum_(0),
+	buildDateDD_(0),
+	buildDateMM_(0),
+	buildDateYY_(0),
+	EPROM_ADC_Cal_0C_(0),
+	EPROM_ADC_Cal_40C_(0),
+	EPROM_DAC_Cal_0C_(0),
+	EPROM_DAC_Cal_40C_(0),
+	VDETCOM_(0),
+	dVolts_(0),
 	dPCBTemp_(0),
 	nPCBTempCount_(0),
 	dCCDTemp_(0),
@@ -1016,6 +1093,7 @@ CRaptorEPIX::CRaptorEPIX(int nCameraType) :
 {
 
 	cameraType_ = nCameraType;
+	cameraVar_ = nCameraVar;
 	switch(nCameraType)
 	{
 		case _RAPTOR_CAMERA_KITE:   
@@ -1025,21 +1103,61 @@ CRaptorEPIX::CRaptorEPIX(int nCameraType) :
 			cameraName_ = g_RaptorOwl320;
 			cameraDeviceName_ = g_RaptorCameraOwl320DeviceName; break;
 		case _RAPTOR_CAMERA_OWL_640:    
-			cameraName_ = g_RaptorOwl640;
-			cameraDeviceName_ = g_RaptorCameraOwl640DeviceName; break;
-		case _RAPTOR_CAMERA_OWL_NINOX_640:    
-			cameraName_ = g_RaptorNinox640;
-			cameraDeviceName_ = g_RaptorCameraOwlNinox640DeviceName; break;
-		case _RAPTOR_CAMERA_EAGLE_V:   
+			if (nCameraVar == _RAPTOR_VARIANT_OWL_640_M)
+			{
+				cameraName_ = g_RaptorOwl640M;
+				cameraDeviceName_ = g_RaptorCameraOwl640MDeviceName; break;
+			}			
+			else
+			{
+				cameraName_ = g_RaptorOwl640;
+				cameraDeviceName_ = g_RaptorCameraOwl640DeviceName; break;
+			}
+		case _RAPTOR_CAMERA_OWL_NINOX_640:
+			if (nCameraVar == _RAPTOR_VARIANT_NINOX_640_SU)
+			{
+				cameraName_ = g_RaptorNinox640SU;
+				cameraDeviceName_ = g_RaptorCameraOwlNinox640SUDeviceName; break;
+			}
+			else
+			{
+				cameraName_ = g_RaptorNinox640;
+				cameraDeviceName_ = g_RaptorCameraOwlNinox640DeviceName; break;
+			}
+		case _RAPTOR_CAMERA_OWL_NINOX_1280:
+			if (nCameraVar == _RAPTOR_VARIANT_OWL_1280)
+			{
+				cameraName_ = g_RaptorOwl1280;
+				cameraDeviceName_ = g_RaptorCameraOwl1280DeviceName; break;
+			}
+			else if (nCameraVar == _RAPTOR_VARIANT_OWL_640_T)
+			{
+				cameraName_ = g_RaptorOwl640T;
+				cameraDeviceName_ = g_RaptorCameraOwl640TDeviceName; break;
+			}
+			else
+			{
+				cameraName_ = g_RaptorNinox1280;
+				cameraDeviceName_ = g_RaptorCameraNinox1280DeviceName; break;
+			}
+		case _RAPTOR_CAMERA_EAGLE_V:
 			cameraName_ = g_RaptorEagle;
 			cameraDeviceName_ = g_RaptorCameraEagleDeviceName; break;
 		case _RAPTOR_CAMERA_EAGLE_V_4240:
 			cameraName_ = g_RaptorEagleV4240;
 			cameraDeviceName_ = g_RaptorCameraEagleV4240DeviceName; break;
 		case _RAPTOR_CAMERA_EAGLE_V_4210:
-			cameraName_ = g_RaptorEagleV4210;
-			cameraDeviceName_ = g_RaptorCameraEagleV4210DeviceName; break;
-		case _RAPTOR_CAMERA_EAGLE:    
+			if (nCameraVar == _RAPTOR_VARIANT_EAGLE_V_4710)
+			{
+				cameraName_ = g_RaptorEagleV4710;
+				cameraDeviceName_ = g_RaptorCameraEagleV4710DeviceName; break;
+			}
+			else
+			{
+				cameraName_ = g_RaptorEagleV4210;
+				cameraDeviceName_ = g_RaptorCameraEagleV4210DeviceName; break;
+			}			
+		case _RAPTOR_CAMERA_EAGLE:
 			cameraName_ = g_RaptorEagle;
 			cameraDeviceName_ = g_RaptorCameraEagleDeviceName; break;
 		case _RAPTOR_CAMERA_FALCON: 
@@ -1160,6 +1278,7 @@ void CRaptorEPIX::GetName(char* name) const
 
 double CRaptorEPIX::GetMicroVersion() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	// get micro version
 	unsigned char bufin[] = {0x56, 0x50};
 	unsigned char buf[256];
@@ -1178,11 +1297,12 @@ double CRaptorEPIX::GetMicroVersion() const
 }
 void CRaptorEPIX::SetMicroReset() const
 {
+	fprintf(fidSerial[UNITSOPENMAP], "<%s>\n",__FUNCTION__);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 	// get micro version
 	int loop=0;
 
-	if(((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1)) > 0 || (cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 ) || ((cameraType_ & _RAPTOR_CAMERA_FALCON_III)>0 ))
+	if(((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1)) > 0 || (cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280) || ((cameraType_ & _RAPTOR_CAMERA_FALCON_III)>0 ))
 	{
 		unsigned char bufin[] = {0x55, 0x99, 0x66, 0x11, 0x50, 0xEB};
 		unsigned char bufin2[] = {0x4F, 0x11, 0x50, 0x0E};		
@@ -1232,6 +1352,7 @@ void CRaptorEPIX::SetMicroReset() const
 
 double CRaptorEPIX::GetFPGAVersion() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	thd_->Suspend(); 	MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 	unsigned char v1=0, v2=0;
 	double dValue;
@@ -1284,8 +1405,12 @@ double CRaptorEPIX::ConvertTECValueToTemp(int nValue) const
 
 double CRaptorEPIX::GetTECSetPoint() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 	double dValue=-999.0;
+
+	if (cameraType_ == _RAPTOR_CAMERA_OWL_640 && cameraVar_ == _RAPTOR_VARIANT_OWL_640_M)
+		return dValue;
 
    if((cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE) > 0 || (cameraType_ & _RAPTOR_CAMERA_FALCON_III) > 0)
    {
@@ -1302,7 +1427,7 @@ double CRaptorEPIX::GetTECSetPoint() const
 		dValue = ConvertTECValueToTemp(nValue);
 
    }
-   else if((cameraType_ & _RAPTOR_CAMERA_KINGFISHER_BASE) > 0 || (cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 ))
+   else if((cameraType_ & _RAPTOR_CAMERA_KINGFISHER_BASE) > 0 || (cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280))
    {
 		unsigned int nValue=0; 
 		unsigned char v1=0, v2=0;
@@ -1343,10 +1468,15 @@ double CRaptorEPIX::GetTECSetPoint() const
 }
 
 void CRaptorEPIX::SetTECSetPoint(double dValue) 
-{
+{	
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 
-   if((cameraType_ & _RAPTOR_CAMERA_FALCON_III) > 0)
+	if (cameraType_ == _RAPTOR_CAMERA_OWL_640 && cameraVar_ == _RAPTOR_VARIANT_OWL_640_M)
+		return;
+
+	if (fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %.5g\n", __FUNCTION__, dValue);
+
+   if((cameraType_ & _RAPTOR_CAMERA_FALCON_III) > 0 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
    {
 		unsigned char bufin1[] = {0x53, 0x00, 0x03, 0x01, 0x03, 0x00, 0x50};
 		unsigned char bufin2[] = {0x53, 0x00, 0x03, 0x01, 0x04, 0x00, 0x50};
@@ -1361,11 +1491,17 @@ void CRaptorEPIX::SetTECSetPoint(double dValue)
 		if(nValue<0 || nValue > 0x0FFF)
 			return;
 
-		bufin1[4] = (unsigned char)((nValue&0x0F00)>>8);
-		bufin2[4] = (unsigned char)((nValue&0x00FF));
+		if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+		{
+			bufin1[4] = 0xFB;
+			bufin2[4] = 0xFA;
+		}
+		bufin1[5] = (unsigned char)((nValue&0x0F00)>>8);
+		bufin2[5] = (unsigned char)((nValue&0x00FF));
 
-		serialWriteRaptorRegister1(UNITMASK, 0x03, bufin1[4]);
-		serialWriteRaptorRegister1(UNITMASK, 0x04, bufin2[4]);
+		serialWriteRaptorRegister1(UNITMASK, bufin1[4], bufin1[5]);
+		serialWriteRaptorRegister1(UNITMASK, bufin2[4], bufin2[5]);
+
 		
 		//serialWriteReadCmd(UNITSOPENMAP, UNITMASK, bufin1, 7, buf, 256 );
 		//serialWriteReadCmd(UNITSOPENMAP, UNITMASK, bufin2, 7, buf, 256 );
@@ -1393,7 +1529,7 @@ void CRaptorEPIX::SetTECSetPoint(double dValue)
 		serialWriteReadCmd(UNITSOPENMAP, UNITMASK, bufin2, 6, buf, 256 );
 
    }   
-   else if((cameraType_ & _RAPTOR_CAMERA_KINGFISHER_BASE) > 0  || (cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 ))
+   else if((cameraType_ & _RAPTOR_CAMERA_KINGFISHER_BASE) > 0  || (cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280))
    {
 		unsigned char bufin1[] = {0x53, 0xE0, 0x02, 0xFB, 0x00, 0x50};
 		unsigned char bufin2[] = {0x53, 0xE0, 0x02, 0xFA, 0x00, 0x50};
@@ -1463,6 +1599,7 @@ unsigned long long CRaptorEPIX::Convert5UCharToULong(unsigned char* val) const
 
 double CRaptorEPIX::GetTrigDelay() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 	unsigned char val[] = {0,0,0,0};
 	unsigned long long lValue = 0;
@@ -1477,7 +1614,7 @@ double CRaptorEPIX::GetTrigDelay() const
 
 	lValue = Convert4UCharToULong(&val[0]);
 
-	if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
+	if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
 		dValue = ((double)lValue) / 40e3;
 	else
 		dValue = ((double)lValue) / 160e3;
@@ -1488,12 +1625,15 @@ double CRaptorEPIX::GetTrigDelay() const
 
 void CRaptorEPIX::SetTrigDelay(double dVal) 
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %.5g\n", __FUNCTION__, dVal);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 	unsigned char val[] = {0,0,0,0};
 	unsigned long lValue = 0;
 	double dValue = 0.0;
-	if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
-		dValue = double(dVal/1000.0) * 40e6;
+	if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+		dValue = double(dVal / 1000.0) * 40e6;
+	else if(cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+		dValue = double(dVal / 1000.0) * 70e6;
 	else
 		dValue = double(dVal/1000.0) * 160e6;
 	lValue = (unsigned long)dValue;
@@ -1527,36 +1667,41 @@ int CRaptorEPIX::DisableMicro() const
 		return 0;
 }
 
-int CRaptorEPIX::SetSystemState(unsigned char nState) const
+int CRaptorEPIX::SetSystemState(unsigned char nState, bool bDisableCheckSum) const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = 0x%X\n", __FUNCTION__, nState);
 	unsigned char bufin[] = {0x4F, 0x00, 0x50, 0x00};
 	unsigned char buf[256];
-	if(g_bCheckSum)
+	if(g_bCheckSum && bDisableCheckSum==false)
 		bufin[1] = nState | 0x40;
 	else
 		bufin[1] = nState & 0xBF;
 
 	
 	if(g_bCmdAck)
-		bufin[1] = nState | 0x10;
+		bufin[1] = bufin[1] | 0x10;
 	else
-		bufin[1] = nState & 0xEF;
+		bufin[1] = bufin[1] & 0xEF;
 
-	
+	int ret;
 	if(g_bCheckSum)
 	{
-	bufin[3] = bufin[0] ^ bufin[1] ^ bufin[2] ;
+		bufin[3] = bufin[0] ^ bufin[1] ^ bufin[2] ;		
 
-	return serialWriteReadCmd(UNITSOPENMAP, UNITMASK, bufin,  4, buf, 256, 3, false );
+		ret = serialWriteReadCmd(UNITSOPENMAP, UNITMASK, bufin,  4, buf, 256, 3, false );
 	}
 	else
 	{
-		return serialWriteReadCmd(UNITSOPENMAP, UNITMASK, bufin,  3, buf, 256, 2, false );
-	}	
+		ret = serialWriteReadCmd(UNITSOPENMAP, UNITMASK, bufin,  3, buf, 256, 2, false );
+	}		
+	if (bDisableCheckSum)
+		g_bCheckSum = false;
+	return ret;
 }
 
 unsigned char CRaptorEPIX::GetSystemState() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char bufin[] = {0x49, 0x50};
 	unsigned char buf[256];
 	unsigned char nState;
@@ -1569,6 +1714,8 @@ unsigned char CRaptorEPIX::GetSystemState() const
 	{
 		nState = buf[ret-2];
 
+		g_bCheckSum = (nState & 0x40) > 0;
+
 		if(g_bCheckSum)
 			nState &= 0xBF;
 	}
@@ -1580,10 +1727,11 @@ unsigned char CRaptorEPIX::GetSystemState() const
 
 
 int CRaptorEPIX::GetSerialNumber() const
-{
+{	
 	if(_IS_CAMERA_OWL_FAMILY || (((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1)) > 0) || (((cameraType_ & _RAPTOR_CAMERA_FALCON_III)) > 0))
 		return serialNum_;
 
+	if (fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 
 	SetSystemState(g_SysStateFPGA);
@@ -1614,6 +1762,7 @@ int CRaptorEPIX::GetSerialNumber() const
 
 int CRaptorEPIX::SetVideoFormat(int cameraType, char* driverparms)
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, cameraType);
 #ifdef _MSC_VER
 #pragma warning (push)
 // Suppress warnings triggered by "-2147483648" in the #included *.fmt files
@@ -1674,49 +1823,196 @@ int CRaptorEPIX::SetVideoFormat(int cameraType, char* driverparms)
 			}
 		}
 	}
-	else if(cameraType == _RAPTOR_CAMERA_OWL_640)
+	else if (cameraType == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
 	{
-		if(stat(FORMATFILE_LOAD_OWL_640,&fileStat) >= 0) 
-			ret = pxd_PIXCIopen(driverparms, "", FORMATFILE_LOAD_OWL_640);
-		if(ret<0)
+		if (stat(FORMATFILE_LOAD_OWL_NINOX_640_SU, &fileStat) >= 0)
+			ret = pxd_PIXCIopen(driverparms, "", FORMATFILE_LOAD_OWL_NINOX_640_SU);
+		if (ret < 0)
 		{
 			ret = pxd_PIXCIopen(driverparms, "Default", "");
 			if (ret < 0)
 			{
 				pxd_mesgFault(UNITSMAP);
 #if defined (WIN32) || defined(WIN64)		
-					MessageBox(NULL, pxd_mesgErrorCode(ret), "pxd_PIXCIopen", MB_OK|MB_TASKMODAL);
+				MessageBox(NULL, pxd_mesgErrorCode(ret), "pxd_PIXCIopen", MB_OK | MB_TASKMODAL);
 #endif
 			}
 			//else
-			if(ret!=-24)
-			{ 
+			if (ret != -24)
+			{
 				ret = 0;
-				#include FORMATFILE_LOAD_OWL_640
+#include FORMATFILE_LOAD_OWL_NINOX_640_SU
 				pxd_videoFormatAsIncludedInit(0);
 				ret = pxd_videoFormatAsIncluded(0);
 			}
 		}
 	}
-	else if(cameraType == _RAPTOR_CAMERA_OWL_NINOX_640)
+	else if (cameraType == _RAPTOR_CAMERA_OWL_640 && cameraVar_ == _RAPTOR_VARIANT_OWL_640_M)
 	{
-		if(stat(FORMATFILE_LOAD_OWL_NINOX_640,&fileStat) >= 0) 
-			ret = pxd_PIXCIopen(driverparms, "", FORMATFILE_LOAD_OWL_NINOX_640);
-		if(ret<0)
+		if (stat(FORMATFILE_LOAD_OWL_640_M, &fileStat) >= 0)
+			ret = pxd_PIXCIopen(driverparms, "", FORMATFILE_LOAD_OWL_640_M);
+		if (ret < 0)
 		{
 			ret = pxd_PIXCIopen(driverparms, "Default", "");
 			if (ret < 0)
 			{
 				pxd_mesgFault(UNITSMAP);
 #if defined (WIN32) || defined(WIN64)		
-					MessageBox(NULL, pxd_mesgErrorCode(ret), "pxd_PIXCIopen", MB_OK|MB_TASKMODAL);
+				MessageBox(NULL, pxd_mesgErrorCode(ret), "pxd_PIXCIopen", MB_OK | MB_TASKMODAL);
 #endif
 			}
 			//else
-			if(ret!=-24)
-			{ 
+			if (ret != -24)
+			{
 				ret = 0;
-				#include FORMATFILE_LOAD_OWL_NINOX_640
+#include FORMATFILE_LOAD_OWL_640_M
+				pxd_videoFormatAsIncludedInit(0);
+				ret = pxd_videoFormatAsIncluded(0);
+			}
+		}
+	}
+	else if (cameraType == _RAPTOR_CAMERA_OWL_NINOX_1280 && cameraVar_ == _RAPTOR_VARIANT_OWL_640_T)
+	{
+		if (stat(FORMATFILE_LOAD_OWL_640_T, &fileStat) >= 0)
+			ret = pxd_PIXCIopen(driverparms, "", FORMATFILE_LOAD_OWL_640_T);
+		if (ret < 0)
+		{
+			ret = pxd_PIXCIopen(driverparms, "Default", "");
+			if (ret < 0)
+			{
+				pxd_mesgFault(UNITSMAP);
+#if defined (WIN32) || defined(WIN64)		
+				MessageBox(NULL, pxd_mesgErrorCode(ret), "pxd_PIXCIopen", MB_OK | MB_TASKMODAL);
+#endif
+			}
+			//else
+			if (ret != -24)
+			{
+				ret = 0;
+#include FORMATFILE_LOAD_OWL_640_T
+				pxd_videoFormatAsIncludedInit(0);
+				ret = pxd_videoFormatAsIncluded(0);
+			}
+		}
+	}
+	else if (cameraType == _RAPTOR_CAMERA_OWL_640)
+	{
+		if (stat(FORMATFILE_LOAD_OWL_640, &fileStat) >= 0)
+			ret = pxd_PIXCIopen(driverparms, "", FORMATFILE_LOAD_OWL_640);
+		if (ret < 0)
+		{
+			ret = pxd_PIXCIopen(driverparms, "Default", "");
+			if (ret < 0)
+			{
+				pxd_mesgFault(UNITSMAP);
+#if defined (WIN32) || defined(WIN64)		
+				MessageBox(NULL, pxd_mesgErrorCode(ret), "pxd_PIXCIopen", MB_OK | MB_TASKMODAL);
+#endif
+			}
+			//else
+			if (ret != -24)
+			{
+				ret = 0;
+#include FORMATFILE_LOAD_OWL_640
+				pxd_videoFormatAsIncludedInit(0);
+				ret = pxd_videoFormatAsIncluded(0);
+			}
+		}
+	}
+	else if (cameraType == _RAPTOR_CAMERA_OWL_NINOX_640)
+	{
+		if (stat(FORMATFILE_LOAD_OWL_NINOX_640, &fileStat) >= 0)
+			ret = pxd_PIXCIopen(driverparms, "", FORMATFILE_LOAD_OWL_NINOX_640);
+		if (ret < 0)
+		{
+			ret = pxd_PIXCIopen(driverparms, "Default", "");
+			if (ret < 0)
+			{
+				pxd_mesgFault(UNITSMAP);
+#if defined (WIN32) || defined(WIN64)		
+				MessageBox(NULL, pxd_mesgErrorCode(ret), "pxd_PIXCIopen", MB_OK | MB_TASKMODAL);
+#endif
+			}
+			//else
+			if (ret != -24)
+			{
+				ret = 0;
+#include FORMATFILE_LOAD_OWL_NINOX_640
+				pxd_videoFormatAsIncludedInit(0);
+				ret = pxd_videoFormatAsIncluded(0);
+			}
+		}
+	}
+	else if (cameraType == _RAPTOR_CAMERA_OWL_NINOX_1280)
+	{
+	if (stat(FORMATFILE_LOAD_OWL_NINOX_1280, &fileStat) >= 0)
+		ret = pxd_PIXCIopen(driverparms, "", FORMATFILE_LOAD_OWL_NINOX_1280);
+	if (ret < 0)
+	{
+		ret = pxd_PIXCIopen(driverparms, "Default", "");
+
+		if (ret < 0)
+		{
+			pxd_mesgFault(UNITSMAP);
+#if defined (WIN32) || defined(WIN64)		
+			MessageBox(NULL, pxd_mesgErrorCode(ret), "pxd_PIXCIopen", MB_OK | MB_TASKMODAL);
+#endif
+		}
+
+		if (ret != -24)
+		{
+			ret = 0;
+#include FORMATFILE_LOAD_OWL_NINOX_1280
+			pxd_videoFormatAsIncludedInit(0);
+			ret = pxd_videoFormatAsIncluded(0);
+		}
+	}
+	}
+	else if (cameraType == _RAPTOR_CAMERA_OWL_NINOX_1280 && cameraVar_==_RAPTOR_VARIANT_OWL_1280)
+	{
+		if (stat(FORMATFILE_LOAD_OWL_1280, &fileStat) >= 0)
+			ret = pxd_PIXCIopen(driverparms, "", FORMATFILE_LOAD_OWL_1280);
+		if (ret < 0)
+		{
+			ret = pxd_PIXCIopen(driverparms, "Default", "");
+
+			if (ret < 0)
+			{
+				pxd_mesgFault(UNITSMAP);
+	#if defined (WIN32) || defined(WIN64)		
+				MessageBox(NULL, pxd_mesgErrorCode(ret), "pxd_PIXCIopen", MB_OK | MB_TASKMODAL);
+	#endif
+			}
+
+			if (ret != -24)
+			{
+				ret = 0;
+	#include FORMATFILE_LOAD_OWL_1280
+				pxd_videoFormatAsIncludedInit(0);
+				ret = pxd_videoFormatAsIncluded(0);
+			}
+		}
+	}
+	else if (cameraType == _RAPTOR_CAMERA_OWL_NINOX_1280)
+	{
+		if (stat(FORMATFILE_LOAD_OWL_NINOX_1280, &fileStat) >= 0)
+			ret = pxd_PIXCIopen(driverparms, "", FORMATFILE_LOAD_OWL_NINOX_1280);
+		if (ret < 0)
+		{
+			ret = pxd_PIXCIopen(driverparms, "Default", "");
+
+			if (ret < 0)
+			{
+				pxd_mesgFault(UNITSMAP);
+	#if defined (WIN32) || defined(WIN64)		
+				MessageBox(NULL, pxd_mesgErrorCode(ret), "pxd_PIXCIopen", MB_OK | MB_TASKMODAL);
+	#endif
+			}
+
+			if (ret != -24)
+			{
+				ret = 0;
+	#include FORMATFILE_LOAD_OWL_NINOX_1280
 				pxd_videoFormatAsIncludedInit(0);
 				ret = pxd_videoFormatAsIncluded(0);
 			}
@@ -1794,25 +2090,49 @@ int CRaptorEPIX::SetVideoFormat(int cameraType, char* driverparms)
 			}
 		}
 	}
-	else if(cameraType == _RAPTOR_CAMERA_EAGLE_V_4210)
+	else if (cameraType == _RAPTOR_CAMERA_EAGLE_V_4210 && cameraVar_ == _RAPTOR_VARIANT_EAGLE_V_4710)
 	{
-		if(stat(FORMATFILE_LOAD_EAGLE_XO4210,&fileStat) >= 0) 
-			ret = pxd_PIXCIopen(driverparms, "", FORMATFILE_LOAD_EAGLE_XO4210);
-		if(ret<0)
+		if (stat(FORMATFILE_LOAD_EAGLE_XO4710, &fileStat) >= 0)
+			ret = pxd_PIXCIopen(driverparms, "", FORMATFILE_LOAD_EAGLE_XO4710);
+		if (ret < 0)
 		{
 			ret = pxd_PIXCIopen(driverparms, "Default", "");
 			if (ret < 0)
 			{
 				pxd_mesgFault(UNITSMAP);
-#if defined (WIN32) || defined(WIN64)		
-					MessageBox(NULL, pxd_mesgErrorCode(ret), "pxd_PIXCIopen", MB_OK|MB_TASKMODAL);
-#endif
+	#if defined (WIN32) || defined(WIN64)		
+				MessageBox(NULL, pxd_mesgErrorCode(ret), "pxd_PIXCIopen", MB_OK | MB_TASKMODAL);
+	#endif
 			}
 			//else
-			if(ret!=-24)
-			{ 
+			if (ret != -24)
+			{
 				ret = 0;
-				#include FORMATFILE_LOAD_EAGLE_XO4210
+	#include FORMATFILE_LOAD_EAGLE_XO4710
+				pxd_videoFormatAsIncludedInit(0);
+				ret = pxd_videoFormatAsIncluded(0);
+			}
+		}
+	}
+	else if (cameraType == _RAPTOR_CAMERA_EAGLE_V_4210)
+	{
+		if (stat(FORMATFILE_LOAD_EAGLE_XO4210, &fileStat) >= 0)
+			ret = pxd_PIXCIopen(driverparms, "", FORMATFILE_LOAD_EAGLE_XO4210);
+		if (ret < 0)
+		{
+			ret = pxd_PIXCIopen(driverparms, "Default", "");
+			if (ret < 0)
+			{
+				pxd_mesgFault(UNITSMAP);
+	#if defined (WIN32) || defined(WIN64)		
+				MessageBox(NULL, pxd_mesgErrorCode(ret), "pxd_PIXCIopen", MB_OK | MB_TASKMODAL);
+	#endif
+			}
+			//else
+			if (ret != -24)
+			{
+				ret = 0;
+	#include FORMATFILE_LOAD_EAGLE_XO4210
 				pxd_videoFormatAsIncludedInit(0);
 				ret = pxd_videoFormatAsIncluded(0);
 			}
@@ -2128,8 +2448,8 @@ int CRaptorEPIX::Initialize()
 	char profilepath1[1000];
 	char strLog1[1024];
 	ExpandEnvironmentStrings("%userprofile%",profilepath1,1000);
-	sprintf_s(strLog1,1024,"%s\\%sPleora_Serial_Log_Unit%d.%d.txt",profilepath1,RAPTOR,UNITSOPENMAP,GetCurrentProcessId());
-	fidSerial[UNITSOPENMAP] = fopen(strLog1,"a");
+	sprintf_s(strLog1,1024,"%s\\%sPleora_Serial_Log_Unit%d_PID%d.txt",profilepath1,RAPTOR,UNITSOPENMAP,GetCurrentProcessId());
+	fidSerial[UNITSOPENMAP] = fopen(strLog1,"w");
 	
 	if(fidSerial[UNITSOPENMAP])
 		gUseSerialLog[UNITSOPENMAP] = 1;
@@ -2334,21 +2654,28 @@ int CRaptorEPIX::Initialize()
 	nSerialBlock_ = 1;
 
 	char profilepath[1000];
-	char strLog[1024];
+	char strLog[1024], strTime[80];
+	struct tm* timeinfo;
+	time_t rawtime;
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+
+	strftime(strTime, 80, "%Y%m%dT%H%M%S", timeinfo);
+
 #if defined (WIN32) || defined(WIN64)
 	ExpandEnvironmentStrings("%userprofile%",profilepath,1000);
-	sprintf_s(strLog,1024,"%s\\%sEPIX_Serial_Log_Unit%d.%d.txt",profilepath,RAPTOR,UNITSOPENMAP,GetCurrentProcessId());
+	sprintf_s(strLog,1024,"%s\\%sEPIX_Serial_Log_Unit%d_%s_pid%d.txt",profilepath,RAPTOR,UNITSOPENMAP, strTime, GetCurrentProcessId());
 #else
-	sprintf_s(strLog,1024,"/tmp/%sEPIX_Serial_Log_Unit%d.%d.txt",RAPTOR,UNITSOPENMAP,getpid());
+	sprintf_s(strLog,1024,"/tmp/%sEPIX_Serial_Log_Unit%d_%s_pid%d.txt",RAPTOR,UNITSOPENMAP, strTime, getpid());
 #endif
 
 #ifdef PLEORA
-	sprintf_s(strLog,1024,"%s\\%sPleora_Serial_Log_Unit%d.%d.txt",profilepath,RAPTOR,UNITSOPENMAP,GetCurrentProcessId());
+	sprintf_s(strLog,1024,"%s\\%sPleora_Serial_Log_Unit%d_%s_pid%d.txt",profilepath,RAPTOR,UNITSOPENMAP, strTime, GetCurrentProcessId());
 #endif
 
 
 
-	fidSerial[UNITSOPENMAP] = fopen(strLog,"a");
+	fidSerial[UNITSOPENMAP] = fopen(strLog, "a");
 	//fidSerial = 0;
 
 	if(fidSerial[UNITSOPENMAP])
@@ -2358,12 +2685,15 @@ int CRaptorEPIX::Initialize()
 
 #ifdef PLEORA
 #else
-	time_t rawtime;
-	time ( &rawtime );
+	
 	if(fidSerial[UNITSOPENMAP]) 
 	{
-		fprintf(fidSerial[UNITSOPENMAP], "Version: %s\n\n", g_strVersion );
-		fprintf(fidSerial[UNITSOPENMAP], "Time: %s\n\n", ctime (&rawtime) );
+		int ret;
+		ret = fprintf(fidSerial[UNITSOPENMAP], "Version: %s\n", g_strVersion );
+		ret = fprintf(fidSerial[UNITSOPENMAP], "Time: %s\n", ctime(&rawtime));
+		ret = fprintf(fidSerial[UNITSOPENMAP], "Camera: %s\n\n", cameraDeviceName_);
+		ret = fclose(fidSerial[UNITSOPENMAP]);
+		fidSerial[UNITSOPENMAP] = fopen(strLog, "a");
 	}
 #endif
 	double dMicroVersion, dFPGAVersion;
@@ -2391,9 +2721,24 @@ int CRaptorEPIX::Initialize()
 	
 	SetSystemState(g_SysState0);
 
-	SetExtTrigStatus(0); 
-	SetLiveVideo(0);
-	
+	if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+	{
+		ExtTrigStatus_ = 0x82;
+		SetExtTrigStatus((unsigned char)ExtTrigStatus_);
+		SetLiveVideo(1);
+		
+		FixedFrameRate_ = 25;
+		SetFixedFrameRate(FixedFrameRate_);
+		exposure_ = GetExposureCore();
+		SetExposure(25);
+	}
+	else
+	{
+		ExtTrigStatus_ = 0x0;
+		SetExtTrigStatus(0);
+		SetLiveVideo(0);
+	}
+
 	if(_IS_CAMERA_OWL_FAMILY || (((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1)) > 0) || (((cameraType_ & _RAPTOR_CAMERA_FALCON_III)) > 0))
 	{
 		GetEPROMManuData();
@@ -2420,20 +2765,33 @@ int CRaptorEPIX::Initialize()
 	{
 		TECSetPoint_ = GetTECSetPoint();
 		OWLNUCState_	= GetNUCState();
-		OWLPeakAvgLevel_= GetPeakAvgLevel();
-		int nExp, nAGC;
-		GetAGCExpSpeed(&nAGC, &nExp);
+		if (cameraType_ != _RAPTOR_CAMERA_OWL_NINOX_640)
+			OWLPeakAvgLevel_= GetPeakAvgLevel();
+		int nExp=0, nAGC=0;
+		if (cameraType_ != _RAPTOR_CAMERA_OWL_NINOX_640)
+			GetAGCExpSpeed(&nAGC, &nExp);
 		OWLAGCSpeed_ = nAGC;
   	    OWLExpSpeed_ = nExp;
+		OWLHighGain_ = GetHighGain();
+
 		OWLROIAppearance_ = GetROIAppearance();
-		OWLAutoExp_		= GetAutoExposure();
-		OWLAutoLevel_	= GetAutoLevel();
-		OWLHighGain_	= GetHighGain();
-		OWLVideoPeak	= GetVideoPeak();
-		OWLVideoAvg		= GetVideoAvg();
-		OWLTrigDelay_	= GetTrigDelay();
+		if (cameraType_ != _RAPTOR_CAMERA_OWL_NINOX_640)
+		{
+			OWLAutoExp_ = GetAutoExposure();
+			OWLAutoLevel_ = GetAutoLevel();
+			if (cameraType_ != _RAPTOR_CAMERA_OWL_NINOX_1280)
+				OWLAutoGain_ = GetAutoGain();
+			else
+				OWLAutoGain_ = 0;
+			
+			OWLVideoPeak = GetVideoPeak();
+			OWLVideoAvg = GetVideoAvg();
+		}
+		if (!(cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU))
+			OWLTrigDelay_	= GetTrigDelay();
 		OWLFrameRate_   = GetFrameRate();
-		OWLBlackOffset_ = GetBlackOffset();
+		if ((cameraVar_ != _RAPTOR_VARIANT_OWL_640_M && cameraType_ != _RAPTOR_CAMERA_OWL_NINOX_640) && !(cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU))
+			OWLBlackOffset_ = GetBlackOffset();
 	}
 
 	SetROI(0, 0, cameraCCDXSize_, cameraCCDYSize_);
@@ -2469,7 +2827,7 @@ int CRaptorEPIX::Initialize()
    assert(nRet == DEVICE_OK);
 
    // CameraID
-   std::ostringstream osSerial, osMicroVersion, osFPGAVersion, osBin, osPCBTemp, osCCDTemp, osExpSpeed, osAGCSpeed, osPkAvg, osAutoLevel, osVideoPeak, osVideoAvg, osTrigDelay, osFrameRate, osBlackOffset, osModel, osUnit;
+   std::ostringstream osSerial, osMicroVersion, osFPGAVersion, osBin, osPCBTemp, osCCDTemp, osExpSpeed, osAGCSpeed, osPkAvg, osAutoLevel, osVideoPeak, osVideoAvg, osTrigDelay, osFrameRate, osBlackOffset, osModel, osUnit, osAutoGain, osVolts;
    osSerial << nSerial;
    osMicroVersion << dMicroVersion;
    osFPGAVersion  << dFPGAVersion;
@@ -2481,12 +2839,15 @@ int CRaptorEPIX::Initialize()
    osAGCSpeed << OWLAGCSpeed_;
    osPkAvg << OWLPeakAvgLevel_;
    osAutoLevel << OWLAutoLevel_;
+   osAutoGain << OWLAutoGain_;
    osVideoPeak << OWLVideoPeak;
    osVideoAvg << OWLVideoAvg;
    osTrigDelay << OWLTrigDelay_;
    osFrameRate << OWLFrameRate_;
    osBlackOffset << OWLBlackOffset_;
    osUnit << UNITSOPENMAP;
+   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+	   osVolts << dVolts_;
 
    nRet = CreateProperty(MM::g_Keyword_CameraID, osSerial.str().c_str(), MM::String, true);
    assert(nRet == DEVICE_OK);
@@ -2497,6 +2858,9 @@ int CRaptorEPIX::Initialize()
 
    // FPGA Version
    nRet = CreateProperty("FPGA Version", osFPGAVersion.str().c_str(), MM::String, true);
+   assert(nRet == DEVICE_OK);
+
+   nRet = CreateProperty("Volts", osVolts.str().c_str(), MM::String, true);
    assert(nRet == DEVICE_OK);
 
 #ifdef PLEORA
@@ -2700,21 +3064,21 @@ int CRaptorEPIX::Initialize()
    }
    else
    {
-	   pAct = new CPropertyAction (this, &CRaptorEPIX::OnPixelType);
-	   nRet = CreateProperty(MM::g_Keyword_PixelType, g_PixelType_16bit, MM::String, false, pAct);
+	   //pAct = new CPropertyAction (this, &CRaptorEPIX::OnPixelType);
+	   nRet = CreateProperty(MM::g_Keyword_PixelType, g_PixelType_16bit, MM::String, true, NULL);
 	   assert(nRet == DEVICE_OK);
 
 	//   pixelTypeValues.push_back(g_PixelType_8bit);
-	   pixelTypeValues.push_back(g_PixelType_16bit); 
+	//   pixelTypeValues.push_back(g_PixelType_16bit); 
 	//	pixelTypeValues.push_back(g_PixelType_32bitRGB);
 	//	pixelTypeValues.push_back(g_PixelType_64bitRGB);
 	//  pixelTypeValues.push_back(::g_PixelType_32bit); 
 
-	   nRet = SetAllowedValues(MM::g_Keyword_PixelType, pixelTypeValues);
-	   if (nRet != DEVICE_OK)
-		  return nRet;
+//	   nRet = SetAllowedValues(MM::g_Keyword_PixelType, pixelTypeValues);
+//	   if (nRet != DEVICE_OK)
+//		  return nRet;
 
-		SetProperty(MM::g_Keyword_PixelType, g_PixelType_16bit);
+//		SetProperty(MM::g_Keyword_PixelType, g_PixelType_16bit);
    }
 
 
@@ -2727,8 +3091,15 @@ int CRaptorEPIX::Initialize()
 	   else
 		   nRet = CreateProperty("BitDepth", "12", MM::Integer, true);
    }
-   else if(_IS_CAMERA_OWL_FAMILY)
-	   nRet = CreateProperty("BitDepth", "14", MM::Integer, true);
+   else if (_IS_CAMERA_OWL_FAMILY)
+   {
+	   if(cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+		   nRet = CreateProperty("BitDepth", "12", MM::Integer, true);
+	   else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+		   nRet = CreateProperty("BitDepth", "16", MM::Integer, true);
+	   else
+		   nRet = CreateProperty("BitDepth", "14", MM::Integer, true);
+   }
    else
 	   nRet = CreateProperty("BitDepth", "16", MM::Integer, true);
    assert(nRet == DEVICE_OK);
@@ -2822,6 +3193,11 @@ int CRaptorEPIX::Initialize()
    pAct = new CPropertyAction(this, &CRaptorEPIX::OnMaximumExposure);
    nRet = CreateProperty(g_Keyword_ExposureMax, "1000", MM::Integer, false, pAct);
    assert(nRet == DEVICE_OK);
+   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+   {
+	   exposureMax_ = 100.0;
+	   SetProperty(g_Keyword_ExposureMax, "100");
+   }
    //SetPropertyLimits(g_Keyword_ExposureMax, 100, 200000);
 
    pAct = new CPropertyAction(this, &CRaptorEPIX::OnTriggerTimeout);
@@ -2836,10 +3212,12 @@ int CRaptorEPIX::Initialize()
 	yesNo.push_back("1");
 	nRet = SetAllowedValues(g_Keyword_UseSerialLog, yesNo);
 
-   pAct = new CPropertyAction(this, &CRaptorEPIX::OnFrameInterval);
-   nRet = CreateProperty(g_Keyword_FrameInterval, "0", MM::Float, false, pAct);
-   assert(nRet == DEVICE_OK);
-
+	if (!_IS_CAMERA_OWL_FAMILY)
+	{
+		pAct = new CPropertyAction(this, &CRaptorEPIX::OnFrameInterval);
+		nRet = CreateProperty(g_Keyword_FrameInterval, "0", MM::Float, false, pAct);
+		assert(nRet == DEVICE_OK);
+	}
    pAct = new CPropertyAction (this, &CRaptorEPIX::OnExposure);
    nRet = CreateProperty(MM::g_Keyword_Exposure, osExp.str().c_str(), MM::Float, false, pAct);
    assert(nRet == DEVICE_OK);
@@ -2869,13 +3247,16 @@ int CRaptorEPIX::Initialize()
    // camera gain
    if(_IS_CAMERA_OWL_FAMILY)
    {
-	   double dGain=0;
-	   dGain = GetGain();
-	   osGain << dGain;
-	   pAct = new CPropertyAction(this, &CRaptorEPIX::OnGain);
-	   nRet = CreateProperty(MM::g_Keyword_Gain, osGain.str().c_str(), MM::Float, false, pAct);
-	   assert(nRet == DEVICE_OK);
-	   SetPropertyLimits(MM::g_Keyword_Gain, 0, 48);
+	   if (!(cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU))
+	   {
+		   double dGain = 0;
+		   dGain = GetGain();
+		   osGain << dGain;
+		   pAct = new CPropertyAction(this, &CRaptorEPIX::OnGain);
+		   nRet = CreateProperty(MM::g_Keyword_Gain, osGain.str().c_str(), MM::Float, false, pAct);
+		   assert(nRet == DEVICE_OK);
+		   SetPropertyLimits(MM::g_Keyword_Gain, 0, 48);
+	   }
    }
    else if(((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1) > 0)  && ((cameraType_ & _RAPTOR_CAMERA_OSPREY_BASE)>0) )
    {
@@ -2971,7 +3352,7 @@ int CRaptorEPIX::Initialize()
 	   frameRates.push_back(g_Keyword_FrameRate_50Hz);
 	   frameRates.push_back(g_Keyword_FrameRate_60Hz);
 	   frameRates.push_back(g_Keyword_FrameRate_User);
-	   if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+	   if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640) // || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
 	   {
 		   frameRates.push_back(g_Keyword_FrameRate_90Hz);
 		   frameRates.push_back(g_Keyword_FrameRate_120Hz);
@@ -2986,21 +3367,41 @@ int CRaptorEPIX::Initialize()
 	   ////////////////////////////////////////////////////////////////
 	   pAct = new CPropertyAction (this, &CRaptorEPIX::OnTECSetPoint);
 
-	   if(cameraType_ == _RAPTOR_CAMERA_OWL_640  )
+	   if (cameraType_ == _RAPTOR_CAMERA_OWL_640 )
 	   {
-		   nRet = CreateProperty(g_Keyword_TECSetPoint, "15", MM::Float, false, pAct);
-		   assert(nRet == DEVICE_OK);
-		   SetPropertyLimits(g_Keyword_TECSetPoint, ceil(ConvertTECValueToTemp(0)), floor(ConvertTECValueToTemp(0x0FFF)));
-		   TECSetPoint_ = 15.0;
-		   SetTECSetPoint(TECSetPoint_);
+		   if (cameraVar_ != _RAPTOR_VARIANT_OWL_640_M)
+		   {
+			   nRet = CreateProperty(g_Keyword_TECSetPoint, "15", MM::Float, false, pAct);
+			   assert(nRet == DEVICE_OK);
+			   SetPropertyLimits(g_Keyword_TECSetPoint, ceil(ConvertTECValueToTemp(0)), floor(ConvertTECValueToTemp(0x0FFF)));
+			   TECSetPoint_ = 15.0;
+			   SetTECSetPoint(TECSetPoint_);
+		   }
 	   }
-	   else if(cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
+	   else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
 	   {
 		   nRet = CreateProperty(g_Keyword_TECSetPoint, "-15", MM::Float, false, pAct);
 		   assert(nRet == DEVICE_OK);
 		   SetPropertyLimits(g_Keyword_TECSetPoint, ceil(ConvertTECValueToTemp(0)), floor(ConvertTECValueToTemp(0x0FFF)));
 		   TECSetPoint_ = -15.0;
 		   SetTECSetPoint(TECSetPoint_);
+	   }	   
+	   else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+	   {
+		   if (cameraVar_ == _RAPTOR_VARIANT_OWL_1280 || cameraVar_ == _RAPTOR_VARIANT_OWL_640_T)
+		   {
+			   nRet = CreateProperty(g_Keyword_TECSetPoint, "15", MM::Float, false, pAct);
+			   TECSetPoint_ = 15.0;
+		   }
+		   else
+		   {
+			   nRet = CreateProperty(g_Keyword_TECSetPoint, "-15", MM::Float, false, pAct);
+			   TECSetPoint_ = -15.0;
+		   }
+		   assert(nRet == DEVICE_OK);
+		   SetPropertyLimits(g_Keyword_TECSetPoint, ceil(ConvertTECValueToTemp(0)), floor(ConvertTECValueToTemp(0x0FFF)));
+		   
+		   SetTECSetPoint(TECSetPoint_);
 	   }
 	   else
 	   {
@@ -3011,100 +3412,169 @@ int CRaptorEPIX::Initialize()
 		   SetTECSetPoint(TECSetPoint_);
 	   }
 
-	   pAct = new CPropertyAction (this, &CRaptorEPIX::OnHighGain);
-	   nRet = CreateProperty(g_Keyword_HighGain, g_Keyword_On, MM::String, false, pAct);
-	   assert(nRet == DEVICE_OK);
-	   AddAllowedValue(g_Keyword_HighGain, g_Keyword_Off);
-	   AddAllowedValue(g_Keyword_HighGain, g_Keyword_On);
-	   OWLHighGain_ = 1;
-	   SetHighGain(OWLHighGain_);
-   
-	   pAct = new CPropertyAction (this, &CRaptorEPIX::OnAutoExposure);
-	   nRet = CreateProperty(g_Keyword_AutoExposure, g_Keyword_On, MM::String, false, pAct);
-	   assert(nRet == DEVICE_OK);
-	   AddAllowedValue(g_Keyword_AutoExposure, g_Keyword_Off);
-	   AddAllowedValue(g_Keyword_AutoExposure, g_Keyword_On);
-	   OWLAutoExp_ = 1;
-	   SetAutoExposure(OWLAutoExp_);
-   
-	   pAct = new CPropertyAction (this, &CRaptorEPIX::OnPeakAvgLevel);
-	   nRet = CreateProperty(g_Keyword_PeakAvgLevel, osPkAvg.str().c_str(), MM::Integer, false, pAct);
-	   assert(nRet == DEVICE_OK);
-	   SetPropertyLimits(g_Keyword_PeakAvgLevel, 0, 255);
-
-	   pAct = new CPropertyAction (this, &CRaptorEPIX::OnAutoLevel);
-	   nRet = CreateProperty(g_Keyword_AutoExpLevel, osAutoLevel.str().c_str(), MM::Integer, false, pAct);
-	   assert(nRet == DEVICE_OK);
-	   SetPropertyLimits(g_Keyword_AutoExpLevel, 0, 0x3FFF);
-
-	   if(!(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 ))
+	   if (cameraVar_ != _RAPTOR_VARIANT_OWL_640_M)
 	   {
-		   pAct = new CPropertyAction (this, &CRaptorEPIX::OnBlackOffset);
-		   nRet = CreateProperty(g_Keyword_BlackOffset, osBlackOffset.str().c_str(), MM::Integer, false, pAct);
+		   pAct = new CPropertyAction(this, &CRaptorEPIX::OnHighGain);
+		   nRet = CreateProperty(g_Keyword_HighGain, g_Keyword_On, MM::String, false, pAct);
 		   assert(nRet == DEVICE_OK);
-		   SetPropertyLimits(g_Keyword_BlackOffset, 0, 0x3FFF);
+		   AddAllowedValue(g_Keyword_HighGain, g_Keyword_Off);
+		   AddAllowedValue(g_Keyword_HighGain, g_Keyword_On);
+		   if (OWLHighGain_)
+			   SetProperty(g_Keyword_HighGain, g_Keyword_On);
+		   else
+			   SetProperty(g_Keyword_HighGain, g_Keyword_Off);
 	   }
 
-	   pAct = new CPropertyAction (this, &CRaptorEPIX::OnTrigDelay);
-	   nRet = CreateProperty(g_Keyword_TrigDelay, osTrigDelay.str().c_str(), MM::Float, false, pAct);
-	   assert(nRet == DEVICE_OK);
-	   SetPropertyLimits(g_Keyword_TrigDelay, 0, 104);
-
-	   pAct = new CPropertyAction (this, &CRaptorEPIX::OnROIAppearance);
-	   nRet = CreateProperty(g_Keyword_ROIAppearance, g_Keyword_ROI_Normal, MM::String, false, pAct);
-	   assert(nRet == DEVICE_OK);
-	   AddAllowedValue(g_Keyword_ROIAppearance, g_Keyword_ROI_Normal);
-	   AddAllowedValue(g_Keyword_ROIAppearance, g_Keyword_ROI_Bright);
-	   AddAllowedValue(g_Keyword_ROIAppearance, g_Keyword_ROI_Dark);
-
-	   pAct = new CPropertyAction (this, &CRaptorEPIX::OnNUCState);
-	   nRet = CreateProperty(g_Keyword_NUCState, g_Keyword_NUCState3, MM::String, false, pAct);
-	   assert(nRet == DEVICE_OK);
-	   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState0);
-	   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState1);
-	   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState2);
-	   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState3);
-	   //AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState4);
-	   //AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState5);
-	   //AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState6);
-	   
-	   if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
+	   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
 	   {
-		   //AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState7b);
-		   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState8);
+		   pAct = new CPropertyAction(this, &CRaptorEPIX::OnLongExp);
+		   nRet = CreateProperty(g_Keyword_LongExp, g_Keyword_Off, MM::String, false, pAct);
+		   assert(nRet == DEVICE_OK);
+		   AddAllowedValue(g_Keyword_LongExp, g_Keyword_Off);
+		   AddAllowedValue(g_Keyword_LongExp, g_Keyword_On);
+		   OWLLongExp_ = 0;
+		   
 	   }
-	   /*
+
+	   if (!(cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU))
+	   {
+		   pAct = new CPropertyAction(this, &CRaptorEPIX::OnAutoExposure);
+		   nRet = CreateProperty(g_Keyword_AutoExposure, g_Keyword_On, MM::String, false, pAct);
+		   assert(nRet == DEVICE_OK);
+		   AddAllowedValue(g_Keyword_AutoExposure, g_Keyword_Off);
+		   AddAllowedValue(g_Keyword_AutoExposure, g_Keyword_On);
+		   OWLAutoExp_ = 1;
+		   SetAutoExposure(OWLAutoExp_);
+
+		   pAct = new CPropertyAction(this, &CRaptorEPIX::OnPeakAvgLevel);
+		   nRet = CreateProperty(g_Keyword_PeakAvgLevel, osPkAvg.str().c_str(), MM::Integer, false, pAct);
+		   assert(nRet == DEVICE_OK);
+		   SetPropertyLimits(g_Keyword_PeakAvgLevel, 0, 255);
+
+		   pAct = new CPropertyAction(this, &CRaptorEPIX::OnAutoLevel);
+		   nRet = CreateProperty(g_Keyword_AutoExpLevel, osAutoLevel.str().c_str(), MM::Integer, false, pAct);
+		   assert(nRet == DEVICE_OK);
+		   SetPropertyLimits(g_Keyword_AutoExpLevel, 0, 0x3FFF);
+
+		   if (cameraType_ == _RAPTOR_CAMERA_OWL_640)
+		   {
+			   pAct = new CPropertyAction(this, &CRaptorEPIX::OnAutoGain);
+			   nRet = CreateProperty(g_Keyword_AutoGain, g_Keyword_On, MM::String, false, pAct);
+			   assert(nRet == DEVICE_OK);
+			   AddAllowedValue(g_Keyword_AutoGain, g_Keyword_Off);
+			   AddAllowedValue(g_Keyword_AutoGain, g_Keyword_On);
+			   OWLAutoGain_ = 1;
+			   SetHighGain(OWLAutoGain_);
+		   }
+		   if (!(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280))
+		   {
+			   if (cameraVar_ != _RAPTOR_VARIANT_OWL_640_M)
+			   {
+				   pAct = new CPropertyAction(this, &CRaptorEPIX::OnBlackOffset);
+				   nRet = CreateProperty(g_Keyword_BlackOffset, osBlackOffset.str().c_str(), MM::Integer, false, pAct);
+				   assert(nRet == DEVICE_OK);
+				   SetPropertyLimits(g_Keyword_BlackOffset, 0, 0x3FFF);
+			   }
+		   }
+
+		   pAct = new CPropertyAction(this, &CRaptorEPIX::OnTrigDelay);
+		   nRet = CreateProperty(g_Keyword_TrigDelay, osTrigDelay.str().c_str(), MM::Float, false, pAct);
+		   assert(nRet == DEVICE_OK);
+		   SetPropertyLimits(g_Keyword_TrigDelay, 0, 104);
+
+		   pAct = new CPropertyAction(this, &CRaptorEPIX::OnROIAppearance);
+		   nRet = CreateProperty(g_Keyword_ROIAppearance, g_Keyword_ROI_Normal, MM::String, false, pAct);
+		   assert(nRet == DEVICE_OK);
+		   AddAllowedValue(g_Keyword_ROIAppearance, g_Keyword_ROI_Normal);
+		   AddAllowedValue(g_Keyword_ROIAppearance, g_Keyword_ROI_Bright);
+		   AddAllowedValue(g_Keyword_ROIAppearance, g_Keyword_ROI_Dark);
+	   }
+	   pAct = new CPropertyAction (this, &CRaptorEPIX::OnNUCState);
+	   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+	   {
+		   nRet = CreateProperty(g_Keyword_NUCState, g_Keyword_On, MM::String, false, pAct);
+		   assert(nRet == DEVICE_OK);
+		   AddAllowedValue(g_Keyword_NUCState, g_Keyword_Off);
+		   AddAllowedValue(g_Keyword_NUCState, g_Keyword_On);
+
+		   OWLNUCState_ = 0x30;
+	   }
 	   else
-		   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState7a);
-	   */
-	   OWLNUCState_ = 0x60;
+	   {
+		   nRet = CreateProperty(g_Keyword_NUCState, g_Keyword_NUCState3, MM::String, false, pAct);
+		   assert(nRet == DEVICE_OK);
+		   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState0);
+		   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState1);
+		   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState2);
+		   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState3);
+
+		   //AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState4);
+		   //AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState5);
+		   //AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState6);
+
+		   if (cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+		   {
+			   //AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState7b);
+			   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState8);
+		   }
+		   else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+		   {
+			   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState0);
+			   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState1);
+			   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState2);
+			   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState3);
+			   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState4);
+			   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState5);
+			   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState6);
+			   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState7b);
+			   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState8);
+		   }
+
+		   /*
+		   else
+			   AddAllowedValue(g_Keyword_NUCState, g_Keyword_NUCState7a);
+		   */
+
+
+		   OWLNUCState_ = 0x60;
+
+		   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+			   OWLNUCState_ = 0x6C;
+	   }
 	   SetNUCState(OWLNUCState_);
 
-	   pAct = new CPropertyAction (this, &CRaptorEPIX::OnAGCSpeed);
-	   nRet = CreateProperty(g_Keyword_AGCSpeed, osAGCSpeed.str().c_str(), MM::Integer, false, pAct);
-	   assert(nRet == DEVICE_OK);
-	   SetPropertyLimits(g_Keyword_AGCSpeed, 0, 15);
-	   
-	   pAct = new CPropertyAction (this, &CRaptorEPIX::OnExpSpeed);
-	   nRet = CreateProperty(g_Keyword_ExpSpeed, osExpSpeed.str().c_str(), MM::Integer, false, pAct);
-	   assert(nRet == DEVICE_OK);
-	   SetPropertyLimits(g_Keyword_ExpSpeed, 0, 15);
+	   if (!(cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU))
+	   {
+		   pAct = new CPropertyAction(this, &CRaptorEPIX::OnAGCSpeed);
+		   nRet = CreateProperty(g_Keyword_AGCSpeed, osAGCSpeed.str().c_str(), MM::Integer, false, pAct);
+		   assert(nRet == DEVICE_OK);
+		   SetPropertyLimits(g_Keyword_AGCSpeed, 0, 15);
+
+		   pAct = new CPropertyAction(this, &CRaptorEPIX::OnExpSpeed);
+		   nRet = CreateProperty(g_Keyword_ExpSpeed, osExpSpeed.str().c_str(), MM::Integer, false, pAct);
+		   assert(nRet == DEVICE_OK);
+		   SetPropertyLimits(g_Keyword_ExpSpeed, 0, 15);
 
 
-	   pAct = new CPropertyAction (this, &CRaptorEPIX::OnVideoPeak);
-	   nRet = CreateProperty(g_Keyword_VideoPeak, osVideoPeak.str().c_str(), MM::Integer, true, pAct);
-	   assert(nRet == DEVICE_OK);
+		   pAct = new CPropertyAction(this, &CRaptorEPIX::OnVideoPeak);
+		   nRet = CreateProperty(g_Keyword_VideoPeak, osVideoPeak.str().c_str(), MM::Integer, true, pAct);
+		   assert(nRet == DEVICE_OK);
 
-	   pAct = new CPropertyAction (this, &CRaptorEPIX::OnVideoAvg);
-		nRet = CreateProperty(g_Keyword_VideoAvg, osVideoAvg.str().c_str(), MM::Integer, true, pAct);
-	   assert(nRet == DEVICE_OK);
+		   pAct = new CPropertyAction(this, &CRaptorEPIX::OnVideoAvg);
+		   nRet = CreateProperty(g_Keyword_VideoAvg, osVideoAvg.str().c_str(), MM::Integer, true, pAct);
+		   assert(nRet == DEVICE_OK);
+	   }
 
 	   char strBuildInfo[256];
 	   sprintf_s(strBuildInfo, 256, "%s %d/%d/20%d", buildCode_, buildDateMM_, buildDateDD_, buildDateYY_);
 	   nRet = CreateProperty(g_Keyword_BuildInfo, strBuildInfo, MM::String, true);
 	   assert(nRet == DEVICE_OK);
 
-	   if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
+	   if ((cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU))
+	   {
+
+	   }
+	   else if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
 	   {
    		   pAct = new CPropertyAction (this, &CRaptorEPIX::OnHorizontalFlip);
 		   nRet = CreateProperty(g_Keyword_HorizontalFlip, g_Keyword_On, MM::String, false, pAct);
@@ -3201,8 +3671,10 @@ int CRaptorEPIX::Initialize()
    assert(nRet == DEVICE_OK);
    AddAllowedValue(g_Keyword_PostCaptureROI, g_Keyword_Off);
    AddAllowedValue(g_Keyword_PostCaptureROI, g_Keyword_On); 
-   if(((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1) > 0))	
-  	  PostCaptureROI_ = false;
+   if(cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+	   PostCaptureROI_ = true;
+   else if(((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1) > 0))	
+	   PostCaptureROI_ = false;
    else
       PostCaptureROI_ = false;
 
@@ -3217,29 +3689,38 @@ int CRaptorEPIX::Initialize()
 //   CreateProperty("TriggerDevice","", MM::String, false, pAct);
 
    // TE Cooler
-   pAct = new CPropertyAction (this, &CRaptorEPIX::OnTECooler);
-   nRet = CreateProperty(g_Keyword_TECooler,g_Keyword_Off, MM::String, false, pAct);
-   assert(nRet == DEVICE_OK);
-   AddAllowedValue(g_Keyword_TECooler, g_Keyword_Off);
-   if(_IS_CAMERA_OWL_FAMILY || ((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1) > 0)  || ((cameraType_ & _RAPTOR_CAMERA_FALCON_III) > 0) )
-	   AddAllowedValue(g_Keyword_TECooler, g_Keyword_On);
-   else
+   if (cameraVar_ != _RAPTOR_VARIANT_OWL_640_M)
    {
-	   AddAllowedValue(g_Keyword_TECooler, g_Keyword_TECooler_neg5oC);
-	   AddAllowedValue(g_Keyword_TECooler, g_Keyword_TECooler_neg20oC);
+	   pAct = new CPropertyAction(this, &CRaptorEPIX::OnTECooler);
+	   nRet = CreateProperty(g_Keyword_TECooler, g_Keyword_Off, MM::String, false, pAct);
+	   assert(nRet == DEVICE_OK);
+	   AddAllowedValue(g_Keyword_TECooler, g_Keyword_Off);
+	   if (_IS_CAMERA_OWL_FAMILY || ((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1) > 0) || ((cameraType_ & _RAPTOR_CAMERA_FALCON_III) > 0))
+		   AddAllowedValue(g_Keyword_TECooler, g_Keyword_On);
+	   else
+	   {
+		   AddAllowedValue(g_Keyword_TECooler, g_Keyword_TECooler_neg5oC);
+		   AddAllowedValue(g_Keyword_TECooler, g_Keyword_TECooler_neg20oC);
+	   }
    }
+
    if(((cameraType_ & (_RAPTOR_CAMERA_EAGLE_BASE)) > 0))
 	   AddAllowedValue(g_Keyword_TECooler, g_Keyword_TECooler_Reset);
 
-
    // TE Fan
-   if(cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 || cameraType_ == _RAPTOR_CAMERA_OSPREY || cameraType_ == _RAPTOR_CAMERA_OSPREY_RGB  || ((cameraType_ & _RAPTOR_CAMERA_FALCON_III) > 0))
+   if (cameraVar_ != _RAPTOR_VARIANT_OWL_640_M)
    {
-	   pAct = new CPropertyAction (this, &CRaptorEPIX::OnTECFan);
-	   nRet = CreateProperty(g_Keyword_TECFan,g_Keyword_Off, MM::String, false, pAct);
-	   assert(nRet == DEVICE_OK);
-	   AddAllowedValue(g_Keyword_TECFan, g_Keyword_Off);
-	   AddAllowedValue(g_Keyword_TECFan, g_Keyword_On);
+	   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 || cameraType_ == _RAPTOR_CAMERA_OSPREY || cameraType_ == _RAPTOR_CAMERA_OSPREY_RGB || ((cameraType_ & _RAPTOR_CAMERA_FALCON_III) > 0))
+	   {
+		   if (cameraVar_ != _RAPTOR_VARIANT_OWL_1280)
+		   {
+			   pAct = new CPropertyAction(this, &CRaptorEPIX::OnTECFan);
+			   nRet = CreateProperty(g_Keyword_TECFan, g_Keyword_Off, MM::String, false, pAct);
+			   assert(nRet == DEVICE_OK);
+			   AddAllowedValue(g_Keyword_TECFan, g_Keyword_Off);
+			   AddAllowedValue(g_Keyword_TECFan, g_Keyword_On);
+		   }
+	   }
    }
 
    // AntiBloom
@@ -3323,7 +3804,7 @@ int CRaptorEPIX::Initialize()
 		   AddAllowedValue(g_Keyword_ExtTrigger, g_Keyword_ExtTrigger_Abort);
 	   triggerMode_ = 0;
    }
-   else if(((cameraType_ & _RAPTOR_CAMERA_FALCON_III) > 0))
+   else if(((cameraType_ & _RAPTOR_CAMERA_FALCON_III) > 0) || (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU))
    {
 	   pAct = new CPropertyAction (this, &CRaptorEPIX::OnTrigger);
 	   nRet = CreateProperty(g_Keyword_TriggerMode, g_Keyword_TrigITR, MM::String, false, pAct);
@@ -3334,6 +3815,12 @@ int CRaptorEPIX::Initialize()
 	   AddAllowedValue(g_Keyword_TriggerMode, g_Keyword_ExtTrigger_negTrig);
 	   AddAllowedValue(g_Keyword_TriggerMode, g_Keyword_ExtTrigger_Abort);
 	   triggerMode_ = 0;
+	   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+	   {
+		   ExtTrigStatus_ = 0x82;
+		   triggerMode_ = 0;
+		   SetProperty(g_Keyword_TriggerMode, g_Keyword_TrigFFR);
+	   }
    }
    else
    {
@@ -3450,19 +3937,39 @@ int CRaptorEPIX::Initialize()
 	}
    	captureMode_ = GetLiveVideo();
 	triggerMode_ = GetExtTrigStatus();
+	
 	ExtTrigStatus_ = 0;
 	if((((cameraType_ & _RAPTOR_CAMERA_FALCON_III)) > 0))
 		SetExtTrigStatus(0x04);
+	else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+	{
+		ExtTrigStatus_ = 0x82;
+		SetExtTrigStatus(ExtTrigStatus_);
+		SetLiveVideo(1);
+		SetExposure(exposure_);
+	}
 	else
 		SetExtTrigStatus(0);
+
 	triggerMode_ = GetExtTrigStatus();
+	ExtTrigStatus_ = triggerMode_;
 	//SetLiveVideo(captureMode_>0);
 
    if(_IS_CAMERA_OWL_FAMILY)
    {
-		serialWriteRaptorRegister1(UNITMASK, 0xF9, 0x60 ) ;
-
-	   if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
+	   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+		   serialWriteRaptorRegister1(UNITMASK, 0xF9, 0x30);
+	   else
+		   serialWriteRaptorRegister1(UNITMASK, 0xF9, 0x60);
+	   
+	   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 || (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU))
+		   SetFPGACtrl(0x04);
+	   else if (cameraVar_ == _RAPTOR_VARIANT_OWL_640_M)
+	   {
+			SetFPGACtrl(0x82);
+			serialWriteRaptorRegister1(UNITMASK, 0x01, 0x82);
+	   }
+ 	   else if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
 			SetFPGACtrl(0x87);
 	   else
 			SetFPGACtrl(0x03);
@@ -3497,6 +4004,16 @@ int CRaptorEPIX::Initialize()
 			SetExtTrigStatus(0x04);
 			SetLiveVideo(1);
 		}
+		else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+		{
+			SetLiveVideo(1);
+			SetExposure(exposure_);
+			captureMode_ = 1;
+			liveMode_ = 1;
+			ExtTrigStatus_ = 0x82;
+			SetExtTrigStatus((unsigned char)ExtTrigStatus_);
+		}
+
 		else
 		{
 			SetLiveVideo(0);
@@ -3546,18 +4063,25 @@ int CRaptorEPIX::Shutdown()
 {
 	SetLiveVideo(false);
 	SetExtTrigStatus(0);
-	SetEMGain(0);
+	if (!_IS_CAMERA_OWL_FAMILY)
+		SetEMGain(0);
 
-	  if(_IS_CAMERA_OWL_FAMILY)
+	if (_IS_CAMERA_OWL_FAMILY)
 	  {
-		  if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
+		if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+		{
+			//SetFPGACtrl(4);
+		}
+		  else if (cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
 			  SetFPGACtrl(130);
+		  else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+			  SetFPGACtrl(2);
 		  else
 			  SetFPGACtrl(2);
 	  }
-
+	
+	SetSystemState(g_SysState0, true);
 	g_bCheckSum = false;
-	SetSystemState(g_SysState0);
 
 	DisableMicro();
 
@@ -3571,6 +4095,12 @@ int CRaptorEPIX::Shutdown()
 		pxd_PIXCIclose();
 
 	g_PIXCI_DriverLoaded = 0;
+
+	if (fidSerial[UNITSOPENMAP])
+	{
+		fprintf(fidSerial[UNITSOPENMAP], "--- CLOSE ---\n\n");
+		fclose(fidSerial[UNITSOPENMAP]);
+	}
 #endif
 	initialized_ = false;
 	g_SerialOK = false;
@@ -3809,9 +4339,10 @@ int CRaptorEPIX::SnapImage()
 					}
 					DisableMicro();
 				}
-				else
+				else if ((cameraType_ & _RAPTOR_CAMERA_EAGLE) == 0)
 			    {
 				    SetExtTrigStatus(0); 
+
 					SetLiveVideo(1);
 				   while(GetLiveVideo()==0)
 				   {
@@ -3897,7 +4428,7 @@ int CRaptorEPIX::SnapImage()
    }
    */
    readoutStartTime_ = GetCurrentMMTime();
-
+   nCapturing_ = 0;
    
    return ret;
 
@@ -4008,6 +4539,7 @@ long CRaptorEPIX::GetImageBufferSize() const
 */
 int CRaptorEPIX::SetROI(unsigned x, unsigned y, unsigned xSize, unsigned ySize)
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d, %d, %d, %d\n", __FUNCTION__,x,y,xSize,ySize);
    if(IsCapturing())
        return DEVICE_CAMERA_BUSY_ACQUIRING;
 
@@ -4210,7 +4742,7 @@ int CRaptorEPIX::ClearROI()
 */
 double CRaptorEPIX::GetExposure() const
 { 
-	if(exposure_>0)
+	if((!(_IS_CAMERA_OWL_FAMILY && OWLAutoExp_)) && exposure_>0)
 		return exposure_;
 
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
@@ -4222,10 +4754,11 @@ double CRaptorEPIX::GetExposure() const
  
 double CRaptorEPIX::GetExposureCore() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char val[5] ={0,0,0,0,0};
 	unsigned long long uExp = 0;
 	
-	if((cameraType_ & _RAPTOR_CAMERA_KINGFISHER_BASE)>0 || (cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE)>0 || (cameraType_ & _RAPTOR_CAMERA_OSPREY_BASE)>0 || (cameraType_ & _RAPTOR_CAMERA_FALCON_III))
+	if((cameraType_ & _RAPTOR_CAMERA_KINGFISHER_BASE)>0 || (cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE)>0 || (cameraType_ & _RAPTOR_CAMERA_OSPREY_BASE)>0 || (cameraType_ & _RAPTOR_CAMERA_FALCON_III) || (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU))
 	{
 		serialReadRaptorRegister1(UNITMASK, 0xED, &val[0] ) ;
 		serialReadRaptorRegister1(UNITMASK, 0xEE, &val[1] ) ;
@@ -4233,6 +4766,14 @@ double CRaptorEPIX::GetExposureCore() const
 		serialReadRaptorRegister1(UNITMASK, 0xF0, &val[3] ) ;
 		serialReadRaptorRegister1(UNITMASK, 0xF1, &val[4] ) ;
 		uExp = Convert5UCharToULong(&val[0]);
+	}
+	else if (cameraType_ == _RAPTOR_CAMERA_OWL_640 && cameraVar_ == _RAPTOR_VARIANT_OWL_640_M)
+	{
+		serialReadRaptorRegister1(UNITMASK, 0x28, &val[0]);
+		serialReadRaptorRegister1(UNITMASK, 0x29, &val[1]);
+		serialReadRaptorRegister1(UNITMASK, 0x2A, &val[2]);
+		serialReadRaptorRegister1(UNITMASK, 0x2B, &val[3]);
+		uExp = Convert4UCharToULong(&val[0]);
 	}
 	else
 	{
@@ -4246,10 +4787,19 @@ double CRaptorEPIX::GetExposureCore() const
 	
 	double dExp = double(uExp);
  
-	if(cameraType_ == _RAPTOR_CAMERA_KITE)
+	if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+		dExp /= double(72e3);
+	else if(cameraType_ == _RAPTOR_CAMERA_KITE)
 		dExp /= double(20e3);
-	else if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
+	else if (cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
 		dExp /= double(40e3);
+	else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+	{
+		if (OWLHighGain_)
+			dExp /= double(1e2);
+		else
+			dExp /= double(1e3);
+	}
 	else if(_IS_CAMERA_OWL_FAMILY)
 		dExp /= double(160e3);
 	else if(cameraType_ == _RAPTOR_CAMERA_FALCON)
@@ -4268,6 +4818,7 @@ double CRaptorEPIX::GetExposureCore() const
 
 int CRaptorEPIX::GetReadoutMode() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	if((cameraType_ & _RAPTOR_CAMERA_KINGFISHER_BASE)==0 && (cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE)==0 )
 		return -1;
 
@@ -4283,6 +4834,7 @@ int CRaptorEPIX::GetReadoutMode() const
 
 int CRaptorEPIX::SetReadoutMode(unsigned char v1 )
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = 0x%X\n", __FUNCTION__, v1);
 	if((cameraType_ & _RAPTOR_CAMERA_KINGFISHER_BASE)==0 && (cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE)==0 )
 		return -1;
 
@@ -4297,6 +4849,7 @@ int CRaptorEPIX::SetReadoutMode(unsigned char v1 )
 
 int CRaptorEPIX::SetReadoutClock(int nRate ) 
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, nRate);
 	if((cameraType_ & _RAPTOR_CAMERA_KINGFISHER_BASE) )
 	{
 
@@ -4371,6 +4924,7 @@ int CRaptorEPIX::SetReadoutClock(int nRate )
 
 int CRaptorEPIX::GetReadoutClock( ) const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	if( (cameraType_ & _RAPTOR_CAMERA_KINGFISHER_BASE)==0 && (cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE)==0 && ((cameraType_ & _RAPTOR_CAMERA_FALCON_III) == 0))
 		return -1;
 
@@ -4437,6 +4991,7 @@ int CRaptorEPIX::GetReadoutClock( ) const
 
 double CRaptorEPIX::GetFrameRate() const
 { 
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	if(_NOT_CAMERA_OWL_FAMILY)
 		return 0.0;
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
@@ -4444,7 +4999,7 @@ double CRaptorEPIX::GetFrameRate() const
 	unsigned char val[5] ={0,0,0,0,0};
 	unsigned long long nRate = 0;
 
-	if((cameraType_ & (~_RAPTOR_CAMERA_FALCON_III))==0)
+	if((cameraType_ & (~_RAPTOR_CAMERA_FALCON_III))==0 || (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU))
 	{
 		serialReadRaptorRegister1(UNITMASK, 0xDC, &val[0] ) ;
 		serialReadRaptorRegister1(UNITMASK, 0xDD, &val[1] ) ;
@@ -4454,6 +5009,15 @@ double CRaptorEPIX::GetFrameRate() const
 
 		nRate = Convert5UCharToULong(&val[0]);
 	}
+	else if (cameraType_ == _RAPTOR_CAMERA_OWL_640 && cameraVar_ == _RAPTOR_VARIANT_OWL_640_M)
+	{
+		serialReadRaptorRegister1(UNITMASK, 0x39, &val[0]);
+		serialReadRaptorRegister1(UNITMASK, 0x3A, &val[1]);
+		serialReadRaptorRegister1(UNITMASK, 0x3B, &val[2]);
+		serialReadRaptorRegister1(UNITMASK, 0x3C, &val[3]);
+
+		nRate = Convert4UCharToULong(&val[0]);
+	}
 	else
 	{
 		serialReadRaptorRegister1(UNITMASK, 0xDD, &val[0] ) ;
@@ -4461,7 +5025,7 @@ double CRaptorEPIX::GetFrameRate() const
 		serialReadRaptorRegister1(UNITMASK, 0xDF, &val[2] ) ;
 		serialReadRaptorRegister1(UNITMASK, 0xE0, &val[3] ) ;
 
-		//unsigned long long nRate = Convert4UCharToULong(&val[0]);
+		nRate = Convert4UCharToULong(&val[0]);
 	}
 	DisableMicro(); thd_->Resume(); 
 		
@@ -4469,16 +5033,22 @@ double CRaptorEPIX::GetFrameRate() const
 	double dRate = 0.0;
 	if(nRate>0)
 	{
-		if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
-			dRate = 40e6/double(nRate);
+		if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+			dRate = 72e6 / double(nRate);
+		else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+			dRate = 70e6 / double(nRate);
+		else if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
+			dRate = 40e6 / double(nRate);
 		else
 			dRate = 5e6/double(nRate);
-		dRate = floor(dRate*100+0.5)/100.0;
+		if(dRate>=10.0)
+			dRate = floor(dRate*100+0.5)/100.0;
 	}
 	return dRate; 
 }
 double CRaptorEPIX::GetFixedFrameRate() const
 { 
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	if((cameraType_ & (~_RAPTOR_CAMERA_COMMONCMDS1))==0)
 		return 0.0;
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
@@ -4487,7 +5057,7 @@ double CRaptorEPIX::GetFixedFrameRate() const
 	unsigned long long nRate;
 	double maxRate;
 	
-	if((cameraType_ & _RAPTOR_CAMERA_KINGFISHER_BASE)>0 || (cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE)>0 || (cameraType_ & _RAPTOR_CAMERA_FALCON_III)>0)
+	if((cameraType_ & _RAPTOR_CAMERA_KINGFISHER_BASE)>0 || (cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE)>0 || (cameraType_ & _RAPTOR_CAMERA_FALCON_III)>0 || (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU))
 	{
 		serialReadRaptorRegister1(UNITMASK, 0xDC, &val[0] ) ;
 		serialReadRaptorRegister1(UNITMASK, 0xDD, &val[1] ) ;
@@ -4501,6 +5071,18 @@ double CRaptorEPIX::GetFixedFrameRate() const
 			maxRate = 40e6;
 		else if((cameraType_ & _RAPTOR_CAMERA_FALCON_III)>0)
 			maxRate = 80e6;
+		else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+			maxRate = 72e6;
+	}
+	else if (cameraType_ == _RAPTOR_CAMERA_OWL_640 && cameraVar_ == _RAPTOR_VARIANT_OWL_640_M)
+	{
+		serialReadRaptorRegister1(UNITMASK, 0x39, &val[0]);
+		serialReadRaptorRegister1(UNITMASK, 0x3A, &val[1]);
+		serialReadRaptorRegister1(UNITMASK, 0x3B, &val[2]);
+		serialReadRaptorRegister1(UNITMASK, 0x3C, &val[3]);
+
+		nRate = Convert4UCharToULong(&val[0]);
+		maxRate = 40e6;
 	}
 	else
 	{
@@ -4510,7 +5092,11 @@ double CRaptorEPIX::GetFixedFrameRate() const
 		serialReadRaptorRegister1(UNITMASK, 0xE0, &val[3] ) ;
 
 		nRate = Convert4UCharToULong(&val[0]);
-		maxRate = 80e6;
+
+		if(cameraType_== _RAPTOR_CAMERA_OWL_NINOX_1280)
+			maxRate = 70e6;
+		else
+			maxRate = 80e6;
 	}
 	DisableMicro(); thd_->Resume(); 
 
@@ -4533,7 +5119,7 @@ int CRaptorEPIX::serialWriteRaptorRegister1(int unit, unsigned char nReg, unsign
 	unsigned char bufinF[]  = {0x53, 0x00, 0x03, 0x01, 0xFF, 0xFF, 0x50};
 	unsigned char buf[256]; 
 
-	if(cameraType_ & _RAPTOR_CAMERA_FALCON_III)
+	if(cameraType_ & _RAPTOR_CAMERA_FALCON_III || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
 	{
 		bufinF[4] = nReg ;
 		bufinF[5] = val ;
@@ -4574,7 +5160,7 @@ int CRaptorEPIX::serialReadRaptorRegister1(int unit, unsigned char nReg, unsigne
 
 	int pos=0;
 
-	if(cameraType_ & _RAPTOR_CAMERA_FALCON_III)
+	if(cameraType_ & _RAPTOR_CAMERA_FALCON_III || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
 	{
 		bufinF[5] = nReg;
 		ret = serialWriteReadCmd(UNITSOPENMAP, unit, bufinF,  7, buf, 256 );
@@ -4631,7 +5217,7 @@ int CRaptorEPIX::serialReadRaptorRegister2(int unit, unsigned char nReg, unsigne
 
 	int pos=0;
 
-	if(cameraType_ & _RAPTOR_CAMERA_FALCON_III)
+	if(cameraType_ & _RAPTOR_CAMERA_FALCON_III || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
 	{
 		bufinF[5] = nReg;
 		ret = serialWriteReadCmd(UNITSOPENMAP, unit, bufinF,  7, buf, 256 );
@@ -4668,13 +5254,14 @@ int CRaptorEPIX::serialReadRaptorRegister2(int unit, unsigned char nReg, unsigne
 }
 
 int CRaptorEPIX::SetLiveVideo(bool bLive) const
-{
+{	
 	//thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 	int ret;
 
-	if(_IS_CAMERA_OWL_FAMILY)
+	if(_IS_CAMERA_OWL_FAMILY && !(cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU))
 		return -1;	
 
+	if (fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, (int)bLive);
 	if(((cameraType_ & _RAPTOR_CAMERA_FALCON_III) > 0))
 	{
 		if(bLive)
@@ -4694,6 +5281,17 @@ int CRaptorEPIX::SetLiveVideo(bool bLive) const
 		
 		if(g_bCheckSum)
 			SetSystemState(g_SysState0);
+	}
+	else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+	{
+		ret = serialWriteRaptorRegister1(UNITMASK, 0xF2, 0x08);
+		ret = serialWriteRaptorRegister1(UNITMASK, 0xF2, 0x00);
+		if (bLive)
+			ret = serialWriteRaptorRegister1(UNITMASK, 0xF2, (unsigned char)ExtTrigStatus_ );
+		else
+			ret = serialWriteRaptorRegister1(UNITMASK, 0xF2, (unsigned char)ExtTrigStatus_ & 0xF0);
+
+		GetExposureCore();		
 	}
 	else
 	{
@@ -4716,11 +5314,17 @@ int CRaptorEPIX::SetLiveVideo(bool bLive) const
 }
 int CRaptorEPIX::GetLiveVideo() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	int ret;
 	unsigned char val;
 
-	if(_IS_CAMERA_OWL_FAMILY)
+	if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
 	{
+		ret = serialReadRaptorRegister1(UNITMASK, 0xF2, &val);
+		return (val & 0x06) > 0;
+	}
+	else if(_IS_CAMERA_OWL_FAMILY)
+	{		
 		if(triggerMode_)
 			return 0x00;	
 		else
@@ -4730,7 +5334,7 @@ int CRaptorEPIX::GetLiveVideo() const
 	if(((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1) > 0) || ((cameraType_ & _RAPTOR_CAMERA_FALCON_III) > 0) )
 	{
 		ret = serialReadRaptorRegister1(UNITMASK, 0xD4, &val);
-		return (val & 0x04)>0;	
+		return (val & 0x04) > 0;
 	}
 	else	
 		ret = serialReadRaptorRegister1(UNITMASK, 0xF2, &val);
@@ -4748,6 +5352,7 @@ void CRaptorEPIX::SetBinningFactor(int nBin)
 
 void CRaptorEPIX::SetBinningFactor(int nBin) 
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, nBin);
 #ifdef _MSC_VER
 #pragma warning (push)
 // Suppress warnings triggered by "-2147483648" in the #included *.fmt files
@@ -5140,6 +5745,7 @@ void CRaptorEPIX::SetBinningFactor(int nBin)
 
 void CRaptorEPIX::SetBinningFactorXY(int nBinX, int nBinY) 
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d, %d\n", __FUNCTION__, nBinX, nBinY);
 #ifdef _MSC_VER
 #pragma warning (push)
 // Suppress warnings triggered by "-2147483648" in the #included *.fmt files
@@ -5163,9 +5769,24 @@ void CRaptorEPIX::SetBinningFactorXY(int nBinX, int nBinY)
 		serialWriteRaptorRegister1(UNITMASK, 0xA1, (valx-1)&0xFF);
 		serialWriteRaptorRegister1(UNITMASK, 0xA2, (valy-1)&0xFF);
 
-		if(cameraType_ == _RAPTOR_CAMERA_EAGLE_V_4240)
+		if (cameraType_ == _RAPTOR_CAMERA_EAGLE_V_4210)
 		{
-			#include FORMATFILE_LOAD_EAGLE_XO4240_BIN1
+			if (cameraVar_ == _RAPTOR_VARIANT_EAGLE_V_4710)
+			{
+#include FORMATFILE_LOAD_EAGLE_XO4710_BIN1
+				pxd_videoFormatAsIncludedInit(0);
+				ret = pxd_videoFormatAsIncluded(0);
+			}
+			else
+			{
+#include FORMATFILE_LOAD_EAGLE_XO4210_BIN1
+				pxd_videoFormatAsIncludedInit(0);
+				ret = pxd_videoFormatAsIncluded(0);
+			}
+		}
+		else if (cameraType_ == _RAPTOR_CAMERA_EAGLE_V_4240)
+		{
+#include FORMATFILE_LOAD_EAGLE_XO4240_BIN1
 			pxd_videoFormatAsIncludedInit(0);
 			ret = pxd_videoFormatAsIncluded(0);
 		}
@@ -5311,13 +5932,17 @@ int serialWriteReadCmd(int unitopenmap, int unit, unsigned char* bufin, int insi
 		
 		if(fidSerial[unitopenmap] && gUseSerialLog[unitopenmap])
 		{
-			gClockCurrent[unitopenmap] = myClock();
-			fprintf(fidSerial[unitopenmap], "Time: %0.8f \t", double(gClockCurrent[unitopenmap] - gClockZero[unitopenmap]));
+			gClockTx[unitopenmap] = myClock();
+			int nLen = 0;
+			nLen += fprintf(fidSerial[unitopenmap], "Time: %0.8f    ", double(gClockTx[unitopenmap] - gClockZero[unitopenmap]));
 
-			fprintf(fidSerial[unitopenmap], "TX: ");
-			for(ii=0; ii<insize2; ii++)
-				fprintf(fidSerial[unitopenmap], "0x%02X ",g_ucSerialBuf[ii]);
-			fprintf(fidSerial[unitopenmap], "\n");
+			nLen += fprintf(fidSerial[unitopenmap], "TX: ");
+			for (ii = 0; ii < insize2; ii++)
+				nLen += fprintf(fidSerial[unitopenmap], "0x%02X ",g_ucSerialBuf[ii]);
+
+			if(nLen < 80)
+				for (ii = 0; ii < 80-nLen; ii++)
+					fprintf(fidSerial[unitopenmap], " ");
 		}
 		tick=0;
 
@@ -5449,11 +6074,17 @@ int serialWriteReadCmd(int unitopenmap, int unit, unsigned char* bufin, int insi
 		
 			if(fidSerial[unitopenmap] && gUseSerialLog[unitopenmap])
 			{
-				gClockCurrent[unitopenmap] = myClock();
-				fprintf(fidSerial[unitopenmap], "Time: %0.8f \t", double(gClockCurrent[unitopenmap] - gClockZero[unitopenmap]) );
-				fprintf(fidSerial[unitopenmap], "RX: ");
+				gClockCurrent[unitopenmap] = myClock();				
+				fprintf(fidSerial[unitopenmap], "    RX: ");
+				int nLen = 0;
 				for(ii=0; ii<bytes; ii++)
-					fprintf(fidSerial[unitopenmap], "0x%02X ",bufout[ii]);
+					nLen += fprintf(fidSerial[unitopenmap], "0x%02X ",bufout[ii]);
+
+				if(nLen<16)
+					for (ii = 0; ii < 16-nLen; ii++)
+						fprintf(fidSerial[unitopenmap], " ");
+
+				fprintf(fidSerial[unitopenmap], "    (dTime: %0.8f)", double(gClockCurrent[unitopenmap] - gClockTx[unitopenmap]));
 				fprintf(fidSerial[unitopenmap], "\n");
 			}
 		}
@@ -5470,7 +6101,7 @@ int serialWriteReadCmd(int unitopenmap, int unit, unsigned char* bufin, int insi
 * Required by the MM::Camera API.
 */
 void CRaptorEPIX::SetExposure(double exp, bool bUpdate)
-{ 
+{ 	
 	if(exp==0)
 		exp = 1.0;
 
@@ -5485,19 +6116,51 @@ void CRaptorEPIX::SetExposure(double exp, bool bUpdate)
 		SetProperty(MM::g_Keyword_Exposure, CDeviceUtils::ConvertToString(exp));
 	}
 
+	if (OWLAutoExp_ == 1)
+	{
+		OWLAutoExp_ = 0;
+		SetAutoExposure(OWLAutoExp_);
+		Sleep(100);
+	}
+
+	if (fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %.5g\n", __FUNCTION__, exp);
+
 	if(cameraType_ == _RAPTOR_CAMERA_KITE)
 	{
 		if(exp>214.0*1000.0)
 			exp = 214.0*1000.0;
 		exp *= double(20e3);
-	}
-	else if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
+	}	
+	if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
 	{
-		if(exp>26.8*1000.0)
-			exp = 26.8*1000.0;
+		if (exp > 300.0 * 1000.0)
+			exp = 300.0 * 1000.0;
+		exp *= double(72e3);
+		if (exp < 20)
+			exp = 20;
+	}
+	else if (cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+	{
+		if (exp > 26.8 * 1000.0)
+			exp = 26.8 * 1000.0;
 		exp *= double(40e3);
-		if(exp<20)
-			exp = 20;		
+		if (exp < 20)
+			exp = 20;
+	}
+	else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+	{
+
+		if (OWLLongExp_ && exp > 10000.0)
+			exp = 10000.0;
+		else if (OWLLongExp_==0 && exp > 100.0)
+			exp = 100.0;
+		if(OWLHighGain_)
+			exp *= double(1e2);
+		else
+			exp *= double(1e3);
+
+		if (exp < 20)
+			exp = 20;
 	}
 	else if(_IS_CAMERA_OWL_FAMILY)
 	{
@@ -5555,7 +6218,14 @@ void CRaptorEPIX::SetExposure(double exp, bool bUpdate)
 	ucExp[3] = (unsigned char)( (lExp & 0x000000FF00L) >>  8 );	
 	ucExp[4] = (unsigned char)( (lExp & 0x00000000FFL) );	
  
-	if((cameraType_ & _RAPTOR_CAMERA_KINGFISHER_BASE) || (cameraType_ & _RAPTOR_CAMERA_OSPREY_BASE) || (cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE) || (cameraType_ & _RAPTOR_CAMERA_FALCON_III))
+	if (cameraType_ == _RAPTOR_CAMERA_OWL_640 && cameraVar_ == _RAPTOR_VARIANT_OWL_640_M)
+	{
+		serialWriteRaptorRegister1(UNITMASK, 0x28, ucExp[1]);
+		serialWriteRaptorRegister1(UNITMASK, 0x29, ucExp[2]);
+		serialWriteRaptorRegister1(UNITMASK, 0x2A, ucExp[3]);
+		serialWriteRaptorRegister1(UNITMASK, 0x2B, ucExp[4]);
+	}
+	else if((cameraType_ & _RAPTOR_CAMERA_KINGFISHER_BASE) || (cameraType_ & _RAPTOR_CAMERA_OSPREY_BASE) || (cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE) || (cameraType_ & _RAPTOR_CAMERA_FALCON_III) || (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU))
 	{
 		serialWriteRaptorRegister1(UNITMASK, 0xED, ucExp[0]);
 		serialWriteRaptorRegister1(UNITMASK, 0xEE, ucExp[1]);
@@ -5571,7 +6241,10 @@ void CRaptorEPIX::SetExposure(double exp, bool bUpdate)
 		serialWriteRaptorRegister1(UNITMASK, 0xF1, ucExp[4]);
 	}
 
-	exposure_ = GetExposureCore(); 
+	if(cameraVar_ == _RAPTOR_VARIANT_OWL_640_M)
+		exposure_ = (double(lExp) / 40e3);
+	else
+		exposure_ = GetExposureCore(); 
 
 	if(exposure_ > exposureMax_)
 	{
@@ -5593,16 +6266,21 @@ void CRaptorEPIX::SetExposure(double exp, bool bUpdate)
 
 void CRaptorEPIX::SetFrameRate(double dFrameRate)
 { 
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %.5g\n", __FUNCTION__, dFrameRate);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 	unsigned long nRate=0;
 
 	if(_NOT_CAMERA_OWL_FAMILY)
 		return;
 
-	if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
-		nRate = (unsigned long)(40e6/dFrameRate);
-	if(cameraType_ == _RAPTOR_CAMERA_FALCON_III )
-		nRate = (unsigned long)(80e6/dFrameRate);
+	if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+		nRate = (unsigned long)(72e6 / dFrameRate);
+	else if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+		nRate = (unsigned long)(40e6 / dFrameRate);
+	else if(cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+		nRate = (unsigned long)(70e6 / dFrameRate);
+	else if(cameraType_ == _RAPTOR_CAMERA_FALCON_III )
+		nRate = (unsigned long)(80e6 / dFrameRate);	
 	else
 		nRate = (unsigned long)(5e6/dFrameRate);
 	
@@ -5629,16 +6307,27 @@ void CRaptorEPIX::SetFrameRate(double dFrameRate)
 		ucRate[2] = (unsigned char)( (nRate & 0x0000FF00L) >> 8  );	
 		ucRate[3] = (unsigned char)( (nRate & 0x000000FFL) );	
  
-		serialWriteRaptorRegister1(UNITMASK, 0xDD, ucRate[0]);
-		serialWriteRaptorRegister1(UNITMASK, 0xDE, ucRate[1]);
-		serialWriteRaptorRegister1(UNITMASK, 0xDF, ucRate[2]);
-		serialWriteRaptorRegister1(UNITMASK, 0xE0, ucRate[3]);
+		if (cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+		{
+			serialWriteRaptorRegister1(UNITMASK, 0x39, ucRate[0]);
+			serialWriteRaptorRegister1(UNITMASK, 0x3A, ucRate[1]);
+			serialWriteRaptorRegister1(UNITMASK, 0x3B, ucRate[2]);
+			serialWriteRaptorRegister1(UNITMASK, 0x3C, ucRate[3]);
+		}
+		else
+		{
+			serialWriteRaptorRegister1(UNITMASK, 0xDD, ucRate[0]);
+			serialWriteRaptorRegister1(UNITMASK, 0xDE, ucRate[1]);
+			serialWriteRaptorRegister1(UNITMASK, 0xDF, ucRate[2]);
+			serialWriteRaptorRegister1(UNITMASK, 0xE0, ucRate[3]);
+		}
 	}
 	DisableMicro(); thd_->Resume();
 
 }
 void CRaptorEPIX::SetFixedFrameRate(double dFrameRate)
 { 
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %.5g\n", __FUNCTION__, dFrameRate);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 	unsigned long long nRate=0;
 
@@ -5649,8 +6338,12 @@ void CRaptorEPIX::SetFixedFrameRate(double dFrameRate)
 		nRate = (unsigned long long)(20e6/dFrameRate);
 	else if(cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE)
 		nRate = (unsigned long long)(40e6/dFrameRate);
+	else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+		nRate = (unsigned long long)(70e6 / dFrameRate);
+	else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+		nRate = (unsigned long long)(72e6 / dFrameRate);
 	else
-		nRate = (unsigned long long)(80e6/dFrameRate);
+		nRate = (unsigned long long)(80e6 / dFrameRate);
 	
 	unsigned char ucRate[5];
 	ucRate[0] = (unsigned char)( (nRate & 0xFF00000000L) >> 32 );	
@@ -6169,6 +6862,7 @@ int CRaptorEPIX::OnTestProperty(MM::PropertyBase* pProp, MM::ActionType eAct, lo
 
 int CRaptorEPIX::SetEMGain(long nGain)
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, nGain);
 	if(cameraType_==_RAPTOR_CAMERA_FALCON_III)
 	{
 
@@ -6217,6 +6911,7 @@ int CRaptorEPIX::SetEMGain(long nGain)
 
 void CRaptorEPIX::SetHighDynamicRange(int nHDR)
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, nHDR);
 	if(!(cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1))
 		return;	
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
@@ -6242,6 +6937,7 @@ void CRaptorEPIX::SetHighDynamicRange(int nHDR)
 
 void CRaptorEPIX::SetNUCMap(int nNUC)
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, nNUC);
 	if(!(cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1))
 		return;	
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
@@ -6256,6 +6952,7 @@ void CRaptorEPIX::SetNUCMap(int nNUC)
 
 int CRaptorEPIX::SetGain(double dGain)
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %.5g\n", __FUNCTION__, dGain);
 	if(_NOT_CAMERA_OWL_FAMILY && ((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1)==0))
 		return -1;	
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
@@ -6283,7 +6980,12 @@ int CRaptorEPIX::SetGain(double dGain)
 	ucGain[1] = (unsigned char)( (nGain & 0x00FF) );	
  
 	int ret;
-	if(_IS_CAMERA_OWL_FAMILY)
+	if (cameraType_ == _RAPTOR_CAMERA_OWL_640 && cameraVar_ == _RAPTOR_VARIANT_OWL_640_M)
+	{
+		ret = serialWriteRaptorRegister1(UNITMASK, 0x26, ucGain[0]);
+		ret = serialWriteRaptorRegister1(UNITMASK, 0x27, ucGain[1]);
+	}
+	else if(_IS_CAMERA_OWL_FAMILY)
 	{
 		ret = serialWriteRaptorRegister1(UNITMASK, 0xC6, ucGain[0]);
 		ret = serialWriteRaptorRegister1(UNITMASK, 0xC7, ucGain[1]);
@@ -6302,6 +7004,7 @@ int CRaptorEPIX::SetGain(double dGain)
 
 long CRaptorEPIX::GetEMGain() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	if(cameraType_==_RAPTOR_CAMERA_FALCON_III)
 	{
 
@@ -6336,6 +7039,7 @@ long CRaptorEPIX::GetEMGain() const
 
 int CRaptorEPIX::GetHighDynamicRange() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	if(!(cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1 ))
 		return -1;
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
@@ -6349,6 +7053,7 @@ int CRaptorEPIX::GetHighDynamicRange() const
 
 int CRaptorEPIX::GetNUCMap() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	if(!(cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1 ))
 		return -1;
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
@@ -6362,6 +7067,7 @@ int CRaptorEPIX::GetNUCMap() const
 
 double CRaptorEPIX::GetGain() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 	unsigned char val[2] ={0,0};
 
@@ -6376,8 +7082,16 @@ double CRaptorEPIX::GetGain() const
 	}
 	else
 	{
-		serialReadRaptorRegister1(UNITMASK, 0xC6, &val[0] ) ;
-		serialReadRaptorRegister1(UNITMASK, 0xC7, &val[1] ) ;
+		if (cameraType_ == _RAPTOR_CAMERA_OWL_640 && cameraVar_ == _RAPTOR_VARIANT_OWL_640_M)
+		{
+			serialReadRaptorRegister1(UNITMASK, 0x26, &val[0]);
+			serialReadRaptorRegister1(UNITMASK, 0x27, &val[1]);
+		}
+		else
+		{
+			serialReadRaptorRegister1(UNITMASK, 0xC6, &val[0]);
+			serialReadRaptorRegister1(UNITMASK, 0xC7, &val[1]);
+		}
 		DisableMicro(); thd_->Resume();
 
 		gain = double(val[0]) + (double(val[1])/256.0);
@@ -6391,6 +7105,7 @@ double CRaptorEPIX::GetGain() const
 
 int CRaptorEPIX::GetBloomingStatus() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 	unsigned char val[2] ={0,0};
 	int value ;
@@ -6428,7 +7143,7 @@ int CRaptorEPIX::GetBloomingStatus() const
 
 void CRaptorEPIX::SetBloomingStatus(int val) const
 {
-	
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, val);
 	unsigned char ucVal[2] ={0,0};
 	if(val==1)
 	{
@@ -6475,6 +7190,7 @@ void CRaptorEPIX::SetBloomingStatus(int val) const
 
 double CRaptorEPIX::GetPCBTemp(bool bSnap) const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	if(bSuspend_ && !bSnap)
 	{
 		thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
@@ -6482,7 +7198,7 @@ double CRaptorEPIX::GetPCBTemp(bool bSnap) const
 	unsigned char val[2] ={0,0};
 	double value=-999.0 ; 
 
-	if(_IS_CAMERA_OWL_FAMILY && !(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 ))
+	if(_IS_CAMERA_OWL_FAMILY && !(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 ))
 	{
 		unsigned char bufin[] = {0x53, 0x97, 0x02, 0x50}; 
 		unsigned char buf[256];
@@ -6534,6 +7250,7 @@ double CRaptorEPIX::GetPCBTemp(bool bSnap) const
 
 double CRaptorEPIX::GetCCDTemp(bool bSnap) 
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char val[2] ={0,0};
 	double value = -999;
 	nCCDTempCalibrated_ = 0;
@@ -6542,7 +7259,7 @@ double CRaptorEPIX::GetCCDTemp(bool bSnap)
 	{
 		thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 	}
-	if(_IS_CAMERA_OWL_FAMILY && !(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 ))
+	if(_IS_CAMERA_OWL_FAMILY && !(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 ))
 	{
 		unsigned char bufin[] = {0x53, 0x91, 0x02, 0x50}; 
 		unsigned char buf[256];
@@ -6648,7 +7365,7 @@ double CRaptorEPIX::GetCCDTemp(bool bSnap)
 		nCCDTempCalibrated_ = 1;
 	    return value; 
 	}
-	else if(((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1) > 0) || (cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 ))
+	else if(((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1) > 0) || (cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 ))
 	{
 		serialReadRaptorRegister1(UNITMASK, 0x6E, &val[0] ) ;
 		serialReadRaptorRegister1(UNITMASK, 0x6F, &val[1] ) ;
@@ -6688,6 +7405,7 @@ double CRaptorEPIX::GetCCDTemp(bool bSnap)
 
 int CRaptorEPIX::GetFPGACtrl() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char val;
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 	serialReadRaptorRegister1(UNITMASK, 0x00, &val ) ;
@@ -6696,18 +7414,29 @@ int CRaptorEPIX::GetFPGACtrl() const
 }
 int CRaptorEPIX::GetEPROMManuData() 
 { 
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 	unsigned char bufin1[] = {0x53, 0xAE, 0x05, 0x01, 0x00, 0x00, 0x02, 0x00, 0x50};
-	unsigned char bufinF[] = {0x53, 0x03, 0x05, 0x12, 0x03, 0x41, 0x00, 0x00, 0x50};
+	unsigned char bufinF[] = { 0x53, 0x03, 0x05, 0x12, 0x03, 0x41, 0x00, 0x00, 0x50 };
+	unsigned char bufinN[] = { 0x53, 0x05, 0x05, 0x12, 0x03, 0x00, 0x00, 0x00, 0x50 };
+	unsigned char bufinNsu[] = { 0x53, 0x05, 0x05, 0x14, 0x03, 0x00, 0x00, 0x00, 0x50 };
 	unsigned char bufin2[] = {0x53, 0xAF, 0x12, 0x50};
 	unsigned char buf[256];
 
 	SetSystemState(g_SysStateFPGA);
 	int ret;
 
-	if((cameraType_ & _RAPTOR_CAMERA_FALCON_III) > 0)
+	if(cameraType_ & _RAPTOR_CAMERA_FALCON_III)
 	{
 		ret = serialWriteReadCmd(UNITSOPENMAP, UNITMASK, bufinF,  9, buf, 256 );
+	}
+	else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+	{
+		ret = serialWriteReadCmd(UNITSOPENMAP, UNITMASK, bufinNsu, 9, buf, 256);
+	}
+	else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+	{
+		ret = serialWriteReadCmd(UNITSOPENMAP, UNITMASK, bufinN, 9, buf, 256);
 	}
 	else
 	{	
@@ -6732,6 +7461,10 @@ int CRaptorEPIX::GetEPROMManuData()
 		{
 			ret = serialWriteReadCmd(UNITSOPENMAP, UNITMASK, bufinF,  9, buf, 256 );
 		}
+		else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+		{
+			ret = serialWriteReadCmd(UNITSOPENMAP, UNITMASK, bufinN, 9, buf, 256);
+		}
 		else
 		{
 			ret = serialWriteReadCmd(UNITSOPENMAP, UNITMASK, bufin1,  9, buf, 256 );
@@ -6748,6 +7481,9 @@ int CRaptorEPIX::GetEPROMManuData()
 
 	if(ret>18)
 	{
+		if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+			ret -= 2;
+
 	   serialNum_ = buf[ret-19] + (int(buf[ret-18])<<8);
 	   buildDateDD_  = buf[ret-17];
 	   buildDateMM_  = buf[ret-16];
@@ -6758,6 +7494,12 @@ int CRaptorEPIX::GetEPROMManuData()
 	   EPROM_ADC_Cal_40C_ = buf[ret-7] + (int(buf[ret-6])<<8);
 	   EPROM_DAC_Cal_0C_  = buf[ret-5] + (int(buf[ret-4])<<8);
 	   EPROM_DAC_Cal_40C_ = buf[ret-3] + (int(buf[ret-2])<<8);
+
+	   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+	   {
+		   VDETCOM_ = buf[ret - 1] + (int(buf[ret - 0]) << 8);
+		   dVolts_ = (double(VDETCOM_) / 1024.0) * 4.5;
+	   }
 	   
 	   return 0;
 	}
@@ -6783,6 +7525,7 @@ int CRaptorEPIX::GetEPROMManuData()
 
 void CRaptorEPIX::SetFPGACtrl(unsigned char val) const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = 0x%X\n", __FUNCTION__, val);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 	serialWriteRaptorRegister1(UNITMASK, 0x00, val ) ;
 	DisableMicro(); thd_->Resume();
@@ -6790,6 +7533,7 @@ void CRaptorEPIX::SetFPGACtrl(unsigned char val) const
 
 int CRaptorEPIX::GetExtTrigStatus() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char val;
 	if(((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1) > 0) || (cameraType_ & _RAPTOR_CAMERA_FALCON_III)>0)
 	{ 
@@ -6799,8 +7543,12 @@ int CRaptorEPIX::GetExtTrigStatus() const
 	else if(_IS_CAMERA_OWL_FAMILY)
 	{
 		serialReadRaptorRegister1(UNITMASK, 0xF2, &val ) ;
-		if((val&0x40)==0)
-			val=0;
+		if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+			return val;
+		else if ((val & 0x40) == 0)
+			val = 0;
+		else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+			val = 2;
 		else if((val&0x20)==0)
 			val=6; 
 		else
@@ -6814,6 +7562,7 @@ int CRaptorEPIX::GetExtTrigStatus() const
 
 int CRaptorEPIX::GetBinningFactorX() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char valx;
 	int bin=0;
 
@@ -6831,6 +7580,7 @@ int CRaptorEPIX::GetBinningFactorX() const
 
 int CRaptorEPIX::GetBinningFactorY() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char valy;
 	int bin=0;
 
@@ -6847,12 +7597,14 @@ int CRaptorEPIX::GetBinningFactorY() const
 }
 
 int CRaptorEPIX::GetBinningFactor() const
-{
+{	
 	unsigned char val, valx, valy;
 	int bin=0;
 
 	if(_IS_CAMERA_OWL_FAMILY)
 		return 1;
+
+	if (fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 
 	if(cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE || cameraType_ & _RAPTOR_CAMERA_FALCON_III)
 	{
@@ -6890,6 +7642,8 @@ int CRaptorEPIX::GetBinningFactor() const
 
 void CRaptorEPIX::SetExtTrigStatus(unsigned char val) const
 {
+
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = 0x%X\n", __FUNCTION__, val);
 	if(((cameraType_ & _RAPTOR_CAMERA_FALCON_III)>0 ))
 	{
 		if(val==1)
@@ -6913,16 +7667,37 @@ void CRaptorEPIX::SetExtTrigStatus(unsigned char val) const
 		if(val==1)
 			val = 0;
 
-		if(cameraType_ == _RAPTOR_CAMERA_OWL_640 )
+		if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+		{
+			if (val & 0x01)			
+				serialWriteRaptorRegister1(UNITMASK, 0xF2, 0x00);
+
+			serialWriteRaptorRegister1(UNITMASK, 0xF2, val);
+		}
+		else if(cameraType_ == _RAPTOR_CAMERA_OWL_640 )
 		{
 			unsigned char val2 = 0;
 
 			serialReadRaptorRegister1(UNITMASK, 0xF2, &val2 ) ;
 			val2 &= 0x9F;
 			val2 |= val;
-			serialWriteRaptorRegister1(UNITMASK, 0xF2, val2 ) ;
+			serialWriteRaptorRegister1(UNITMASK, 0xF2, val2);
 		}
-		else if(cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
+		else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+		{
+			unsigned char val2 = 0;
+			serialReadRaptorRegister1(UNITMASK, 0xF2, &val2);
+			val2 &= 0xBF;
+
+			if(val>0)
+				val2 |= 0x40;
+
+			serialWriteRaptorRegister1(UNITMASK, 0xF2, 0);
+			if(val2!=0)
+				serialWriteRaptorRegister1(UNITMASK, 0xF2, val2);
+
+		}
+		else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
 		{
 			unsigned char val2 = 0;
 			serialReadRaptorRegister1(UNITMASK, 0xF2, &val2 ) ;
@@ -6945,6 +7720,7 @@ void CRaptorEPIX::SetExtTrigStatus(unsigned char val) const
 
 void CRaptorEPIX::GetROIStatus(unsigned int *nWidth, unsigned int *nHeight, unsigned int *nXOffset, unsigned int *nYOffset) const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 	unsigned char val[2] ={0,0};
 
@@ -6959,14 +7735,18 @@ void CRaptorEPIX::GetROIStatus(unsigned int *nWidth, unsigned int *nHeight, unsi
 	{
 		if(_IS_CAMERA_OWL_FAMILY)
 		{
+			int nDiv = 4;
+			if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+				nDiv = 8;
+
 			serialReadRaptorRegister1(UNITMASK, 0x32, &val[0] ) ;
-			*nXOffset = 4*(int)(val[0]);
+			*nXOffset = nDiv *(int)(val[0]);
 			serialReadRaptorRegister1(UNITMASK, 0x33, &val[0] ) ;
-			*nYOffset = 4*(int)(val[0]);
+			*nYOffset = nDiv *(int)(val[0]);
 			serialReadRaptorRegister1(UNITMASK, 0x35, &val[0] ) ;
-			*nWidth = 4*(int)(val[0]);
+			*nWidth = nDiv *(int)(val[0]);
 			serialReadRaptorRegister1(UNITMASK, 0x36, &val[0] ) ;
-			*nHeight = 4*(int)(val[0]);
+			*nHeight = nDiv *(int)(val[0]);
 		}
 		else if(((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1) > 0) || ((cameraType_ & _RAPTOR_CAMERA_FALCON_III) > 0) )
 		{	
@@ -7054,6 +7834,7 @@ void CRaptorEPIX::GetROIStatus(unsigned int *nWidth, unsigned int *nHeight, unsi
 
 void CRaptorEPIX::SetROIStatus(unsigned int nWidth, unsigned int nHeight, unsigned int nXOffset, unsigned int nYOffset) const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d, %d, %d, %d\n", __FUNCTION__, nWidth, nHeight, nXOffset, nYOffset);
 	unsigned char val[2] ={0,0};
 
 	if(PostCaptureROI_)
@@ -7064,15 +7845,23 @@ void CRaptorEPIX::SetROIStatus(unsigned int nWidth, unsigned int nHeight, unsign
 		nHeight  = cameraCCDYSize_;
 	}
 
-	if(_IS_CAMERA_OWL_FAMILY) 
+	if ((cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU))
 	{
-		val[0] = (unsigned char)(nXOffset/4);
+		return;
+	}
+	else if(_IS_CAMERA_OWL_FAMILY) 
+	{
+		int nDiv = 4;
+		if(cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+			nDiv = 8;
+
+		val[0] = (unsigned char)(nXOffset/nDiv);
 		serialWriteRaptorRegister1(UNITMASK, 0x32, val[0] ) ;
-		val[0] = (unsigned char)(nYOffset/4);
+		val[0] = (unsigned char)(nYOffset/nDiv);
 		serialWriteRaptorRegister1(UNITMASK, 0x33, val[0] ) ;
-		val[0] = (unsigned char)(nWidth/4);
+		val[0] = (unsigned char)(nWidth/nDiv);
 		serialWriteRaptorRegister1(UNITMASK, 0x35, val[0] ) ;
-		val[0] = (unsigned char)(nHeight/4);
+		val[0] = (unsigned char)(nHeight/nDiv);
 		serialWriteRaptorRegister1(UNITMASK, 0x36, val[0] ) ;
 	}
 	else if(((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1) > 0) || ((cameraType_ & _RAPTOR_CAMERA_FALCON_III) > 0) ) 
@@ -7114,8 +7903,10 @@ void CRaptorEPIX::SetROIStatus(unsigned int nWidth, unsigned int nHeight, unsign
 		}
 		else
 		{
-			nWidth  = (nWidth/2)*2;
-			nHeight = (nHeight/2)*2;
+			if (nWidth < cameraCCDXSize_)
+				nWidth  = (nWidth/2)*2;
+			if (nHeight < cameraCCDYSize_)
+				nHeight = (nHeight/2)*2;
 		}
 
 		val[0] = ((nWidth&0xFF00)>>8);
@@ -7196,9 +7987,15 @@ void CRaptorEPIX::SetROIStatus(unsigned int nWidth, unsigned int nHeight, unsign
 		val1 |= 0x08;
 		serialWriteRaptorRegister1(UNITMASK, 0xD4, val1 ) ;
 
-		if(g_bCheckSum)
+		Sleep(100);
+		if (g_bCheckSum)
+		{
 			SetSystemState(g_SysState0);
-
+			GetSystemState();
+			Sleep(100);
+			SetSystemState(g_SysState0);
+			GetSystemState();
+		}
 #ifdef PLEORA
 
 #else
@@ -7262,6 +8059,7 @@ void CRaptorEPIX::SetROIStatus(unsigned int nWidth, unsigned int nHeight, unsign
 
 void CRaptorEPIX::SetNUCState(int val) 
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, val);
 	if(_IS_CAMERA_OWL_FAMILY)
 	{
 		thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
@@ -7272,6 +8070,7 @@ void CRaptorEPIX::SetNUCState(int val)
 }
 int  CRaptorEPIX::GetNUCState() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char val = 0;
 
 	if(_IS_CAMERA_OWL_FAMILY)
@@ -7285,6 +8084,7 @@ int  CRaptorEPIX::GetNUCState() const
 }
 int  CRaptorEPIX::GetPeakAvgLevel() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char val = 0;
 
 	if(_IS_CAMERA_OWL_FAMILY)
@@ -7298,6 +8098,7 @@ int  CRaptorEPIX::GetPeakAvgLevel() const
 }
 void CRaptorEPIX::SetPeakAvgLevel(int val)
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	if(_IS_CAMERA_OWL_FAMILY)
 	{
 		thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
@@ -7307,6 +8108,7 @@ void CRaptorEPIX::SetPeakAvgLevel(int val)
 }
 void CRaptorEPIX::SetAutoLevel(int val)
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, val);
 	unsigned char ucval[]={0,0};
  
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
@@ -7321,8 +8123,32 @@ void CRaptorEPIX::SetAutoLevel(int val)
 	}
 	DisableMicro(); thd_->Resume();
 }
+void CRaptorEPIX::SetAutoGain(int val)
+{
+	//if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+	//	return;
+
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, val);
+	unsigned char ucval = 0;
+
+	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
+	
+	if (_IS_CAMERA_OWL_FAMILY)
+	{		
+		serialReadRaptorRegister1(UNITMASK, 0x01, &ucval);
+		ucval = ucval & 0xFD;
+		if (val)
+			ucval |= 0x02;
+
+		serialWriteRaptorRegister1(UNITMASK, 0x01, ucval);
+
+		
+	}
+	DisableMicro(); thd_->Resume();
+}
 int  CRaptorEPIX::GetAutoLevel() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char ucval[] = {0,0};
 	int val=0;
 
@@ -7339,8 +8165,25 @@ int  CRaptorEPIX::GetAutoLevel() const
 
 	return val;
 }
+int  CRaptorEPIX::GetAutoGain() const
+{
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
+	unsigned char ucval=0;
+	int val = 0;
+
+	if (_IS_CAMERA_OWL_FAMILY)
+	{
+		thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
+		serialReadRaptorRegister1(UNITMASK, 0x01, &ucval);
+		DisableMicro(); thd_->Resume();
+	}
+
+	val = (ucval & 0x02) > 0;
+	return val;
+}
 void CRaptorEPIX::SetBlackOffset(int val)
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, val);
 	unsigned char ucval[]={0,0};
  
 	ucval[0] = (val&0x3F00)>>8;
@@ -7356,6 +8199,7 @@ void CRaptorEPIX::SetBlackOffset(int val)
 }
 int  CRaptorEPIX::GetBlackOffset() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char ucval[] = {0,0};
 	int val=0;
 
@@ -7375,6 +8219,7 @@ int  CRaptorEPIX::GetBlackOffset() const
 }
 int  CRaptorEPIX::GetVideoPeak() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char ucval[] = {0,0};
 	int val=0;
 
@@ -7392,6 +8237,7 @@ int  CRaptorEPIX::GetVideoPeak() const
 }
 int  CRaptorEPIX::GetVideoAvg() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char ucval[] = {0,0};
 	int val=0;
 
@@ -7409,6 +8255,7 @@ int  CRaptorEPIX::GetVideoAvg() const
 }
 void CRaptorEPIX::SetAGCExpSpeed(int nAGC, int nExp)
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d, %d\n", __FUNCTION__, nAGC, nExp);
 	if(_IS_CAMERA_OWL_FAMILY)
 	{
 		unsigned char val;
@@ -7422,6 +8269,7 @@ void CRaptorEPIX::SetAGCExpSpeed(int nAGC, int nExp)
 }
 int  CRaptorEPIX::GetAGCExpSpeed(int *nAGC, int *nExp) const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char val = 0;
 
 	if(_IS_CAMERA_OWL_FAMILY)
@@ -7438,6 +8286,10 @@ int  CRaptorEPIX::GetAGCExpSpeed(int *nAGC, int *nExp) const
 }
 void CRaptorEPIX::SetROIAppearance(int val)
 {
+	if ((cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU))
+		return;
+	
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, val);
 	if(_IS_CAMERA_OWL_FAMILY)
 	{
 		thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
@@ -7447,6 +8299,10 @@ void CRaptorEPIX::SetROIAppearance(int val)
 }
 int  CRaptorEPIX::GetROIAppearance() const
 {
+	if ((cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU))
+		return 0;
+	
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char val = 0;
 
 	if(_IS_CAMERA_OWL_FAMILY)
@@ -7460,6 +8316,7 @@ int  CRaptorEPIX::GetROIAppearance() const
 }
 void CRaptorEPIX::SetAutoExposure(int nVal)
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, nVal);
   if(_IS_CAMERA_OWL_FAMILY)
   {
 	  unsigned char val;
@@ -7469,10 +8326,17 @@ void CRaptorEPIX::SetAutoExposure(int nVal)
 		SetFPGACtrl(val & 0xFD);
 	  else 
 		SetFPGACtrl(val | 0x02);
+
+	  if (nVal == 0 && OWLAutoGain_ > 0)
+	  {
+		  OWLAutoGain_ = 0;
+		  SetAutoGain(OWLAutoGain_);
+	  }
   }
 }
 int  CRaptorEPIX::GetAutoExposure() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
     unsigned char val;
     val = (unsigned char)GetFPGACtrl();
 
@@ -7481,6 +8345,7 @@ int  CRaptorEPIX::GetAutoExposure() const
 
 void CRaptorEPIX::SetHighPreAmpGain(int nVal)
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, nVal);
   	if(cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE)
     {
 	  unsigned char val;
@@ -7494,6 +8359,7 @@ void CRaptorEPIX::SetHighPreAmpGain(int nVal)
 }
 int CRaptorEPIX::GetHighPreAmpGain() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
     unsigned char val;
     val = (unsigned char)GetFPGACtrl();
 
@@ -7501,45 +8367,122 @@ int CRaptorEPIX::GetHighPreAmpGain() const
 }
 void CRaptorEPIX::SetHighGain(int val)
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, val);
   if(_IS_CAMERA_OWL_FAMILY)
   {
 	  thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 
-		if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
+	  if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+	  {
+		  if(val)
+			serialWriteRaptorRegister1(UNITMASK, 0xD7, 0x6D);
+		  else
+			serialWriteRaptorRegister1(UNITMASK, 0xD7, 0xED);
+	  }
+	  else if (cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+	  {
+		  unsigned char val2 = 0;
+		  serialReadRaptorRegister1(UNITMASK, 0xF2, &val2);
+		  if (val)
+			  val2 |= 0x06;
+		  else
+			  val2 &= 0xF9;
+		  serialWriteRaptorRegister1(UNITMASK, 0xF2, val2);
+	  }
+	  else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+	  {
+		unsigned char val2 = 0;
+		serialReadRaptorRegister1(UNITMASK, 0xF2, &val2);
+		val2 &= 0xFC;
+		if (val)
+			val2 |= 0x02;
+		
+		serialWriteRaptorRegister1(UNITMASK, 0xF2, val2);
+	  }
+	  else
+	  {
+		if(val>0)
 		{
-			unsigned char val2 = 0;
-			serialReadRaptorRegister1(UNITMASK, 0xF2, &val2 ) ;
-			if(val)
-				val2 |= 0x06 ;
-			else
-				val2 &= 0xF9 ;
-			serialWriteRaptorRegister1(UNITMASK, 0xF2, val2 ) ;  
+			serialWriteRaptorRegister1(UNITMASK, 0xE4, 0x2F ) ;  
+			serialWriteRaptorRegister1(UNITMASK, 0xE5, 0xFC ) ;  
+			serialWriteRaptorRegister1(UNITMASK, 0xE6, 0x00 ) ;  
+			serialWriteRaptorRegister1(UNITMASK, 0xE7, 0x04 ) ;  
 		}
 		else
 		{
-			if(val>0)
-			{
-				serialWriteRaptorRegister1(UNITMASK, 0xE4, 0x2F ) ;  
-				serialWriteRaptorRegister1(UNITMASK, 0xE5, 0xFC ) ;  
-				serialWriteRaptorRegister1(UNITMASK, 0xE6, 0x00 ) ;  
-				serialWriteRaptorRegister1(UNITMASK, 0xE7, 0x04 ) ;  
-			}
-			else
-			{
-				serialWriteRaptorRegister1(UNITMASK, 0xE4, 0x3F ) ;  
-				serialWriteRaptorRegister1(UNITMASK, 0xE5, 0xFC ) ;  
-				serialWriteRaptorRegister1(UNITMASK, 0xE6, 0x00 ) ;  
-				serialWriteRaptorRegister1(UNITMASK, 0xE7, 0x04 ) ;  
-			}
+			serialWriteRaptorRegister1(UNITMASK, 0xE4, 0x3F ) ;  
+			serialWriteRaptorRegister1(UNITMASK, 0xE5, 0xFC ) ;  
+			serialWriteRaptorRegister1(UNITMASK, 0xE6, 0x00 ) ;  
+			serialWriteRaptorRegister1(UNITMASK, 0xE7, 0x04 ) ;  
 		}
+	}
 	  DisableMicro(); thd_->Resume();
   } 
 }
+void CRaptorEPIX::SetLongExp(int val)
+{
+	if (fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, val);
+	if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+	{
+		thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
+
+		if (val)
+		{
+			OWLAutoExp_ = 0;
+			SetAutoExposure(OWLAutoExp_);
+			Gain_ = 0.0;			
+			SetGain(Gain_);
+			OWLHighGain_ = 0;
+			SetHighGain(OWLHighGain_);
+			serialWriteRaptorRegister1(UNITMASK, 0xEE, 0x0);
+			serialWriteRaptorRegister1(UNITMASK, 0xEF, 0x0);
+			serialWriteRaptorRegister1(UNITMASK, 0xF0, 0x0);
+			serialWriteRaptorRegister1(UNITMASK, 0xF1, 0x0);
+
+			OWLNUCState_ = 0;
+			serialWriteRaptorRegister1(UNITMASK, 0xF9, 0x00);
+			serialWriteRaptorRegister1(UNITMASK, 0xF2, 0x1C);
+
+			exposureMax_ = 10000.0;
+			SetPropertyLimits(MM::g_Keyword_Exposure, 0, exposureMax_);
+			if(exposure_>25.0)
+				exposure_ = 25;
+			OWLFrameRate_ = 10;
+			SetFrameRate(OWLFrameRate_);
+			SetExposure(exposure_);
+		}
+		else
+		{
+			serialWriteRaptorRegister1(UNITMASK, 0xF2, 0x00);
+			exposureMax_ = 100.0;
+			exposure_ = 25;
+			OWLFrameRate_ = 25;
+			SetFrameRate(OWLFrameRate_);
+			SetExposure(exposure_);
+			OWLAutoExp_ = 1;
+			SetAutoExposure(OWLAutoExp_);
+			
+			SetMaxExposureFixedFrameRate();
+			SetPropertyLimits(MM::g_Keyword_Exposure, 0, exposureMax_);
+		}
+		DisableMicro(); thd_->Resume();
+	}
+}
+
 int  CRaptorEPIX::GetHighGain() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char val[] = {0,0,0,0};
 
-	if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
+	if(cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+	{
+		thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
+		unsigned char val2 = 0;
+		serialReadRaptorRegister1(UNITMASK, 0xD7, &val2);
+		DisableMicro(); thd_->Resume();
+		return (val2 == 0x6D);
+	}
+	else if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 )
 	{
 		thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 		unsigned char val2 = 0;
@@ -7569,10 +8512,11 @@ int CRaptorEPIX::OnGain(MM::PropertyBase* pProp, MM::ActionType eAct)
 {
    if (eAct == MM::BeforeGet)
    {
-	  if(_IS_CAMERA_OWL_FAMILY || ((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1) > 0))
+	   if (_IS_CAMERA_OWL_FAMILY || ((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1) > 0))
 	  {
 		  if(ForceUpdate_)
 			  Gain_ = GetGain();
+
 		  pProp->Set(Gain_);
 	  }
 	  else
@@ -7587,6 +8531,16 @@ int CRaptorEPIX::OnGain(MM::PropertyBase* pProp, MM::ActionType eAct)
       std::ostringstream os;
 	  if(_IS_CAMERA_OWL_FAMILY || ((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1) > 0))
 	  {
+		  if (_IS_CAMERA_OWL_FAMILY)
+		  {
+			  if (OWLAutoExp_)
+			  {
+				  OWLAutoExp_ = 0;
+				  SetAutoExposure(OWLAutoExp_);
+			  }
+		  }
+
+
 		pProp->Get(Gain_);
 		SetGain(Gain_);
 
@@ -7712,28 +8666,28 @@ int CRaptorEPIX::OnCCDTemp(MM::PropertyBase* pProp, MM::ActionType eAct)
 		{
 		  double dTemp=-999.0;		  
 
-		  if(ForceUpdate_ || (ExtTrigStatus_ & 0x04))
+		  if(ForceUpdate_ || (ExtTrigStatus_ & 0x06))
 		  {
- 	  	  GetSystemState();
-		  FPGACtrl_ = GetFPGACtrl()  ;
+ 	  		  GetSystemState();
+			  FPGACtrl_ = GetFPGACtrl()  ;
 		  
-		  if(TECCooler_>0)
-		  {
+			  if(TECCooler_>0)
+			  {
+				  Sleep(100);
+				  SetFPGACtrl((unsigned char)FPGACtrl_| 0x01);
+				  SetTECSetPoint(TECSetPoint_);
+			  }
+
 			  Sleep(100);
-			  SetFPGACtrl((unsigned char)FPGACtrl_| 0x01);
-			  SetTECSetPoint(TECSetPoint_);
-		  }
+			  GetTECSetPoint();
+			  dTemp = GetCCDTemp();
 
-		  Sleep(100);
-		  GetTECSetPoint();
-		  dTemp = GetCCDTemp();
-
-		  if(dTemp>-273)
-		  {
-		  	  dCCDTemp_ = dTemp;
-			  nCCDTempCount_ = 0;
+			  if(dTemp>-273)
+			  {
+		  		  dCCDTemp_ = dTemp;
+				  nCCDTempCount_ = 0;
+			  }
 		  }
-		}
 		}
 		else
 			nCCDTempCount_++;
@@ -7797,6 +8751,7 @@ int CRaptorEPIX::OnMicroReset(MM::PropertyBase* pProp, MM::ActionType eAct)
 			SetMicroReset();
 			DisableMicro(); thd_->Resume();
 
+			Sleep(5000);
 			bool bForce = ForceUpdate_; 
 		    ForceUpdate_ = true;
 		    UpdateStatus();
@@ -7887,16 +8842,49 @@ int CRaptorEPIX::OnExtTrigger(MM::PropertyBase* pProp, MM::ActionType eAct)
 }
 int CRaptorEPIX::SetMaxExposureFixedFrameRate()
 {
+	
    if(!(cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1 || cameraType_ & _RAPTOR_CAMERA_FALCON_III ) )
 	   return DEVICE_OK;
 
    if(ExtTrigStatus_ != 0x02)
 		return DEVICE_OK;
 
-   double dMaxExp = 0.0, dVal1, dVal2, dMaxFrameRate, dClock;
+   if (fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
+   double dMaxExp = 0.0, dVal1 = 0.0, dVal2 = 0.0, dMaxFrameRate = 0.0, dClock = 0.0;
 
    dClock=80.0;
-   if(cameraType_ & _RAPTOR_CAMERA_FALCON_III)
+   if (_IS_CAMERA_OWL_FAMILY)
+   {
+		if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+		{
+			if (OWLAutoExp_)
+			{
+				double dExp = 1.0;
+				if (OWLFrameRate_ == 25)
+					dExp = 26.46;
+				else if (OWLFrameRate_ == 30)
+					dExp = 19.79;
+				else if (OWLFrameRate_ == 50)
+					dExp = 6.46;
+				else if (OWLFrameRate_ == 60)
+					dExp = 3.12;
+
+				exposureMax_ = dExp;
+				dVal1 = exposureMax_;
+				dVal2 = dVal2;
+			}
+			else
+			{
+				double dReadout = 7.51;
+				if (OWLHighGain_)
+					dReadout = 10.418;
+
+				dVal1 = (1000.0 / double(OWLFrameRate_)) - dReadout;
+				dVal2 = dVal1;
+			}
+		}
+   }
+   else if(cameraType_ & _RAPTOR_CAMERA_FALCON_III)
    {
 	   dClock = readoutRate_;
 
@@ -7943,7 +8931,7 @@ int CRaptorEPIX::SetMaxExposureFixedFrameRate()
 
 int CRaptorEPIX::OnTrigger(MM::PropertyBase* pProp, MM::ActionType eAct)
 {
-   if(!(cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1 || cameraType_ & _RAPTOR_CAMERA_FALCON_III ))
+   if(!(cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1 || cameraType_ & _RAPTOR_CAMERA_FALCON_III || (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)))
 	   return DEVICE_OK;
 
    if (eAct == MM::BeforeGet)
@@ -7951,7 +8939,6 @@ int CRaptorEPIX::OnTrigger(MM::PropertyBase* pProp, MM::ActionType eAct)
 	  if(ForceUpdate_ )
 		  ExtTrigStatus_ = GetExtTrigStatus();
 	  long val = ExtTrigStatus_;
-
 	  if(val & 0x40)
 	  {
 		  if(val & 0x80)
@@ -7976,10 +8963,21 @@ int CRaptorEPIX::OnTrigger(MM::PropertyBase* pProp, MM::ActionType eAct)
 	   unsigned char val=0;
 	   bool bAbort=false;
 
-	   if(mode.compare(g_Keyword_TrigITR)==0)
-		   val = 0x00;
-	   else if(mode.compare(g_Keyword_TrigFFR)==0)
-		   val = 0x02;
+	   if (mode.compare(g_Keyword_TrigITR) == 0)
+	   {
+		   val = ExtTrigStatus_ & 0xF0;
+		   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+			   val |= 0x04;
+		   else
+			   val |= 0x00;
+		   liveMode_ = 1;
+	   }
+	   else if (mode.compare(g_Keyword_TrigFFR) == 0)
+	   {
+		   val = ExtTrigStatus_ & 0xF0;
+		   val |= 0x02;
+		   liveMode_ = 1;
+	   }
 	   else if(mode.compare(g_Keyword_ExtTrigger_posTrig)==0)
 		   val = 0x40|0x80;
 	   else if(mode.compare(g_Keyword_ExtTrigger_negTrig)==0)
@@ -7995,7 +8993,10 @@ int CRaptorEPIX::OnTrigger(MM::PropertyBase* pProp, MM::ActionType eAct)
 	   //pxd_goAbortLive(UNITMASK);
 	   SetLiveVideo(0);
 	   SetExtTrigStatus(val);
-	   triggerMode_ = val & ~0x04;
+	   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+		   triggerMode_ = val & ~0x06;
+	   else
+		   triggerMode_ = val & ~0x04;
 	   ExtTrigStatus_ = val;
 	   if(liveMode_)
 	   {
@@ -8008,9 +9009,12 @@ int CRaptorEPIX::OnTrigger(MM::PropertyBase* pProp, MM::ActionType eAct)
 
 	   SetMaxExposureFixedFrameRate();
 
-	   if(val & 0x02)
+	   if (val & 0x06)
+	   {
 		   SetFixedFrameRate(FixedFrameRate_);
-
+		   GetExposureCore();
+		   SetExposure(exposure_);
+	   }
 	   FixedFrameRate_ = GetFixedFrameRate();
 
 //	   if(val==0 || 1)
@@ -8048,6 +9052,8 @@ int CRaptorEPIX::OnFixedFrameRate(MM::PropertyBase* pProp, MM::ActionType eAct)
 	   {
 		   frameInterval_ = 0;
 		   SetFixedFrameRate(FixedFrameRate_);
+		   GetExposureCore();
+		   SetExposure(exposure_);
 		   FixedFrameRate_ = GetFixedFrameRate();
 	   }
 	   
@@ -8099,9 +9105,32 @@ int CRaptorEPIX::OnFrameRate(MM::PropertyBase* pProp, MM::ActionType eAct)
 	   else if(mode.compare(g_Keyword_FrameRate_User)==0)
 		   val = 0;
 	   
-	   if(val>0)
+	   if (val > 0)
+	   {
+		   bool autoExp;
+		   autoExp = OWLAutoExp_;
+		   SetExposure(1.0);
 		   SetFrameRate(val);
+		   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+		   {
+			   double dExp = 1.0;
+			   if (val == 25)
+				   dExp = 26.46;
+			   else if(val == 30)
+				   dExp = 19.79;
+			   else if(val == 50)
+				   dExp = 6.46;
+			   else if(val == 60)
+				   dExp = 3.12;
 
+			   exposureMax_ = dExp;
+			   SetPropertyLimits(MM::g_Keyword_Exposure, 0, exposureMax_);
+			   SetExposure(dExp);
+		   }
+		   OWLAutoExp_ = autoExp;
+		   SetAutoExposure(OWLAutoExp_);
+		   
+	   }
 	   OWLFrameRate_ = val;
 
    }
@@ -8179,8 +9208,10 @@ int CRaptorEPIX::OnExposure(MM::PropertyBase* pProp, MM::ActionType eAct)
 {
    if (eAct == MM::BeforeGet)
    {
-	   if(ForceUpdate_)
-		  exposure_ = GetExposure();
+	   if (ForceUpdate_)	   
+		   exposure_ = 0;		   
+	   
+	   exposure_ = GetExposure();
 	  pProp->Set(exposure_);
    }
    else if (eAct == MM::AfterSet)
@@ -8190,6 +9221,23 @@ int CRaptorEPIX::OnExposure(MM::PropertyBase* pProp, MM::ActionType eAct)
 		if(exposure_==0)
 			exposure_ = 1;
 		SetMaxExposureFixedFrameRate();
+
+		if (OWLLongExp_ && cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+		{
+			double dReadout = 8;
+			if (OWLHighGain_)
+				dReadout = 11;
+
+			if(exposure_<=100.0)
+				OWLFrameRate_ = round(10.0 * (1000.0 / (exposure_ + dReadout))) / 10.0;
+			else
+				OWLFrameRate_ = 1000.0 / (exposure_ + dReadout);
+
+			if (OWLFrameRate_ > 10.0)
+				OWLFrameRate_ = 10.0;
+			SetFrameRate(OWLFrameRate_);
+		}
+
 		SetExposure(exposure_, false);
 
         std::ostringstream os, os2;
@@ -8224,31 +9272,45 @@ int CRaptorEPIX::OnTECSetPoint(MM::PropertyBase* pProp, MM::ActionType eAct)
 
 int CRaptorEPIX::OnNUCState(MM::PropertyBase* pProp, MM::ActionType eAct)
 {
-   if (eAct == MM::BeforeGet)
-   {
-	   if(ForceUpdate_)
-		  OWLNUCState_ = GetNUCState();
+	if (eAct == MM::BeforeGet)
+	{
+		if (ForceUpdate_)
+			OWLNUCState_ = GetNUCState();
 
-	   int nuc = OWLNUCState_>>5;
+		int nuc = OWLNUCState_ >> 5;
 
-	  if(nuc == 0)
-		  pProp->Set(g_Keyword_NUCState0);
-	  else if(nuc == 1)
-		  pProp->Set(g_Keyword_NUCState1);
-	  else if(nuc == 2)
-		  pProp->Set(g_Keyword_NUCState2);
-	  else if(nuc == 3)
-		  pProp->Set(g_Keyword_NUCState3);
-	  else if(nuc == 4)
-		  pProp->Set(g_Keyword_NUCState4);
-	  else if(nuc == 5)
-		  pProp->Set(g_Keyword_NUCState5);
-	  else if(nuc == 6)
-		  pProp->Set(g_Keyword_NUCState6);
-	  else if(nuc == 7)
-		  pProp->Set(g_Keyword_NUCState7a);
+		if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+		{
+			if (nuc == 0)
+				pProp->Set(g_Keyword_Off);
+			else
+				pProp->Set(g_Keyword_On);
 
-	  if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
+			OWLNUCState_ = 0x00;
+			if (nuc)
+				OWLNUCState_ = 0x30;
+		}
+		else
+		{
+			if (nuc == 0)
+				pProp->Set(g_Keyword_NUCState0);
+			else if (nuc == 1)
+				pProp->Set(g_Keyword_NUCState1);
+			else if (nuc == 2)
+				pProp->Set(g_Keyword_NUCState2);
+			else if (nuc == 3)
+				pProp->Set(g_Keyword_NUCState3);
+			else if (nuc == 4)
+				pProp->Set(g_Keyword_NUCState4);
+			else if (nuc == 5)
+				pProp->Set(g_Keyword_NUCState5);
+			else if (nuc == 6)
+				pProp->Set(g_Keyword_NUCState6);
+			else if (nuc == 7)
+				pProp->Set(g_Keyword_NUCState7a);
+		}
+
+	  if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 )
 	  {
 		  if((OWLNUCState_&0x10)>0)
 		  {
@@ -8266,7 +9328,16 @@ int CRaptorEPIX::OnNUCState(MM::PropertyBase* pProp, MM::ActionType eAct)
 	   pProp->Get(mode);
 //	   unsigned char val=0;
 
-	   if(_IS_CAMERA_OWL_FAMILY)
+	   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+	   {
+		   if (mode.compare(g_Keyword_Off) == 0)
+			   OWLNUCState_ = 0;
+		   else if (mode.compare(g_Keyword_On) == 0)
+			   OWLNUCState_ = 0x30;
+		   SetNUCState(OWLNUCState_);
+
+	   }
+	   else if(_IS_CAMERA_OWL_FAMILY)
 	   {
 
 		   if(mode.compare(g_Keyword_NUCState0)==0)
@@ -8285,19 +9356,22 @@ int CRaptorEPIX::OnNUCState(MM::PropertyBase* pProp, MM::ActionType eAct)
 			   OWLNUCState_ = 6<<5;
 		   else if(mode.compare(g_Keyword_NUCState7a)==0)
 			   OWLNUCState_ = 7<<5;
-		   else
+		   
 
-		   if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
+		   if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 )
 		   {
 			   if(mode.compare(g_Keyword_NUCState7b)==0)
 					OWLNUCState_ = 0x90;
 				else if(mode.compare(g_Keyword_NUCState8)==0)
-					OWLNUCState_ = 0x10;
+					OWLNUCState_ = 0x10;			   
 		   }
 		   	if(bBadPixel_)
 				OWLNUCState_ |= 0x01;
 
-		   SetNUCState(OWLNUCState_);   		
+			if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+				OWLNUCState_ |= 0x0C;
+
+			SetNUCState(OWLNUCState_);
 	   }
    }
 	return DEVICE_OK;
@@ -8330,6 +9404,31 @@ int CRaptorEPIX::OnAutoLevel(MM::PropertyBase* pProp, MM::ActionType eAct)
 		pProp->Get(OWLAutoLevel_);
 		SetAutoLevel(OWLAutoLevel_);
    }
+	return DEVICE_OK;
+}
+int CRaptorEPIX::OnAutoGain(MM::PropertyBase* pProp, MM::ActionType eAct)
+{
+	if (eAct == MM::BeforeGet)
+	{
+		if (ForceUpdate_)
+			OWLAutoGain_ = GetAutoGain();
+		if (OWLAutoGain_)
+			pProp->Set(g_Keyword_On);
+		else
+			pProp->Set(g_Keyword_Off);
+	}
+	else if (eAct == MM::AfterSet)
+	{
+		string mode;
+		pProp->Get(mode);
+		
+		if (mode.compare(g_Keyword_On) == 0)
+			OWLAutoGain_ = 1;
+		else
+			OWLAutoGain_ = 0;
+
+		SetAutoGain(OWLAutoGain_);
+	}
 	return DEVICE_OK;
 }
 int CRaptorEPIX::OnBlackOffset(MM::PropertyBase* pProp, MM::ActionType eAct)
@@ -8581,6 +9680,7 @@ int CRaptorEPIX::OnShutterMode(MM::PropertyBase* pProp, MM::ActionType eAct)
 
 void CRaptorEPIX::SetShutterMode(int nMode)
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, nMode);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 
 	unsigned char nVal = 0;
@@ -8593,6 +9693,7 @@ void CRaptorEPIX::SetShutterMode(int nMode)
 
 int CRaptorEPIX::GetShutterMode()
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 
 	unsigned char nVal = 0;
@@ -8643,7 +9744,7 @@ int CRaptorEPIX::OnShutterDelayClose(MM::PropertyBase* pProp, MM::ActionType eAc
 
 double CRaptorEPIX::GetShutterDelayOpen() const
 {
-
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 
 	unsigned char nVal = 0;
@@ -8658,6 +9759,7 @@ double CRaptorEPIX::GetShutterDelayOpen() const
 
 double CRaptorEPIX::GetShutterDelayClose() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 
 	unsigned char nVal = 0;
@@ -8672,6 +9774,7 @@ double CRaptorEPIX::GetShutterDelayClose() const
 
 void CRaptorEPIX::SetShutterDelayOpen(double dVal)
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %.5g\n", __FUNCTION__, dVal);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 
 	unsigned char uVal = 0;
@@ -8690,6 +9793,7 @@ void CRaptorEPIX::SetShutterDelayOpen(double dVal)
 
 void CRaptorEPIX::SetShutterDelayClose(double dVal)
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %.5g\n", __FUNCTION__, dVal);
 	thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
 
 	unsigned char uVal = 0;
@@ -8709,6 +9813,7 @@ void CRaptorEPIX::SetShutterDelayClose(double dVal)
 
 void CRaptorEPIX::SetHorizontalFlip(bool val) 
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, val);
 	if(_IS_CAMERA_OWL_FAMILY)
 	{
 		unsigned char ctrl;
@@ -8722,6 +9827,7 @@ void CRaptorEPIX::SetHorizontalFlip(bool val)
 }
 void CRaptorEPIX::SetBadPixel(bool val) 
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, val);
 	if(_IS_CAMERA_OWL_FAMILY)
 	{
 		unsigned char nuc;
@@ -8735,6 +9841,7 @@ void CRaptorEPIX::SetBadPixel(bool val)
 }
 void CRaptorEPIX::SetInvertVideo(bool val) 
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, val);
 	if(_IS_CAMERA_OWL_FAMILY)
 	{
 		unsigned char ctrl;
@@ -8748,6 +9855,7 @@ void CRaptorEPIX::SetInvertVideo(bool val)
 }
 void CRaptorEPIX::SetImageSharpen(bool val) 
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, val);
 	if(_IS_CAMERA_OWL_FAMILY)
 	{
 		thd_->Suspend(); MMThreadGuard g(g_serialLock_[UNITSOPENMAP]);
@@ -8760,6 +9868,7 @@ void CRaptorEPIX::SetImageSharpen(bool val)
 }
 bool CRaptorEPIX::GetHorizontalFlip() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char val = 0;
 	if(_IS_CAMERA_OWL_FAMILY)
 	{
@@ -8769,6 +9878,7 @@ bool CRaptorEPIX::GetHorizontalFlip() const
 }
 bool CRaptorEPIX::GetBadPixel() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char val = 0;
 	if(_IS_CAMERA_OWL_FAMILY)
 	{
@@ -8778,6 +9888,7 @@ bool CRaptorEPIX::GetBadPixel() const
 }
 bool CRaptorEPIX::GetInvertVideo() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char val = 0;
 	if(_IS_CAMERA_OWL_FAMILY)
 	{
@@ -8787,6 +9898,7 @@ bool CRaptorEPIX::GetInvertVideo() const
 }
 bool CRaptorEPIX::GetImageSharpen() const
 {
+	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s>\n", __FUNCTION__);
 	unsigned char val = 0;
 
 	if(_IS_CAMERA_OWL_FAMILY)
@@ -8819,16 +9931,17 @@ int CRaptorEPIX::OnAutoExposure(MM::PropertyBase* pProp, MM::ActionType eAct)
 
 	   if(_IS_CAMERA_OWL_FAMILY)
 	   {
-		   if(mode.compare(g_Keyword_Off)==0)
-			   OWLAutoExp_ = 0;
-		   else 
+		   if(mode.compare(g_Keyword_On)==0)
 			   OWLAutoExp_ = 1;
+		   else 
+			   OWLAutoExp_ = 0;
 		   
 		   SetAutoExposure(OWLAutoExp_);
 
-		   if(OWLAutoExp_==0)
+		   if(OWLAutoExp_==1)
 		   {
 				Gain_ = GetGain();
+				exposure_ = 0.0;
  			    exposure_ = GetExposure();
 		   }
 	   }
@@ -8863,6 +9976,34 @@ int CRaptorEPIX::OnHighGain(MM::PropertyBase* pProp, MM::ActionType eAct)
 		   SetHighGain(OWLHighGain_);
 	   }
    }
+	return DEVICE_OK;
+}
+
+int CRaptorEPIX::OnLongExp(MM::PropertyBase* pProp, MM::ActionType eAct)
+{
+	if (eAct == MM::BeforeGet)
+	{
+		if (OWLLongExp_ == 0)
+			pProp->Set(g_Keyword_Off);
+		else
+			pProp->Set(g_Keyword_On);
+
+	}
+	else if (eAct == MM::AfterSet)
+	{
+		string mode;
+		pProp->Get(mode);
+
+		if (_IS_CAMERA_OWL_FAMILY)
+		{
+			if (mode.compare(g_Keyword_Off) == 0)
+				OWLLongExp_ = 0;
+			else
+				OWLLongExp_ = 1;
+
+			SetLongExp(OWLLongExp_);
+		}
+	}
 	return DEVICE_OK;
 }
 
@@ -8967,23 +10108,41 @@ int CRaptorEPIX::OnUseDefaults(MM::PropertyBase* pProp, MM::ActionType eAct)
 			   OWLAGCSpeed_ = 7;
 			   OWLExpSpeed_ = 7;
 			   OWLAutoLevel_ = 8192;
+			   OWLAutoGain_ = 1;
 			   OWLPeakAvgLevel_ = 128;
 			   OWLBlackOffset_ = 0;
 			   SetAGCExpSpeed(OWLAGCSpeed_, OWLExpSpeed_);
   	   		   SetPeakAvgLevel(OWLPeakAvgLevel_);
 			   SetAutoLevel(OWLAutoLevel_);
-  	   		   SetBlackOffset(OWLBlackOffset_);
+			   if(cameraVar_ != _RAPTOR_VARIANT_OWL_640_M)
+	  	   		   SetBlackOffset(OWLBlackOffset_);
 
 			   unsigned char val;
 			   val = (unsigned char) GetFPGACtrl();
 			   SetFPGACtrl(val | 0x01);
 
-			   if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
+			   if (cameraVar_ == _RAPTOR_VARIANT_OWL_640_M || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+				   SetAutoGain(OWLAutoGain_);
+				   //OWLAutoGain_ = (val & 0x02) > 0;
+
+			   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+				   TECSetPoint_ = 15.0;
+			   else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+			   {
+				   if(cameraVar_ == _RAPTOR_VARIANT_OWL_1280)
+					   TECSetPoint_ = 15.0;
+				   else
+					   TECSetPoint_ = -15.0;
+			   }
+			   else if(cameraType_ == _RAPTOR_CAMERA_OWL_640 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 )
 				   TECSetPoint_ = -15.0;
 			   else
 				   TECSetPoint_ = 15.0;
 
 			   SetTECSetPoint(TECSetPoint_);
+
+			   OWLLongExp_ = 0;
+			   SetLongExp(OWLLongExp_);
 
 			   OWLHighGain_ = 1;  
 			   SetHighGain(OWLHighGain_);
@@ -8991,7 +10150,14 @@ int CRaptorEPIX::OnUseDefaults(MM::PropertyBase* pProp, MM::ActionType eAct)
 			   OWLAutoExp_ = 1;
 			   SetAutoExposure(OWLAutoExp_);
 		   
-			   OWLNUCState_ = 0x60;
+			   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+				   OWLNUCState_ = 0x30;
+			   else
+				   OWLNUCState_ = 0x60;
+
+			   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+				   OWLNUCState_ |= 0x0C;
+
 			   SetNUCState(OWLNUCState_);
 
 		       OWLFrameRate_ = 25;
@@ -9029,8 +10195,17 @@ int CRaptorEPIX::OnUseDefaults(MM::PropertyBase* pProp, MM::ActionType eAct)
 
 		   if(_IS_CAMERA_OWL_FAMILY)
 		   {
-				serialWriteRaptorRegister1(UNITMASK, 0xF9, 0x60 ) ;
-				SetFPGACtrl(0x03);
+			   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+				   serialWriteRaptorRegister1(UNITMASK, 0xF9, 0x30);
+			   else
+				   serialWriteRaptorRegister1(UNITMASK, 0xF9, 0x60);
+
+				if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
+					SetFPGACtrl(0x04);
+				else if (cameraVar_ != _RAPTOR_VARIANT_OWL_640_M)
+					SetFPGACtrl(0x82);
+				else
+					SetFPGACtrl(0x03);
 		   }
 #ifdef PLEORA
 
@@ -9094,6 +10269,19 @@ int CRaptorEPIX::OnMaximumExposure(MM::PropertyBase* pProp, MM::ActionType eAct)
 {
    if (eAct == MM::BeforeGet)
    {
+	   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280)
+	   {
+		   if (OWLLongExp_)
+			   exposureMax_ = 10000.0;
+		   else if(0)
+		   {
+			   double dReadout = 7.51;
+			   if (OWLHighGain_)
+				   dReadout = 10.418;
+
+			   exposureMax_ = (1000.0 / double(OWLFrameRate_)) - dReadout;
+		   }
+	   }
 	  pProp->Set(exposureMax_);
    }
    else if (eAct == MM::AfterSet)
@@ -10772,7 +11960,7 @@ int CRaptorEPIX::GetNewEPIXImage(ImgBuffer& img, double exp)
 
 		if((cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE)>0) // || (cameraType_ & _RAPTOR_CAMERA_FALCON_III)>0 )
 		{
-			timeout += ulong(3.0*double(binSizeX_)*double(img_.Width())*double(img_.Height())/(double(readoutRate_*1e3)));
+			timeout += ulong(3.0*double(binSizeX_)*double(img_.Width())*double(img_.Height())/(double(readoutRate_)));
 
 			FPGACtrl_ = GetFPGACtrl();
 			double dTemp;
@@ -10783,12 +11971,12 @@ int CRaptorEPIX::GetNewEPIXImage(ImgBuffer& img, double exp)
 
 		if((cameraType_ & _RAPTOR_CAMERA_FALCON_III)>0 )
 		{
-			timeout += ulong(3.0*double(binSizeX_)*double(img_.Width())*double(img_.Height())/(double(readoutRate_*1e3)));
+			timeout += ulong(3.0*double(binSizeX_)*double(img_.Width())*double(img_.Height())/(double(readoutRate_)));
 
 		}
 
 		//if(captureMode_==0 || triggerMode_>0)
-		if(triggerMode_<=1 || (_IS_CAMERA_OWL_FAMILY))
+		if(triggerMode_<=1 || (_IS_CAMERA_OWL_FAMILY && !(cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)))
 		{
 			pxd_goAbortLive(UNITMASK); 
 			captureMode_ = 0;
@@ -10816,7 +12004,13 @@ int CRaptorEPIX::GetNewEPIXImage(ImgBuffer& img, double exp)
 			if(triggerMode_==0)
 			{
 				buf = 1;
-				err = pxd_doSnap(UNITMASK, buf, timeout); 
+				err = pxd_doSnap(UNITMASK, buf, timeout);
+				if (err == -24)
+				{
+					err = pxd_goAbortLive(UNITMASK);
+					SetExtTrigStatus(1);
+					err = pxd_doSnap(UNITMASK, buf, timeout);
+				}
 				if(err<0)
 					return -1;
 				
@@ -11005,14 +12199,24 @@ int CRaptorEPIX::GetNewEPIXImage(ImgBuffer& img, double exp)
 				}
 				else
 				{
-					err = pxd_readushort(UNITMASK, buf, 0, 0, cameraCCDXSize_, cameraCCDYSize_, &pBuf2[0], bufsize2/2, "Grey");
+					err = pxd_readushort(UNITMASK, buf, 0, 0, cameraCCDXSize_, cameraCCDYSize_, &pBuf2[0], bufsize2 / 2, "Grey");
 					if(err>0)
 						MyDebayer((unsigned short*)pBuf2, (unsigned short*)pBuf, cameraCCDXSize_, cameraCCDYSize_, cameraCCDXSize_*4, nDebayerMethod_);
 				}
 			}
 			else
 			{
-				err = pxd_readushort(UNITMASK, buf, 0, 0, cameraCCDXSize_, cameraCCDYSize_, pBuf, bufsize, "Grey");				
+				err = pxd_readushort(UNITMASK, buf, 0, 0, cameraCCDXSize_, cameraCCDYSize_, pBuf, bufsize / 2, "Grey");
+				if (err == -1)
+				{
+					for (int yy = 0; yy < cameraCCDYSize_; yy++)
+					{
+						err = pxd_readushort(UNITMASK, buf, 0, yy, cameraCCDXSize_, yy + 1, &pBuf[yy * cameraCCDXSize_], cameraCCDXSize_, "Grey");
+						if (err < 0)
+							err = 0;
+					}
+				}
+				//err = pxd_readushort(UNITMASK, buf, 0, 0, cameraCCDXSize_, cameraCCDYSize_, pBuf, bufsize/2, "Grey");				
 			}
 
 		}

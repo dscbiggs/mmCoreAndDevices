@@ -161,8 +161,8 @@ private:
 class CRaptorEPIX : public CCameraBase<CRaptorEPIX>  
 {
 public:
-   CRaptorEPIX() {CRaptorEPIX(0);};
-   CRaptorEPIX(int nCameraType);
+   CRaptorEPIX() {CRaptorEPIX(0,0);};
+   CRaptorEPIX(int nCameraType, int nCameraVar=0);
    ~CRaptorEPIX();
   
    // MMDevice API
@@ -239,8 +239,11 @@ public:
    int  GetAutoExposure() const;
    void SetAutoLevel(int val);
    int GetAutoLevel() const;
+   void SetAutoGain(int val);
+   int GetAutoGain() const;
    void SetHighGain(int val);
    int GetHighGain() const;
+   void SetLongExp(int val);
    void SetHighPreAmpGain(int val);
    int GetHighPreAmpGain() const;
    void SetBlackOffset(int val);
@@ -323,6 +326,7 @@ public:
    int OnAntiBloom(MM::PropertyBase* pProp, MM::ActionType eAct);
    int OnTestPattern(MM::PropertyBase* pProp, MM::ActionType eAct);
 
+   int OnAutoGain(MM::PropertyBase* pProp, MM::ActionType eAct);
    int OnTECSetPoint(MM::PropertyBase* pProp, MM::ActionType eAct);
    int OnNUCState(MM::PropertyBase* pProp, MM::ActionType eAct);
    int OnPeakAvgLevel(MM::PropertyBase* pProp, MM::ActionType eAct);
@@ -331,6 +335,7 @@ public:
    int OnROIAppearance(MM::PropertyBase* pProp, MM::ActionType eAct);
    int OnAutoExposure(MM::PropertyBase* pProp, MM::ActionType eAct);
    int OnAutoLevel(MM::PropertyBase* pProp, MM::ActionType eAct);
+   int OnLongExp(MM::PropertyBase* pProp, MM::ActionType eAct);
    int OnHighGain(MM::PropertyBase* pProp, MM::ActionType eAct);
    int OnVideoPeak(MM::PropertyBase* pProp, MM::ActionType eAct);
    int OnVideoAvg(MM::PropertyBase* pProp, MM::ActionType eAct);
@@ -387,7 +392,7 @@ private:
 	double GetMicroVersion() const;
 	double GetFPGAVersion() const;
 	int GetSerialNumber() const;
-	int SetSystemState(unsigned char nState) const;
+	int SetSystemState(unsigned char nState, bool bDisableCheckSum=false) const;
 	unsigned char GetSystemState() const;
 	int GetBloomingStatus() const ;
 	double GetPCBTemp(bool bSnap=false) const ;
@@ -428,6 +433,7 @@ private:
    static const double nominalPixelSizeUm_;
 
    int cameraType_;
+   int cameraVar_;
    double dPhase_;
    ImgBuffer img_;
    ImgBuffer img2_;
@@ -469,7 +475,9 @@ private:
    long OWLROIAppearance_;
    long OWLAutoExp_;
    long OWLAutoLevel_;
+   long OWLAutoGain_;
    long OWLHighGain_;
+   long OWLLongExp_;
    double OWLTrigDelay_;
    double OWLFrameRate_;
    long OWLBlackOffset_;
@@ -527,6 +535,8 @@ private:
    int EPROM_DAC_Cal_0C_;
    int EPROM_DAC_Cal_40C_;
 
+   int VDETCOM_;
+   double dVolts_;
 
    MM::MMTime sequenceStartTime_;
    double mySequenceStartTime_;
