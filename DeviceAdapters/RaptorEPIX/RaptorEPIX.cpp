@@ -42,12 +42,12 @@
 #endif
 
 #ifdef PLEORA
-	const char* g_strVersion = "v1.0.3, 10/21/2019";
+	const char* g_strVersion = "v1.0.4, 1/4/2026";
 #else
-	const char* g_strVersion = "v1.19.1, 10/27/2023";
+	const char* g_strVersion = "v1.20.2, 4/2/2026";
 #endif
-
-
+	
+//#define EPIX_SIMULATOR
 	
 #define _RAPTOR_CAMERA_KITE 1
 #define _RAPTOR_CAMERA_OWL  2
@@ -360,7 +360,7 @@ double myClock();
 int g_PIXCI_DriverLoaded = 0;
 unsigned char g_ucSerialBuf[256];
 int g_SerialOK=false;
-bool g_bCheckSum = true;
+bool g_bCheckSum = false;
 bool g_bCmdAck = true;
 int g_nCheckSum = 0x40;
 int g_nCmdAck = 0x10;
@@ -1476,7 +1476,7 @@ void CRaptorEPIX::SetTECSetPoint(double dValue)
 
 	if (fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %.5g\n", __FUNCTION__, dValue);
 
-   if((cameraType_ & _RAPTOR_CAMERA_FALCON_III) > 0 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+   if((cameraType_ & _RAPTOR_CAMERA_FALCON_III) > 0 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 || (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU))
    {
 		unsigned char bufin1[] = {0x53, 0x00, 0x03, 0x01, 0x03, 0x00, 0x50};
 		unsigned char bufin2[] = {0x53, 0x00, 0x03, 0x01, 0x04, 0x00, 0x50};
@@ -1669,11 +1669,23 @@ int CRaptorEPIX::DisableMicro() const
 
 int CRaptorEPIX::SetSystemState(unsigned char nState, bool bDisableCheckSum) const
 {
+#ifdef EPIX_SIMULATOR
+	return 1;
+#endif
+
+	if (cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE)
+		nState |= 0x04;
+
 	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = 0x%X\n", __FUNCTION__, nState);
 	unsigned char bufin[] = {0x4F, 0x00, 0x50, 0x00};
 	unsigned char buf[256];
-	if(g_bCheckSum && bDisableCheckSum==false)
+	
+	//if (bDisableCheckSum == false)
+	if (g_bCheckSum && bDisableCheckSum == false)
+	{
 		bufin[1] = nState | 0x40;
+		//g_bCheckSum = true;
+	}
 	else
 		bufin[1] = nState & 0xBF;
 
@@ -1706,6 +1718,10 @@ unsigned char CRaptorEPIX::GetSystemState() const
 	unsigned char buf[256];
 	unsigned char nState;
 
+#ifdef EPIX_SIMULATOR
+	return 0x16;
+#endif
+
 	int ret = serialWriteReadCmd(UNITSOPENMAP, UNITMASK, bufin,  2, buf, 256, 3 );
 
 	nState = 0xFF;
@@ -1714,7 +1730,10 @@ unsigned char CRaptorEPIX::GetSystemState() const
 	{
 		nState = buf[ret-2];
 
-		g_bCheckSum = (nState & 0x40) > 0;
+		if(g_bCheckSum && (nState & 0x40)==0)
+			g_bCheckSum = (nState & 0x40) > 0;
+		else
+			g_bCheckSum = (nState & 0x40) > 0;
 
 		if(g_bCheckSum)
 			nState &= 0xBF;
@@ -1763,6 +1782,11 @@ int CRaptorEPIX::GetSerialNumber() const
 int CRaptorEPIX::SetVideoFormat(int cameraType, char* driverparms)
 {
 	if(fidSerial[UNITSOPENMAP]) fprintf(fidSerial[UNITSOPENMAP], "<%s> = %d\n", __FUNCTION__, cameraType);
+
+#ifdef EPIX_SIMULATOR
+	return 0;
+#endif
+
 #ifdef _MSC_VER
 #pragma warning (push)
 // Suppress warnings triggered by "-2147483648" in the #included *.fmt files
@@ -2501,7 +2525,7 @@ int CRaptorEPIX::Initialize()
 
 		SetSystemState(g_SysState0);
 		Sleep(100);
-		unsigned char nState;
+		//unsigned char nState;
 		nState = GetSystemState();
 
 		if(nState==0xFF)
@@ -2641,8 +2665,10 @@ int CRaptorEPIX::Initialize()
 #ifdef PLEORA
 
 #else
-
+#ifndef EPIX_SIMULATOR
 	ret = pxd_serialConfigure(UNITSMAP, 0, 115200, 8, 0, 1, 0, 0, 0);
+#endif // !EPIX_SIMULATOR
+
 #endif
 
 	if(ret==0)
@@ -2656,7 +2682,12 @@ int CRaptorEPIX::Initialize()
 	char profilepath[1000];
 	char strLog[1024], strTime[80];
 	struct tm* timeinfo;
+	
+#ifdef PLEORA
+
+#else
 	time_t rawtime;
+#endif
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
 
@@ -3925,8 +3956,12 @@ int CRaptorEPIX::Initialize()
 			Sleep(30);
 			SetLiveVideo(1);
 		}
+#ifdef PLEORA
+
+#else
 		pxd_goLive(UNITMASK, 1);
 		fieldCount_ = pxd_capturedFieldCount(UNITMASK);
+
 		int nLoop=0;
 		while(fieldCount_<=1 && nLoop<30)
 		{
@@ -3934,6 +3969,7 @@ int CRaptorEPIX::Initialize()
 			Sleep(30);
 			fieldCount_ = pxd_capturedFieldCount(UNITMASK);
 		}
+#endif
 	}
    	captureMode_ = GetLiveVideo();
 	triggerMode_ = GetExtTrigStatus();
@@ -4307,8 +4343,13 @@ int CRaptorEPIX::SnapImage()
 				   }
 				   else
 				   {
-					   if(liveMode_==0)
-							SetExtTrigStatus(1);			
+						if (liveMode_ == 0)
+						{
+							if (triggerMode_ <= 1)
+								SetExtTrigStatus(1);
+							else
+								SetExtTrigStatus((unsigned char)triggerMode_);
+						}
 						err = pxd_goSnap(UNITMASK, 1);
 					}
 				}
@@ -4355,7 +4396,11 @@ int CRaptorEPIX::SnapImage()
 					liveMode_ = 1;
 					DisableMicro();
 			   }
+#ifdef PLEORA
+
+#else
 			   fieldCount_ = pxd_capturedFieldCount(UNITMASK);
+#endif
 		   }
 	   }
 	   else
@@ -5119,7 +5164,7 @@ int CRaptorEPIX::serialWriteRaptorRegister1(int unit, unsigned char nReg, unsign
 	unsigned char bufinF[]  = {0x53, 0x00, 0x03, 0x01, 0xFF, 0xFF, 0x50};
 	unsigned char buf[256]; 
 
-	if(cameraType_ & _RAPTOR_CAMERA_FALCON_III || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+	if(cameraType_ & _RAPTOR_CAMERA_FALCON_III || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 || (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ != 0))
 	{
 		bufinF[4] = nReg ;
 		bufinF[5] = val ;
@@ -5160,7 +5205,7 @@ int CRaptorEPIX::serialReadRaptorRegister1(int unit, unsigned char nReg, unsigne
 
 	int pos=0;
 
-	if(cameraType_ & _RAPTOR_CAMERA_FALCON_III || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+	if(cameraType_ & _RAPTOR_CAMERA_FALCON_III || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 || (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ != 0) )
 	{
 		bufinF[5] = nReg;
 		ret = serialWriteReadCmd(UNITSOPENMAP, unit, bufinF,  7, buf, 256 );
@@ -5217,7 +5262,7 @@ int CRaptorEPIX::serialReadRaptorRegister2(int unit, unsigned char nReg, unsigne
 
 	int pos=0;
 
-	if(cameraType_ & _RAPTOR_CAMERA_FALCON_III || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+	if(cameraType_ & _RAPTOR_CAMERA_FALCON_III || cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_1280 || (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ != 0))
 	{
 		bufinF[5] = nReg;
 		ret = serialWriteReadCmd(UNITSOPENMAP, unit, bufinF,  7, buf, 256 );
@@ -5764,6 +5809,9 @@ void CRaptorEPIX::SetBinningFactorXY(int nBinX, int nBinY)
 	valy = (unsigned char) nBinY;
 
 	int ret;
+#ifdef PLEORA
+
+#else
 	if(cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE)
 	{
 		serialWriteRaptorRegister1(UNITMASK, 0xA1, (valx-1)&0xFF);
@@ -5792,6 +5840,7 @@ void CRaptorEPIX::SetBinningFactorXY(int nBinX, int nBinY)
 		}
 		else if(cameraType_ == _RAPTOR_CAMERA_EAGLE_V)
 		{
+#endif
 #ifdef PLEORA
 
 #else
@@ -5810,6 +5859,9 @@ void CRaptorEPIX::SetBinningFactorXY(int nBinX, int nBinY)
 				ret = pxd_videoFormatAsIncluded(0);
 			}		
 #endif
+#ifdef PLEORA
+
+#else
 		}
 
 		if(((cameraType_ & _RAPTOR_CAMERA_COMMONCMDS1) > 0))
@@ -5823,6 +5875,7 @@ void CRaptorEPIX::SetBinningFactorXY(int nBinX, int nBinY)
 		}
 
 	}
+#endif
 
 #ifdef _MSC_VER
 #pragma warning (pop)
@@ -6440,6 +6493,7 @@ int CRaptorEPIX::StopSequenceAcquisition()
 		   
 		   SetLiveVideo(0);
 		   trigSnap_ = 0;
+		   liveMode_ = 0;
 		   DisableMicro();
 	  }
                                                                           
@@ -6467,6 +6521,9 @@ int CRaptorEPIX::StartSequenceAcquisition(long numImages, double interval_ms, bo
 
    if(_NOT_CAMERA_OWL_FAMILY) 
    {
+#ifdef PLEORA
+
+#else
 	   if((cameraType_ & _RAPTOR_CAMERA_FALCON_III) == 0)
 	   {
 		   SetExtTrigStatus(0);
@@ -6483,16 +6540,16 @@ int CRaptorEPIX::StartSequenceAcquisition(long numImages, double interval_ms, bo
 			{
 				SetLiveVideo(1);
 				Sleep(30);
+#ifdef PLEORA
+
+#else
 				while(pxd_capturedFieldCount(UNITMASK)==0)
 					Sleep(30);
+#endif
 				liveMode_ = 1;
 				triggerMode_ = ExtTrigStatus_ | 0x04;
 			}
 	   }
-#ifdef PLEORA
-
-#else
-
 
 	   int err = pxd_goAbortLive(UNITMASK);
 	   fieldCount_ = pxd_capturedFieldCount(UNITMASK);
@@ -6745,6 +6802,7 @@ void CRaptorEPIX::OnThreadExiting() throw()
 		   pxd_goAbortLive(UNITMASK);
 #endif
 		   trigSnap_ = 0;
+		   liveMode_ = 0;
 	  }
 
       LogMessage(g_Msg_SEQUENCE_ACQUISITION_THREAD_EXITING);
@@ -7430,7 +7488,7 @@ int CRaptorEPIX::GetEPROMManuData()
 	{
 		ret = serialWriteReadCmd(UNITSOPENMAP, UNITMASK, bufinF,  9, buf, 256 );
 	}
-	else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+	else if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ != 0)
 	{
 		ret = serialWriteReadCmd(UNITSOPENMAP, UNITMASK, bufinNsu, 9, buf, 256);
 	}
@@ -7481,7 +7539,7 @@ int CRaptorEPIX::GetEPROMManuData()
 
 	if(ret>18)
 	{
-		if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+		if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ != 0)
 			ret -= 2;
 
 	   serialNum_ = buf[ret-19] + (int(buf[ret-18])<<8);
@@ -7495,7 +7553,7 @@ int CRaptorEPIX::GetEPROMManuData()
 	   EPROM_DAC_Cal_0C_  = buf[ret-5] + (int(buf[ret-4])<<8);
 	   EPROM_DAC_Cal_40C_ = buf[ret-3] + (int(buf[ret-2])<<8);
 
-	   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640)
+	   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ != 0)
 	   {
 		   VDETCOM_ = buf[ret - 1] + (int(buf[ret - 0]) << 8);
 		   dVolts_ = (double(VDETCOM_) / 1024.0) * 4.5;
@@ -7888,7 +7946,7 @@ void CRaptorEPIX::SetROIStatus(unsigned int nWidth, unsigned int nHeight, unsign
 			ret = serialWriteRaptorRegister1(UNITMASK, 0xF4, 0x00 ) ;
 
 		}
-		else
+		else if(0)
 		{
 			serialWriteRaptorRegister1(UNITMASK, 0xB6, 0x00 ) ;
 			serialWriteRaptorRegister1(UNITMASK, 0xB7, 0x00 ) ;
@@ -7909,32 +7967,34 @@ void CRaptorEPIX::SetROIStatus(unsigned int nWidth, unsigned int nHeight, unsign
 				nHeight = (nHeight/2)*2;
 		}
 
-		val[0] = ((nWidth&0xFF00)>>8);
-		val[1] =  (nWidth&0x00FF);
+		
 
 		if((cameraType_ & _RAPTOR_CAMERA_OSPREY_BASE) > 0) 
 		{
+			val[0] = ((nWidth & 0xFF00) >> 8);
+			val[1] = (nWidth & 0x00FF);
 			serialWriteRaptorRegister1(UNITMASK, 0xD7, val[0] ) ;
 			serialWriteRaptorRegister1(UNITMASK, 0xD8, val[1] ) ;
+
+			val[0] = ((nXOffset & 0xFF00) >> 8);
+			val[1] = (nXOffset & 0x00FF);
+
+			serialWriteRaptorRegister1(UNITMASK, 0xD9, val[0]);
+			serialWriteRaptorRegister1(UNITMASK, 0xDA, val[1]);
 		}
 		else
 		{
+			val[0] = ((nXOffset & 0xFF00) >> 8);
+			val[1] = (nXOffset & 0x00FF);
+			serialWriteRaptorRegister1(UNITMASK, 0xB6, val[0] ) ;
+			serialWriteRaptorRegister1(UNITMASK, 0xB7, val[1] ) ;
+
+			val[0] = ((nWidth & 0xFF00) >> 8);
+			val[1] = (nWidth & 0x00FF);
 			serialWriteRaptorRegister1(UNITMASK, 0xB4, val[0] ) ;
 			serialWriteRaptorRegister1(UNITMASK, 0xB5, val[1] ) ;
 		}
 
-		val[0] = ((nXOffset&0xFF00)>>8);
-		val[1] =  (nXOffset&0x00FF);
-		if((cameraType_ & _RAPTOR_CAMERA_OSPREY_BASE) > 0) 
-		{
-			serialWriteRaptorRegister1(UNITMASK, 0xD9, val[0] ) ;
-			serialWriteRaptorRegister1(UNITMASK, 0xDA, val[1] ) ;
-		}
-		else
-		{
-			serialWriteRaptorRegister1(UNITMASK, 0xB6, val[0] ) ;
-			serialWriteRaptorRegister1(UNITMASK, 0xB7, val[1] ) ;
-		}
 
 		if((cameraType_ & _RAPTOR_CAMERA_OSPREY_BASE) > 0) 
 		{
@@ -7972,30 +8032,38 @@ void CRaptorEPIX::SetROIStatus(unsigned int nWidth, unsigned int nHeight, unsign
 		}
 		else
 		{
+			val[0] = ((nYOffset&0xFF00)>>8);
+			val[1] =  (nYOffset&0x00FF);
+			serialWriteRaptorRegister1(UNITMASK, 0xBA, val[0]);
+			serialWriteRaptorRegister1(UNITMASK, 0xBB, val[1]);
+
 			val[0] = ((nHeight&0xFF00)>>8);
 			val[1] =  (nHeight&0x00FF);
 			serialWriteRaptorRegister1(UNITMASK, 0xB8, val[0] ) ;
 			serialWriteRaptorRegister1(UNITMASK, 0xB9, val[1] ) ;
-
-			val[0] = ((nYOffset&0xFF00)>>8);
-			val[1] =  (nYOffset&0x00FF);
-			serialWriteRaptorRegister1(UNITMASK, 0xBA, val[0] ) ;
-			serialWriteRaptorRegister1(UNITMASK, 0xBB, val[1] ) ;
+			
 		}
 
-		serialReadRaptorRegister1(UNITMASK, 0xD4, &val1 ) ;
-		val1 |= 0x08;
-		serialWriteRaptorRegister1(UNITMASK, 0xD4, val1 ) ;
 
 		Sleep(100);
 		if (g_bCheckSum)
 		{
 			SetSystemState(g_SysState0);
+			Sleep(100);
 			GetSystemState();
 			Sleep(100);
 			SetSystemState(g_SysState0);
+			Sleep(100);
 			GetSystemState();
 		}
+
+		if ((cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE) == 0)
+		{
+			serialReadRaptorRegister1(UNITMASK, 0xD4, &val1);
+			val1 |= 0x08;
+			serialWriteRaptorRegister1(UNITMASK, 0xD4, val1);
+		}
+
 #ifdef PLEORA
 
 #else
@@ -8017,8 +8085,10 @@ void CRaptorEPIX::SetROIStatus(unsigned int nWidth, unsigned int nHeight, unsign
 	   if(liveMode_==0 && initialized_) 
 	   {
 			//pxd_goSnap(UNITMASK, 1);
-		   if((cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE) > 0) 
-			   SetExtTrigStatus(0);					
+		   if ((cameraType_ & _RAPTOR_CAMERA_EAGLE_BASE) > 0)
+		   {
+			   //SetExtTrigStatus(0);
+		   }
 		   else
 			   SetExtTrigStatus(1);					
 	   }
@@ -8053,7 +8123,17 @@ void CRaptorEPIX::SetROIStatus(unsigned int nWidth, unsigned int nHeight, unsign
 		
 	}	
 
-	GetSystemState();
+	//SetSystemState(g_SysState0);
+	Sleep(100);
+	//GetSystemState();
+
+	GetExposureCore();
+	GetFixedFrameRate();
+	//GetSystemState();
+	//Sleep(100);
+	//SetSystemState(g_SysState0);
+	//Sleep(100);
+	//GetSystemState();
 }
 
 
@@ -8965,18 +9045,21 @@ int CRaptorEPIX::OnTrigger(MM::PropertyBase* pProp, MM::ActionType eAct)
 
 	   if (mode.compare(g_Keyword_TrigITR) == 0)
 	   {
-		   val = ExtTrigStatus_ & 0xF0;
+		   val = ExtTrigStatus_ & 0x00;
 		   if (cameraType_ == _RAPTOR_CAMERA_OWL_NINOX_640 && cameraVar_ == _RAPTOR_VARIANT_NINOX_640_SU)
 			   val |= 0x04;
 		   else
 			   val |= 0x00;
-		   liveMode_ = 1;
+
+		   if ((cameraType_ & _RAPTOR_CAMERA_EAGLE) == 0)
+			   liveMode_ = 1;
 	   }
 	   else if (mode.compare(g_Keyword_TrigFFR) == 0)
 	   {
-		   val = ExtTrigStatus_ & 0xF0;
+		   val = ExtTrigStatus_ & 0x80;
 		   val |= 0x02;
-		   liveMode_ = 1;
+		   if ((cameraType_ & _RAPTOR_CAMERA_EAGLE) == 0)
+			   liveMode_ = 1;
 	   }
 	   else if(mode.compare(g_Keyword_ExtTrigger_posTrig)==0)
 		   val = 0x40|0x80;
@@ -12830,7 +12913,8 @@ void CRaptorPleora::OnBnClickedConnectButton( long &nWidth, long &nHeight )
 			return;
 		}
 
-		const PvDeviceInfo* lLastDeviceInfo = lFinder.GetSelected();
+		//const PvDeviceInfo* 
+		lLastDeviceInfo = lFinder.GetSelected();
 	
 		if ( lLastDeviceInfo != NULL )
 		{
