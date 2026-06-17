@@ -44,7 +44,7 @@
 #ifdef PLEORA
 	const char* g_strVersion = "v1.0.4, 1/4/2026";
 #else
-	const char* g_strVersion = "v1.20.2, 4/2/2026";
+	const char* g_strVersion = "v1.20.3, 6/17/2026";
 #endif
 	
 //#define EPIX_SIMULATOR
